@@ -1,0 +1,5 @@
+body {
+    background-color: black;
+    background-image: url(../../../public/images/carpet.jpg);
+    background-size: cover;
+}
