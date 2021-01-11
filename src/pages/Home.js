@@ -1,3 +1,7 @@
+import react from "react";
+import $ from "jquery";
+import 
+
 $(document).ready(function() {
 
     function init(){
