@@ -3,7 +3,9 @@ import "./style.css"
 
 function GamingTable() {
     return (
-        <body />
+        <body>
+            
+        </body>
     );
 }
 
