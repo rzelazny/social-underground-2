@@ -4,9 +4,7 @@ import BlackjackGame from "../BlackjackGame";
 
 function GamingTable() {
     return (
-        <body>
-            <BlackjackGame />
-        </body>
+        <BlackjackGame />
     );
 }
 
