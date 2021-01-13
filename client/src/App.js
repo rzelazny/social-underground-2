@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Navbar";
+// import  Casino from "./pages/Casino";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    // <Casino />
   );
 }
 
