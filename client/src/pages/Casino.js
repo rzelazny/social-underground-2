@@ -1,9 +1,10 @@
 import React from "react";
 import GamingTable from "../components/GamingTable";
+import Nav from "../components/Nav/Navbar"
 
 function Casino() {
     return (
-        // Navbar will go here
+        <Nav />,
         <GamingTable />
         // Footer will go here
     )

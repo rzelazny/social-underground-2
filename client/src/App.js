@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Navbar";
-// import  Casino from "./pages/Casino";
+import  Casino from "./pages/Casino";
 
 function App() {
   return (
@@ -21,10 +21,10 @@ function App() {
           <Route>
             <NoMatch />
           </Route>
+          <Route path ="/casino" component = {Casino} />
         </Switch>
       </div>
     </Router>
-    // <Casino />
   );
 }
 
