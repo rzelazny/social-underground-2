@@ -50,7 +50,18 @@ function Login() {
         })
             .then(function (user) {
                 //localStorage.setItem("user", JSON.stringify(user.id))
-                //window.location.replace("/home");
+                window.location.replace("/home");
+                // If there's an error, log the error
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
+
+    function logout(){
+        console.log(`logging out`)
+        $.post("/api/logout")
+            .then(function (user) {
                 // If there's an error, log the error
             })
             .catch(function (err) {
@@ -78,6 +89,8 @@ function Login() {
                     </form>
                     <br />
                     <p>Or sign up <a href="/signup">here</a></p>
+                    <br />
+                    <button className="btn btn-default" onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>

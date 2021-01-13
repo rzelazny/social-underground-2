@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,9 +8,22 @@ import Casino from "./pages/Casino";
 
 import Nav from "./components/Nav/Navbar";
 //import isAuth from "./components/IsAuth/isAuth";
-//const isAuth = require("./components/IsAuth/isAuth");
+const isAuth = require("./components/IsAuth/isAuth");
 
 function App() {
+
+  const [authenticated, setAuth] = useState([false]);
+
+  fetch("/api/login",{
+    method: "post"
+  })
+  .then((data)=>{
+    console.log("data", data);
+    if(data.status===200) setAuth(true);
+      
+  })
+  .catch((err)=> console.log(err))
+
   return (
     <Router>
       <div>
@@ -22,10 +35,10 @@ function App() {
           <Route exact path={"/signup"}>
             <Signup />
           </Route>
-          {/* <Route exact path={"/home"}>
-            {console.log("user", user)}
-            {isAuth("req", "res") ?  <Casino /> : <Login />}
-          </Route> */}
+          <Route exact path={"/home"}>
+            {console.log("loggedIn", authenticated)}
+            {authenticated ?  <Casino /> : <Login />}
+          </Route>
           <Route>
             <NoMatch />
           </Route>
