@@ -3,7 +3,7 @@ const db = require("../models");
 var passport = require("../config/passport");
 
 //signup functionality
-router.post("/api/signup", ({ body }, res) => {
+router.post("/signup", ({ body }, res) => {
 	console.log("Signing up " + body.email);
 	db.User.create(body)
 		.then(dbUser => {
@@ -17,14 +17,8 @@ router.post("/api/signup", ({ body }, res) => {
 });
 
 //login functionality
-router.post("/login", /*passport.authenticate("local"),*/ function (req, res) {
-	console.log("Loging in ", req.body.email);
-	res.setHeader('content-type', 'text/plain');
-	res.json(req.user);
-});
-
-//login functionality
-router.post("api/login", /*passport.authenticate("local"),*/ function (req, res) {
+// Endpoint: /api/login
+router.post("/login", passport.authenticate("local"), function (req, res) {
 	console.log("Loging in ", req.body.email);
 	res.setHeader('content-type', 'text/plain');
 	res.json(req.user);
