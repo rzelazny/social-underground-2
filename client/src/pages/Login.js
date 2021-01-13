@@ -50,7 +50,7 @@ function Login() {
         })
             .then(function (user) {
                 //localStorage.setItem("user", JSON.stringify(user.id))
-                window.location.replace("/setup");
+                //window.location.replace("/home");
                 // If there's an error, log the error
             })
             .catch(function (err) {
@@ -83,6 +83,5 @@ function Login() {
         </div>
     );
 }
-
 
 export default Login;
