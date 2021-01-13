@@ -1,8 +1,10 @@
 import React from "react";
 import { Button } from "reactstrap";
 
-export default (props) => {
+function NewBtn () {
     return (
-        <Button color="join">Join</Button>
+        <Button color="new">New</Button>
     );
 };
+
+export default NewBtn;
