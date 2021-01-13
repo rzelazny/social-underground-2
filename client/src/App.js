@@ -8,22 +8,23 @@ import Nav from "./components/Nav/Navbar";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route exact path={["/", "/login"]}>
-            <Login />
-          </Route>
-          <Route exact path={"/signup"}>
-            <Signup />
-          </Route>
-          <Route>
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <Home />
+    // <Router>
+    //   <div>
+    //     <Nav />
+    //     <Switch>
+    //       <Route exact path={["/", "/login"]}>
+    //         <Login />
+    //       </Route>
+    //       <Route exact path={"/signup"}>
+    //         <Signup />
+    //       </Route>
+    //       <Route>
+    //         <NoMatch />
+    //       </Route>
+    //     </Switch>
+    //   </div>
+    // </Router>
   );
 }
 
