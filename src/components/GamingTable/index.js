@@ -1,10 +1,10 @@
 import React from "react";
 import "./style.css"
-import BlackjackGame from "../BlackjackGame";
+import BlackjackTable from "../BlackjackTable";
 
 function GamingTable() {
     return (
-        <BlackjackGame />
+        <BlackjackTable />
     );
 }
 
