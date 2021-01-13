@@ -1,24 +1,45 @@
-const router = require("express").Router();
+// Requiring path to so we can use relative routes to our HTML files
 var path = require("path");
 
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-//go home, default path
-router.get("/", function(req, res) {
-    console.log("html get home");
-    res.sendFile(path.join(__dirname, "../public/login.html"));
-});
+module.exports = function (app) {
 
-//go to the main boardgame page
-router.get("/gameboard/:id", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/gameboard.html"));
-});
+    app.get("/", function (req, res) {
+        // If the user already has an account send them to the members page
+        if (req.user) {
+            console.log("I'm sending them home");
+            res.redirect("/home");
+        }
+        res.sendFile(path.join(__dirname, "../public/login.html"));
+    });
 
-//go to for game setup page
-router.get("/setup", isAuthenticated, function(req, res) {
-    console.log("html get setup");
-    res.sendFile(path.join(__dirname, "../public/setup.html"));
-});
+    app.get("/login", function (req, res) {
+        // If the user already has an account send them to the members page
+        if (req.user) {
+            res.redirect("/home");
+        }
+        res.sendFile(path.join(__dirname, "../public/login.html"));
+    });
 
-module.exports = router;
+    app.get("/signup", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/signup.html"));
+    });
+
+    // Here we've add our isAuthenticated middleware to this route.
+    // If a user who is not logged in tries to access this route they will be redirected to the signup page
+    app.get("/home", isAuthenticated, function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/home.html"));
+    });
+
+    app.get("/members", isAuthenticated, function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/members.html"));
+    });
+
+    app.get("/casino:id", isAuthenticated, function (req, res) {
+        console.log("sending them to :" + req.url);
+        res.sendFile(path.join(__dirname, "../public/casino.html"));
+    });
+
+};

@@ -15,7 +15,6 @@ function Login() {
     function handleFormSubmit(event) {
         console.log("Login form submitted");
         event.preventDefault();
-        
         var userData = {
             email: email.trim(),
             password: password.trim()
@@ -59,7 +58,6 @@ function Login() {
             });
     }
 
-
     return (
         <div className="container box">
             <div className="row">
@@ -78,6 +76,8 @@ function Login() {
                         </div>
                         <button type="submit" className="btn btn-default">Login</button>
                     </form>
+                    <br />
+                    <p>Or sign up <a href="/signup">here</a></p>
                 </div>
             </div>
         </div>
