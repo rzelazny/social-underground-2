@@ -8,13 +8,25 @@ import BlackjackPlayers from "../BlackjackPlayers"
 function BlackjackGame() {
 
     function restart() {
-        console.log("I see this restart")
+        console.log("restart triggered")
+    }
+
+    function hit() {
+        console.log("hit triggered")
+    }
+
+    function stand() {
+        console.log("stand triggered")
     }
 
     return (
         <Container id="gameBody" >
             <BlackjackPlayers />
-            <BlackjackButtons />
+            <BlackjackButtons
+            restart={restart}
+            hit={hit}
+            stand={stand}
+            />
         </Container>
     );
 }
