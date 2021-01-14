@@ -14,49 +14,23 @@ function App() {
   const [authenticated, setAuth] = useState([false]);
 
   return (
-<<<<<<< HEAD
-    <Home />
-    // <Router>
-    //   <div>
-    //     <Nav />
-    //     <Switch>
-    //       <Route exact path={["/", "/login"]}>
-    //         <Login />
-    //       </Route>
-    //       <Route exact path={"/signup"}>
-    //         <Signup />
-    //       </Route>
-    //       <Route>
-    //         <NoMatch />
-    //       </Route>
-    //     </Switch>
-    //   </div>
-    // </Router>
-=======
     <Router>
       <div>
         <Nav />
+        <Home />
         <Switch>
-          <Route exact path={["/", "/login"]}>
+          {/* <Route exact path={["/", "/login"]}>
             <Login />
           </Route>
           <Route exact path={"/signup"}>
             <Signup />
           </Route>
-          <Route exact path={"/home"}>
-            <Home />
-          </Route>
-          <Route exact path={"/casino"}>
-            <Casino />
-          </Route>
           <Route>
             <NoMatch />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </Router>
-    // <Casino />
->>>>>>> main
   );
 }
 
