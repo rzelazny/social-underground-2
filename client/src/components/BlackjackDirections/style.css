@@ -1,5 +1,5 @@
-/*Buttons*/
-ul {
+/* Buttons */
+/* ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
@@ -32,7 +32,7 @@ ul li:after {
     background: #2a2a2a;
     transform-origin: right;
     transform: skewY(-49deg);
-}
+} 
 ul li span {
     position: absolute;
     top: 0;
@@ -75,8 +75,8 @@ ul li:hover span:nth-child(1) {
 }
 ul li:nth-child(1):hover span {
     background: #d60000 !important;
-}
-/* ul li:nth-child(2):hover span {
+} 
+ ul li:nth-child(2):hover span {
     background: #062ddf !important;
 }
 ul li:nth-child(3):hover span {
@@ -84,10 +84,10 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
-} */
+} 
 
-#start
+ #start
     {
     margin: 10px;
     text-align: center;
-}
+}  */

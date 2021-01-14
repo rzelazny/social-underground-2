@@ -1,12 +1,12 @@
 export const DropItem = [
     {
         title: "Blackjack",
-        path: '/blackjack',
-        cName: dropdown-link
+        path: '/GamingTable',
+        cName: "dropdown-link"
     },
     {
         title: "RPS",
-        path: '/rps',
-        cName: dropdown-link
+        path: '/GamingTable',
+        cName: "dropdown-link"
     }
 ]
