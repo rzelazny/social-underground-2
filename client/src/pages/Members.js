@@ -1,3 +1,24 @@
+import React from 'react'
+import $ from "jquery";
+
+function Members() {
+  return (
+    <div>
+      <h1 className="members">Members</h1>
+    </div>
+  )
+}
+
+export default Members
+
+
+
+
+
+
+
+
+
 $(document).ready(function() {
 
   // This file just does a GET request to figure out which user is logged in
