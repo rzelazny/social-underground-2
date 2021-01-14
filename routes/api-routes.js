@@ -2,7 +2,9 @@ const router = require("express").Router();
 const db = require("../models");
 var passport = require("../config/passport");
 
+console.log("API Routes running");
 //signup functionality
+// Endpoint: /api/signup
 router.post("/signup", ({ body }, res) => {
 	console.log("Signing up " + body.email);
 	db.User.create(body)
@@ -19,13 +21,15 @@ router.post("/signup", ({ body }, res) => {
 //login functionality
 // Endpoint: /api/login
 router.post("/login", passport.authenticate("local"), function (req, res) {
-	console.log("Loging in ", req.body.email);
+	console.log("Loging in ", req.user.email);
 	res.setHeader('content-type', 'text/plain');
 	res.json(req.user);
 });
 
 //logout functionality
+// Endpoint: /api/logout
 router.get("/logout", function (req, res) {
+	console.log("Logging out ", req);
 	req.logout();
 	res.redirect("/");
 });
@@ -61,16 +65,16 @@ router.get("/allgames", function (req, res) {
 router.post("/newGame", ({ body }, res) => {
 	console.log("Storing new game");
 
-	db.Game.create(body)
-		.then(dbGame => {
-			console.log(dbGame);
-			res.json(dbGame);
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).json(err);
-		});
-});
+// 	db.Game.create(body)
+// 		.then(dbGame => {
+// 			console.log(dbGame);
+// 			res.json(dbGame);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.status(404).json(err);
+// 		});
+// });
 
 //create a new player
 router.post("/newPlayer", ({ body }, res) => {
@@ -164,21 +168,21 @@ router.post("/updatePlayer/:id", (req, res) => {
 		});
 });
 
-//update the gameBoard collection
-router.post("/updateBoard/:id", (req, res) => {
-	db.GameBoard.updateOne(
-		{ _id: req.params.id }, req.body)
-		.then(boardData => {
-			console.log("Game Board Data: ", boardData);
-			res.json(boardData);
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).json(err);
-		});
-});
+// //update the gameBoard collection
+// router.post("/api/updateBoard/:id", (req, res) => {
+// 	db.GameBoard.updateOne(
+// 		{ _id: req.params.id }, req.body)
+// 		.then(boardData => {
+// 			console.log("Game Board Data: ", boardData);
+// 			res.json(boardData);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.status(404).json(err);
+// 		});
+// });
 
-app.get("/tables", function (req, res) {
+router.get("/tables", function (req, res) {
 	db.gaming_table.findAll({
 		where: {
 			game_ended: {
@@ -222,7 +226,7 @@ app.get("/tables", function (req, res) {
 	})
 });
 
-app.post("/cleanup", function (req, res) {
+router.post("/cleanup", function (req, res) {
 
 	console.log("cleanup running");
 	db.gaming_table.findAll({
