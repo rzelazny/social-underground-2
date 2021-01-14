@@ -37,10 +37,9 @@
   }
 }
 
-ul {
+/* ul {
   position: absolute;
   display: flex;
-  /* transform: rotate(-25deg) skew(25deg); */
   transform-style: preserve-3d;
 }
 ul li {
@@ -123,4 +122,4 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
   background: #fceb00 !important;
-}
+} */
