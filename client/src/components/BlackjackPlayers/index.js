@@ -77,8 +77,29 @@ function BlackjackPlayers() {
             parseInt(houseHand[0].value) + parseInt(houseHand[1].value)
         );
         setPlayer1Points(
-            parseInt(player1Hand[0].value) + parseInt(player1Hand[1].value)
+            totalPointsPlayer1()
         )
+    }
+    
+    function totalPointsPlayer1() {
+        for (var i = 0; player1Hand.length; i++) {
+            // sets value of face cards //
+            if (player1Hand[i].value === "JACK" || player1Hand[i].value === "QUEEN" || player1Hand[i].value === "KING") {
+                player1Hand[i].value === "10";
+            }
+            
+            // sets value for ace depending on current point value //
+            if (player1Hand[0].value === "ACE") {
+                player1Hand[0].value = "11";
+            } else if (player1Hand[1].value === "ACE" && player1Hand[0].value < 11) {
+                player1Hand[1].value = "11";
+            } else if (player1Hand[1].value === "ACE" && player1Hand[0].value > 10) {
+                player1Hand[1].value = "1";
+            }
+        }
+        console.log(player1Hand[0].value);
+        console.log(player1Hand[1].value);
+        return parseInt(player1Hand[0].value) + parseInt(player1Hand[1].value)
     }
 
 
