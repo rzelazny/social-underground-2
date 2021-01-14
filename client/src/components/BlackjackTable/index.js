@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,23 +7,35 @@ import BlackjackGame from "../BlackjackGame";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 
 function BlackjackTable() {
+    const [displayDirections, setDisplayDirections] = useState(true);
+    const [startGame, setStartGame] = useState(false);
+    const [displayScoreCard, setDisplayScoreCard] = useState(false);
 
     function onStart() {
-        console.log("clicking start btn")
+        console.log("clicking start btn");
+        setStartGame(true);
+        setDisplayDirections(false);
+    }
+
+    function endRound() {
+        console.log("end of round triggered");
+        setDisplayScoreCard(true);
     }
 
     return (
         <Container id="blackjackTable">
             <h2>Single Player Blackjack</h2>
             <br />
-            <BlackjackDirections 
+            {displayDirections
+            && <BlackjackDirections 
             onStart={onStart}
-            /> 
-            {/* hide the directions on click of start */}
-            <BlackjackScoreCard />
-            {/* have this card hidden until the end of game is called */}
-            <BlackjackGame />
-            {/* display this hidden component on click of start btn */}
+            />}
+            {displayScoreCard
+            && <BlackjackScoreCard /> 
+            }
+            {startGame 
+            && <BlackjackGame /> 
+            }
         </Container>
     );
 }

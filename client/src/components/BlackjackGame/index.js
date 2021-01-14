@@ -3,15 +3,15 @@ import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
+import BlackjackPlayers from "../BlackjackPlayers"
 
 function BlackjackGame() {
+
     return (
-        <Container >
+        <Container id="gameBody" >
             <p>The blackjack game will go here.</p>
-            <div id="gameBody">
-                <div className="players" id="players"></div>
+                <BlackjackPlayers />
                 <BlackjackButtons />
-            </div>
     </Container>
     );
 }
