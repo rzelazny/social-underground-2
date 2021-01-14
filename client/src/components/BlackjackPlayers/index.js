@@ -191,8 +191,11 @@ function BlackjackPlayers() {
             </div>
             <Card id="house">
                 <CardTitle tag="h5">{house.Name}</CardTitle>
-                <CardImg id="cardOneHouse" src={houseHand[0].imgUrl} alt="{houseHand[0].code}" />
-                <CardImg id="cardTwoHouse" src={houseHand[1].imgUrl} alt="{houseHand[1].code}" />
+                <CardText tag="h5">Points: {house.Points}</CardText>
+                <div id="houseHand">
+                    <CardImg id="cardOneHouse" src={houseHand[0].imgUrl} alt="{houseHand[0].code}" />
+                    <CardImg id="cardTwoHouse" src={houseHand[1].imgUrl} alt="{houseHand[1].code}" />
+                </div>
             </Card>
             <Card id="player1">
                 <CardTitle tag="h5">{player1.Name}</CardTitle>
