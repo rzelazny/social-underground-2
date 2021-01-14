@@ -50,11 +50,11 @@ router.get("/api/user_data", function (req, res) {
 //get all running games for the setup page
 router.get("/api/allgames", function (req, res) {
 	db.Game.find({})
-	.populate("players")
-	.then(function (results) {
-		console.log("get tables returning data");
-		return res.send(results);
-	})
+		.populate("players")
+		.then(function (results) {
+			console.log("get tables returning data");
+			return res.send(results);
+		})
 });
 
 //create a new game
@@ -76,7 +76,7 @@ router.post("/api/newGame", ({ body }, res) => {
 router.post("/api/newPlayer", ({ body }, res) => {
 	console.log("Storing new player");
 	console.log(body);
-	db.Player.create({name: body.name})
+	db.Player.create({ name: body.name })
 		.then(dbGame => {
 			console.log(dbGame);
 			res.json(dbGame);
@@ -165,7 +165,7 @@ router.post("/api/updatePlayer/:id", (req, res) => {
 });
 
 //update the gameBoard collection
-router.post("/api/updateBoard/:id", (req, res) => {
+router.post("/updateBoard/:id", (req, res) => {
 	db.GameBoard.updateOne(
 		{ _id: req.params.id }, req.body)
 		.then(boardData => {
@@ -178,4 +178,89 @@ router.post("/api/updateBoard/:id", (req, res) => {
 		});
 });
 
+app.get("/tables", function (req, res) {
+	db.gaming_table.findAll({
+		where: {
+			game_ended: {
+				[Op.eq]: false
+			},
+			[Op.or]: [
+				{
+					user1:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user2:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user3:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user4:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user5:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				}]
+		},
+	}).then(function (results) {
+		console.log("get tables returning data");
+		return res.send(results);
+	})
+});
+
+app.post("/cleanup", function (req, res) {
+
+	console.log("cleanup running");
+	db.gaming_table.findAll({
+		where: {
+			user1: {
+				[Op.eq]: "Open Seat"
+			},
+			user2: {
+				[Op.eq]: "Open Seat"
+			},
+			user3: {
+				[Op.eq]: "Open Seat"
+			},
+			user4: {
+				[Op.eq]: "Open Seat"
+			},
+			user5: {
+				[Op.eq]: "Open Seat"
+			}
+		}
+	})
+		.then(function (results) {
+			if (results != null) {
+				for (i = 0; i < results.length; i++) {
+					db.gaming_table.destroy({
+						where: {
+							id: {
+								[Op.eq]: results[i].id
+							}
+						}
+					})
+					console.log("deleting empty table", results[i].id)
+				}
+				res.send(results);
+			}
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
 module.exports = router;

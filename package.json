@@ -33,6 +33,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0",
+    "reactstrap": "^8.8.1",
     "socket.io": "^3.0.5",
     "webcam-easy": "^1.0.5"
   }
