@@ -155,64 +155,13 @@ function BlackjackPlayers() {
                 // .catch(err => setPlayer1Hand.error(err));
     }, []);
 
-    // function updatePoints() {
-    //     setHouseHand(
-    //         [
-    //             {
-    //                 value: totalPoints(),
-    //             }, 
-    //             {
-    //                 value: totalPoints(),
-    //             }
-    //         ]
-    //         )
-    // }
-
-    // function totalPoints() {
-    //     return 11;
-    // }
-
-    // function updatePoints() {
-    //     setHousePoints(
-    //         parseInt(houseHand[0].value) + parseInt(houseHand[1].value)
-    //     );
-    //     setPlayer1Points(
-    //         // totalPointsPlayer1()
-    //         10
-    //     )
-    // }
-    
-    // function totalPointsPlayer1() {
-    //     // sets value of face cards //
-    //     if (player1Hand[0].value === "JACK" || player1Hand[0].value === "QUEEN" || player1Hand[0].value === "KING") {
-    //         return player1Hand[0].value === 10;
-    //     }
-    //     if (player1Hand[1].value === "JACK" || player1Hand[1].value === "QUEEN" || player1Hand[1].value === "KING") {
-    //         return player1Hand[1].value === 10;
-    //     }
-        
-    //     // sets value for ace depending on current point value //
-    //     if (player1Hand[0].value === "ACE") {
-    //         return player1Hand[0].value = 11;
-    //     } else if (player1Hand[1].value === "ACE" && player1Hand[0].value < 11) {
-    //         return player1Hand[1].value = 11;
-    //     } else if (player1Hand[1].value === "ACE" && player1Hand[0].value > 10) {
-    //         return player1Hand[1].value = 1;
-    //     }
-
-    // console.log(player1Hand[0].value);
-    // console.log(player1Hand[1].value);
-    // return parseInt(player1Hand[0].value) + parseInt(player1Hand[1].value)
-    // }
-
-
     function addPlayers() {
 
         setHouse({
             Name: 'House', 
             ID: 0, 
             Score: 0, 
-            Points: housePoints, 
+            Points: houseHand[0].value + houseHand[1].value, 
             Bust: false, 
             Hand: houseHand, 
             Stand: false
@@ -222,7 +171,7 @@ function BlackjackPlayers() {
             Name: 'Player1', 
             ID: 1, 
             Score: 0, 
-            Points: player1Points, 
+            Points: player1Hand[0].value + player1Hand[1].value, 
             Bust: false, 
             Hand: player1Hand,
             Stand: false
@@ -236,7 +185,6 @@ function BlackjackPlayers() {
 
     return (
         <Container id="players">
-            {/* <button onClick={updatePoints} >update points</button> */}
             <button onClick={addPlayers} >add players</button>
             <button onClick={consolePlayers} >see console log</button>
     </Container>
