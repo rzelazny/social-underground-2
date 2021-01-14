@@ -1,5 +1,6 @@
 import React from "react";
 import GamingTable from "../components/GamingTable";
+import Nav from "../components/Nav/Navbar"
 import $ from "jquery";
 
 function Casino() {
@@ -20,7 +21,7 @@ function Casino() {
     init();
 
     return (
-        // Navbar will go here
+        <Nav />,
         <GamingTable />
         // Footer will go here
     )

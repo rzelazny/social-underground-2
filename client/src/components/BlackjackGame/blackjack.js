@@ -36,7 +36,7 @@ function onStart() {
     // will call the displayBtns function //
     // displayBtns();
     // will add the players hard coded in the allPlayers function to the session //
-    addPlayers();
+    // addPlayers();
     // will draw cards for all players using the drawCards function //
 
     drawCards();
@@ -79,78 +79,78 @@ function onStart() {
 // }
 
 // setting i to 0 so that we can control the synchronicity //
-var i = 0;
-function drawCards() {
-    // this api link will draw 2 random cards //
-    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
-    $.ajax({
-        url: docUrl,
-        method: "GET"
-    }).then(function (data) {
-        // we will save the data in an array. each object will hold the cards code, suit, value, and image //
-        playerHand = [
-            {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            }, {
-                code: data.cards[1].code,
-                suit: data.cards[1].suit,
-                value: data.cards[1].value,
-                imgUrl: data.cards[1].image
-            }
-        ];
-        // this will give the drawn set of cards to whichever player is 'i' //
-        console.log("Debug stuff:");
-        console.log(i);
-        console.log(playerHand);
-        console.log(playerArray);
-        console.log(playerArray[i].Hand);
-        playerArray[i].Hand = playerHand
-        // this will increment i so that it will keep running the draw cards function for each player //
-        i++
-        if (i < playerArray.length) {
-            drawCards()
-        }
+// var i = 0;
+// function drawCards() {
+//     // this api link will draw 2 random cards //
+//     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
+//     $.ajax({
+//         url: docUrl,
+//         method: "GET"
+//     }).then(function (data) {
+//         // we will save the data in an array. each object will hold the cards code, suit, value, and image //
+//         playerHand = [
+//             {
+//                 code: data.cards[0].code,
+//                 suit: data.cards[0].suit,
+//                 value: data.cards[0].value,
+//                 imgUrl: data.cards[0].image
+//             }, {
+//                 code: data.cards[1].code,
+//                 suit: data.cards[1].suit,
+//                 value: data.cards[1].value,
+//                 imgUrl: data.cards[1].image
+//             }
+//         ];
+//         // this will give the drawn set of cards to whichever player is 'i' //
+//         console.log("Debug stuff:");
+//         console.log(i);
+//         console.log(playerHand);
+//         console.log(playerArray);
+//         console.log(playerArray[i].Hand);
+//         playerArray[i].Hand = playerHand
+//         // this will increment i so that it will keep running the draw cards function for each player //
+//         i++
+//         if (i < playerArray.length) {
+//             drawCards()
+//         }
         // if there isnt any more players it will stop drawing cards and run the following functions //
-        else {
-            totalPoints();
+        // else {
+            // totalPoints();
             createElements();
-        }
-    })
-}
+        // }
+//     })
+// }
 
 // this function is called after the cards are originally drawn //
-function totalPoints() {
-    // handVal is set to 0 //
-    var handVal = 0;
-    for (var i = 0; i < playerArray.length; i++) {
-        // resets players points //
-        playerArray[i].Points = 0;
-        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
-            // sets values for face cards //
-            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
-                playerArray[i].Hand[j].value = "10";
-            }
-            // sets value for ace depending on current point value
-            if (playerArray[i].Hand[0].value === "ACE") {
-                playerArray[i].Hand[0].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
-                playerArray[i].Hand[1].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
-                playerArray[i].Hand[1].value = "1";
-            }
+// function totalPoints() {
+//     // handVal is set to 0 //
+//     var handVal = 0;
+//     for (var i = 0; i < playerArray.length; i++) {
+//         // resets players points //
+//         playerArray[i].Points = 0;
+//         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+//             // sets values for face cards //
+//             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+//                 playerArray[i].Hand[j].value = "10";
+//             }
+//             // sets value for ace depending on current point value
+//             if (playerArray[i].Hand[0].value === "ACE") {
+//                 playerArray[i].Hand[0].value = "11";
+//             } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
+//                 playerArray[i].Hand[1].value = "11";
+//             } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
+//                 playerArray[i].Hand[1].value = "1";
+//             }
 
-            // adds all cards in hand to create new value //
-            handVal += parseInt(playerArray[i].Hand[j].value);
-        }
-        // sets the points equal to the new value //
-        playerArray[i].Points = handVal;
-        // resets back to zero //
-        handVal = 0;
-    }
-}
+//             // adds all cards in hand to create new value //
+//             handVal += parseInt(playerArray[i].Hand[j].value);
+//         }
+//         // sets the points equal to the new value //
+//         playerArray[i].Points = handVal;
+//         // resets back to zero //
+//         handVal = 0;
+//     }
+// }
 
 // this function dynamically creates elements to display the game to the user  //
 function createElements() {
