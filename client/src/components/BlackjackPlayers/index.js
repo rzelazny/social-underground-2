@@ -9,7 +9,7 @@ function BlackjackPlayers() {
     const [house, setHouse] = useState({});
     const [player1, setPlayer1] = useState({});
 
-    function addPlayers(props) {
+    function addPlayers() {
 
         setHouse({
             Name: 'House', 
@@ -17,7 +17,7 @@ function BlackjackPlayers() {
             Score: 0, 
             Points: 0, 
             Bust: false, 
-            Hand: props.houseHand, 
+            Hand: null, 
             Stand: false
         });
     
@@ -27,7 +27,7 @@ function BlackjackPlayers() {
             Score: 0, 
             Points: 0, 
             Bust: false, 
-            Hand: props.player1Hand, 
+            Hand: null, 
             Stand: false
         });
     }
@@ -39,8 +39,8 @@ function BlackjackPlayers() {
 
     return (
         <Container id="players" >
-            <p onClick={addPlayers}>The blackjack players will go here.</p>
-            <p onClick={consolePlayers}>Click here for console log of players</p>
+            <p onClick={consolePlayers}>Click here for console log of players.</p>
+            <p onClick={addPlayers}>Click here to add players.</p>
             <BlackjackHand />
     </Container>
     );
