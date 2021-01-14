@@ -10,8 +10,34 @@ function BlackjackPlayers() {
     const [house, setHouse] = useState({});
     const [player1, setPlayer1] = useState({});
 
-    const [houseHand, setHouseHand] = useState([]);
-    const [player1Hand, setPlayer1Hand] = useState([]);
+    const [houseHand, setHouseHand] = useState([
+        {
+            code: "",
+            suit: "",
+            value: "",
+            imgUrl: ""
+        }, 
+        {
+            code: "",
+            suit: "",
+            value: "",
+            imgUrl: ""
+        }
+    ]);
+    const [player1Hand, setPlayer1Hand] = useState([
+        {
+            code: "",
+            suit: "",
+            value: "",
+            imgUrl: ""
+        }, 
+        {
+            code: "",
+            suit: "",
+            value: "",
+            imgUrl: ""
+        }
+    ]);
 
     const [housePoints, setHousePoints] = useState();
     const [player1Points, setPlayer1Points] = useState();
@@ -23,13 +49,26 @@ function BlackjackPlayers() {
 
         API.drawHouse(houseHand)
             .then(data => {
-                // console.log(data)
+                // console.log(data);
+                let card1Val;
+                // sets value of face card //
+                if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
+                    card1Val = 10;
+                }
+                // sets value for ace  //
+                else if (data.data.cards[0].value === "ACE") {
+                    card1Val = 11;
+                } 
+                else{
+                    card1Val = data.data.cards[0].value;
+                }
+
                 setHouseHand(
                     [
                         {
                             code: data.data.cards[0].code,
                             suit: data.data.cards[0].suit,
-                            value: data.data.cards[0].value,
+                            value: card1Val,
                             imgUrl: data.data.cards[0].image
                         }, 
                         {
@@ -43,6 +82,31 @@ function BlackjackPlayers() {
             })
             // .catch(err => setHouseHand.error(err));
     }, []);
+
+    // function card1Points() {
+    //     console.log(data.data.cards[0].value);
+
+    //     // sets value of face card //
+    //     if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
+    //         return data.data.cards[0].value === 10;
+    //     }
+        
+    //     // sets value for ace  //
+    //     if (data.data.cards[0].value === "ACE") {
+    //         return data.data.cards[0].value = 11;
+    //     } 
+
+    //     return data.data.cards[0].value;
+    // }
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         if (!player1Hand) {
@@ -72,35 +136,55 @@ function BlackjackPlayers() {
                 // .catch(err => setPlayer1Hand.error(err));
     }, []);
 
-    function updatePoints() {
-        setHousePoints(
-            parseInt(houseHand[0].value) + parseInt(houseHand[1].value)
-        );
-        setPlayer1Points(
-            totalPointsPlayer1()
-        )
-    }
+    // function updatePoints() {
+    //     setHouseHand(
+    //         [
+    //             {
+    //                 value: totalPoints(),
+    //             }, 
+    //             {
+    //                 value: totalPoints(),
+    //             }
+    //         ]
+    //         )
+    // }
+
+    // function totalPoints() {
+    //     return 11;
+    // }
+
+    // function updatePoints() {
+    //     setHousePoints(
+    //         parseInt(houseHand[0].value) + parseInt(houseHand[1].value)
+    //     );
+    //     setPlayer1Points(
+    //         // totalPointsPlayer1()
+    //         10
+    //     )
+    // }
     
-    function totalPointsPlayer1() {
-        for (var i = 0; player1Hand.length; i++) {
-            // sets value of face cards //
-            if (player1Hand[i].value === "JACK" || player1Hand[i].value === "QUEEN" || player1Hand[i].value === "KING") {
-                player1Hand[i].value === "10";
-            }
-            
-            // sets value for ace depending on current point value //
-            if (player1Hand[0].value === "ACE") {
-                player1Hand[0].value = "11";
-            } else if (player1Hand[1].value === "ACE" && player1Hand[0].value < 11) {
-                player1Hand[1].value = "11";
-            } else if (player1Hand[1].value === "ACE" && player1Hand[0].value > 10) {
-                player1Hand[1].value = "1";
-            }
-        }
-        console.log(player1Hand[0].value);
-        console.log(player1Hand[1].value);
-        return parseInt(player1Hand[0].value) + parseInt(player1Hand[1].value)
-    }
+    // function totalPointsPlayer1() {
+    //     // sets value of face cards //
+    //     if (player1Hand[0].value === "JACK" || player1Hand[0].value === "QUEEN" || player1Hand[0].value === "KING") {
+    //         return player1Hand[0].value === 10;
+    //     }
+    //     if (player1Hand[1].value === "JACK" || player1Hand[1].value === "QUEEN" || player1Hand[1].value === "KING") {
+    //         return player1Hand[1].value === 10;
+    //     }
+        
+    //     // sets value for ace depending on current point value //
+    //     if (player1Hand[0].value === "ACE") {
+    //         return player1Hand[0].value = 11;
+    //     } else if (player1Hand[1].value === "ACE" && player1Hand[0].value < 11) {
+    //         return player1Hand[1].value = 11;
+    //     } else if (player1Hand[1].value === "ACE" && player1Hand[0].value > 10) {
+    //         return player1Hand[1].value = 1;
+    //     }
+
+    // console.log(player1Hand[0].value);
+    // console.log(player1Hand[1].value);
+    // return parseInt(player1Hand[0].value) + parseInt(player1Hand[1].value)
+    // }
 
 
     function addPlayers() {
@@ -133,7 +217,7 @@ function BlackjackPlayers() {
 
     return (
         <Container id="players">
-            <button onClick={updatePoints} >update points</button>
+            {/* <button onClick={updatePoints} >update points</button> */}
             <button onClick={addPlayers} >add players</button>
             <button onClick={consolePlayers} >see console log</button>
     </Container>
