@@ -6,34 +6,34 @@ const Schema = mongoose.Schema;
     const Table = new Schema({
     
     game: {
-        type: DataTypes.STRING,
+        type: String,
         allowNull: false,
-        defaultValue: "Just Chatting"
+        default: "Just Chatting"
     },
     game_ended: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        default: false
     },
     // There must be at least one player at a table
     user1: {
-        type: DataTypes.STRING,
+        type: String,
         allowNull: false
     },
     user2: {
-        type: DataTypes.STRING,
-        defaultValue: "Open Seat"
+        type: String,
+        default: "Open Seat"
     },
     user3: {
-        type: DataTypes.STRING,
-        defaultValue: "Open Seat"
+        type: String,
+        default: "Open Seat"
     },
     user4: {
-        type: DataTypes.STRING,
-        defaultValue: "Open Seat"
+        type: String,
+        default: "Open Seat"
     },
     user5: {
-        type: DataTypes.STRING,
-        defaultValue: "Open Seat"
+        type: String,
+        default: "Open Seat"
     }
     });
 
