@@ -3,7 +3,7 @@ import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function BlackjackPlayersContainer() {
+function BlackjackPlayers() {
 
     const [house, setHouse] = useState({});
     const [player1, setPlayer1] = useState({});
@@ -44,4 +44,4 @@ function BlackjackPlayersContainer() {
     );
 }
 
-export default BlackjackPlayersContainer;
+export default BlackjackPlayers;
