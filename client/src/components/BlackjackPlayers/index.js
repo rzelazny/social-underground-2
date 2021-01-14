@@ -60,7 +60,23 @@ function BlackjackPlayers() {
                     card1Val = 11;
                 } 
                 else{
-                    card1Val = data.data.cards[0].value;
+                    card1Val = parseInt(data.data.cards[0].value);
+                }
+
+                let card2Val;
+                // sets value of face card //
+                if (data.data.cards[1].value === "JACK" || data.data.cards[1].value === "QUEEN" || data.data.cards[1].value === "KING") {
+                    card2Val = 10;
+                }
+                // sets value for ace  //
+                else if (card1Val < 11 && data.data.cards[1].value === "ACE") {
+                    card2Val = 11;
+                } 
+                else if (card1Val > 11 && data.data.cards[1].value === "ACE") {
+                    card2Val = 1;
+                } 
+                else{
+                    card2Val = parseInt(data.data.cards[1].value);
                 }
 
                 setHouseHand(
@@ -74,7 +90,7 @@ function BlackjackPlayers() {
                         {
                             code: data.data.cards[1].code,
                             suit: data.data.cards[1].suit,
-                            value: data.data.cards[1].value,
+                            value: card2Val,
                             imgUrl: data.data.cards[1].image
                         }
                     ]
@@ -82,31 +98,6 @@ function BlackjackPlayers() {
             })
             // .catch(err => setHouseHand.error(err));
     }, []);
-
-    // function card1Points() {
-    //     console.log(data.data.cards[0].value);
-
-    //     // sets value of face card //
-    //     if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
-    //         return data.data.cards[0].value === 10;
-    //     }
-        
-    //     // sets value for ace  //
-    //     if (data.data.cards[0].value === "ACE") {
-    //         return data.data.cards[0].value = 11;
-    //     } 
-
-    //     return data.data.cards[0].value;
-    // }
-
-
-
-
-
-
-
-
-
 
     useEffect(() => {
         if (!player1Hand) {
@@ -116,18 +107,46 @@ function BlackjackPlayers() {
         API.drawPlayer1(player1Hand)
                 .then(data => {
                     // console.log(data)
+                    let card1Val;
+                // sets value of face card //
+                if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
+                    card1Val = 10;
+                }
+                // sets value for ace  //
+                else if (data.data.cards[0].value === "ACE") {
+                    card1Val = 11;
+                } 
+                else{
+                    card1Val = parseInt(data.data.cards[0].value);
+                }
+
+                let card2Val;
+                // sets value of face card //
+                if (data.data.cards[1].value === "JACK" || data.data.cards[1].value === "QUEEN" || data.data.cards[1].value === "KING") {
+                    card2Val = 10;
+                }
+                // sets value for ace  //
+                else if (card1Val < 11 && data.data.cards[1].value === "ACE") {
+                    card2Val = 11;
+                } 
+                else if (card1Val > 11 && data.data.cards[1].value === "ACE") {
+                    card2Val = 1;
+                } 
+                else{
+                    card2Val = parseInt(data.data.cards[1].value);
+                }
                     setPlayer1Hand(
                     [
                         {
                             code: data.data.cards[0].code,
                             suit: data.data.cards[0].suit,
-                            value: data.data.cards[0].value,
+                            value: card1Val,
                             imgUrl: data.data.cards[0].image
                         }, 
                         {
                             code: data.data.cards[1].code,
                             suit: data.data.cards[1].suit,
-                            value: data.data.cards[1].value,
+                            value: card2Val,
                             imgUrl: data.data.cards[1].image
                         }
                     ]
