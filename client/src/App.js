@@ -9,6 +9,7 @@ import NoMatch from "./pages/NoMatch";
 
 import Nav from "./components/Nav/Navbar";
 
+
 function App() {
 
   const [authenticated, setAuth] = useState([false]);
@@ -33,10 +34,10 @@ function App() {
           <Route>
             <NoMatch />
           </Route>
+          <Route path ="/casino" component = {Casino} />
         </Switch>
       </div>
     </Router>
-    // <Casino />
   );
 }
 
