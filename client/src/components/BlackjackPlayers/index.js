@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BlackjackHand from "../BlackjackHand";
 
 function BlackjackPlayers() {
 
     const [house, setHouse] = useState({});
     const [player1, setPlayer1] = useState({});
     const [playerArray, setPlayerArray] = useState([])
-    const [hand, setHand] = useState([])
 
     function addPlayers() {
+
         setHouse({
             Name: 'House', 
             ID: 0, 
@@ -40,6 +41,7 @@ function BlackjackPlayers() {
     return (
         <Container id="players" >
             <p>The blackjack players will go here.</p>
+            <BlackjackHand />
     </Container>
     );
 }
