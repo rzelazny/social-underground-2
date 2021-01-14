@@ -5,7 +5,18 @@ import $ from "jquery";
 function Home() {
 
     function init() {
-        cleanupTables()
+        //make sure the user is logged in
+        $.get("/api/user_data")
+        .then((userData)=>{
+            console.log(userData)
+            if(!userData.email){
+                window.location.replace("/login");
+            }
+            else{
+                console.log("You're logged in!");
+                cleanupTables()
+            }
+        })
     }
 
     init();
