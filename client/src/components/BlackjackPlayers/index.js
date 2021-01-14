@@ -72,7 +72,7 @@ function BlackjackPlayers() {
                 else if (card1Val < 11 && data.data.cards[1].value === "ACE") {
                     card2Val = 11;
                 } 
-                else if (card1Val > 11 && data.data.cards[1].value === "ACE") {
+                else if (card1Val > 10 && data.data.cards[1].value === "ACE") {
                     card2Val = 1;
                 } 
                 else{
@@ -129,7 +129,7 @@ function BlackjackPlayers() {
                 else if (card1Val < 11 && data.data.cards[1].value === "ACE") {
                     card2Val = 11;
                 } 
-                else if (card1Val > 11 && data.data.cards[1].value === "ACE") {
+                else if (card1Val > 10 && data.data.cards[1].value === "ACE") {
                     card2Val = 1;
                 } 
                 else{

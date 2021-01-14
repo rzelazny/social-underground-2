@@ -4,11 +4,14 @@ import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
 import BlackjackPlayers from "../BlackjackPlayers"
+import BlackjackDirections from "../BlackjackDirections"
 
 function BlackjackGame() {
 
     function restart() {
-        console.log("restart triggered")
+        console.log("restart triggered");
+        var gameBody = document.getElementById("gameBody");
+        return gameBody.innerHTML= <BlackjackDirections />
     }
 
     function hit() {
