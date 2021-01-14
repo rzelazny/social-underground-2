@@ -7,9 +7,8 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(logger("dev"));
-
 // Define middleware here
+app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({ secret: "games rule", resave: true, saveUninitialized: true }));
