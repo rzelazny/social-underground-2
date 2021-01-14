@@ -181,4 +181,89 @@ router.get("/logout", function (req, res) {
 // 		});
 // });
 
+app.get("/tables", function (req, res) {
+	db.gaming_table.findAll({
+		where: {
+			game_ended: {
+				[Op.eq]: false
+			},
+			[Op.or]: [
+				{
+					user1:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user2:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user3:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user4:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user5:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				}]
+		},
+	}).then(function (results) {
+		console.log("get tables returning data");
+		return res.send(results);
+	})
+});
+
+app.post("/cleanup", function (req, res) {
+
+	console.log("cleanup running");
+	db.gaming_table.findAll({
+		where: {
+			user1: {
+				[Op.eq]: "Open Seat"
+			},
+			user2: {
+				[Op.eq]: "Open Seat"
+			},
+			user3: {
+				[Op.eq]: "Open Seat"
+			},
+			user4: {
+				[Op.eq]: "Open Seat"
+			},
+			user5: {
+				[Op.eq]: "Open Seat"
+			}
+		}
+	})
+		.then(function (results) {
+			if (results != null) {
+				for (i = 0; i < results.length; i++) {
+					db.gaming_table.destroy({
+						where: {
+							id: {
+								[Op.eq]: results[i].id
+							}
+						}
+					})
+					console.log("deleting empty table", results[i].id)
+				}
+				res.send(results);
+			}
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
 module.exports = router;
