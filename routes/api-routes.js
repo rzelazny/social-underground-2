@@ -34,7 +34,8 @@ router.get("/logout", function (req, res) {
 	res.redirect("/");
 });
 
-// // // Route for getting some data about our user to be used client side
+// Route for checking login status on the client
+// Endpoint: /api/user_data
 router.get("/user_data", function (req, res) {
 	console.log("get api user data is running")
 	if (!req.user) {
@@ -50,19 +51,104 @@ router.get("/user_data", function (req, res) {
 	}
 });
 
+// Route for finding tables with open seats
+// Endpoint: /api/tables
+router.get("/tables", function (req, res) {
+	db.gaming_table.find({
+		game_ended: {
+			$eq: false
+		},
+		$or: [
+			{
+				user1:
+				{
+					$eq: "Open Seat"
+				}
+			},
+			{
+				user2:
+				{
+					$eq: "Open Seat"
+				}
+			},
+			{
+				user3:
+				{
+					$eq: "Open Seat"
+				}
+			},
+			{
+				user4:
+				{
+					$eq: "Open Seat"
+				}
+			},
+			{
+				user5:
+				{
+					$eq: "Open Seat"
+				}
+			}]
+	}).then(function (results) {
+		console.log("get tables returning data");
+		return res.send(results);
+	})
+});
+
+// Route for removing from the db tables that no longer have players
+// Endpoint: /api/cleanup
+router.post("/cleanup", function (req, res) {
+
+	console.log("cleanup running");
+	db.gaming_table.find({
+		user1: {
+			$eq: "Open Seat"
+		},
+		user2: {
+			$eq: "Open Seat"
+		},
+		user3: {
+			$eq: "Open Seat"
+		},
+		user4: {
+			$eq: "Open Seat"
+		},
+		user5: {
+			$eq: "Open Seat"
+		}
+	})
+		.then(function (results) {
+			if (results != null) {
+				for (i = 0; i < results.length; i++) {
+					db.gaming_table.deleteOne({
+						id: {
+							$eq: results[i].id
+						}
+					})
+					console.log("deleting empty table", results[i].id)
+				}
+				res.send(results);
+			}
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
+
 
 // //get all running games for the setup page
-// router.get("/api/allgames", function (req, res) {
+// // Endpoint: /allgames
+// router.get("/allgames", function (req, res) {
 // 	db.Game.find({})
-// 	.populate("players")
-// 	.then(function (results) {
-// 		console.log("get tables returning data");
-// 		return res.send(results);
-// 	})
+// 		.populate("players")
+// 		.then(function (results) {
+// 			console.log("get tables returning data");
+// 			return res.send(results);
+// 		})
 // });
 
 // //create a new game
-// router.post("/api/newGame", ({ body }, res) => {
+// router.post("/newGame", ({ body }, res) => {
 // 	console.log("Storing new game");
 
 // 	db.Game.create(body)
@@ -77,10 +163,10 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //create a new player
-// router.post("/api/newPlayer", ({ body }, res) => {
+// router.post("/newPlayer", ({ body }, res) => {
 // 	console.log("Storing new player");
 // 	console.log(body);
-// 	db.Player.create({name: body.name})
+// 	db.Player.create({ name: body.name })
 // 		.then(dbGame => {
 // 			console.log(dbGame);
 // 			res.json(dbGame);
@@ -92,7 +178,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //get the current game state
-// router.get("/api/gameState/:id", (req, res) => {
+// router.get("gameState/:id", (req, res) => {
 // 	db.Game.findById(req.params.id)
 // 		.populate("players")
 // 		.then(gameData => {
@@ -106,7 +192,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //get a player's data
-// router.get("/api/playerState/:id", (req, res) => {
+// router.get("/playerState/:id", (req, res) => {
 // 	db.Player.findById(req.params.id)
 // 		.populate("constructedBuildings")
 // 		.then(playerData => {
@@ -120,7 +206,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //update the game collection's phase and round
-// router.post("/api/updatePhase/:id", (req, res) => {
+// router.post("/updatePhase/:id", (req, res) => {
 // 	db.Game.updateOne(
 // 		{ _id: req.params.id },
 // 		{
@@ -141,7 +227,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //update the game collection
-// router.post("/api/updateGame/:id", (req, res) => {
+// router.post("/updateGame/:id", (req, res) => {
 // 	db.Game.updateOne(
 // 		{ _id: req.params.id }, req.body)
 // 		.then(gameData => {
@@ -155,7 +241,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //update a player collection
-// router.post("/api/updatePlayer/:id", (req, res) => {
+// router.post("/updatePlayer/:id", (req, res) => {
 // 	db.Player.updateOne(
 // 		{ _id: req.params.id }, req.body)
 // 		.then(playerData => {
@@ -169,7 +255,7 @@ router.get("/user_data", function (req, res) {
 // });
 
 // //update the gameBoard collection
-// router.post("/api/updateBoard/:id", (req, res) => {
+// router.post("/updateBoard/:id", (req, res) => {
 // 	db.GameBoard.updateOne(
 // 		{ _id: req.params.id }, req.body)
 // 		.then(boardData => {
@@ -182,89 +268,5 @@ router.get("/user_data", function (req, res) {
 // 		});
 // });
 
-router.get("/tables", function (req, res) {
-	db.gaming_table.findAll({
-		where: {
-			game_ended: {
-				[Op.eq]: false
-			},
-			[Op.or]: [
-				{
-					user1:
-					{
-						[Op.eq]: "Open Seat"
-					}
-				},
-				{
-					user2:
-					{
-						[Op.eq]: "Open Seat"
-					}
-				},
-				{
-					user3:
-					{
-						[Op.eq]: "Open Seat"
-					}
-				},
-				{
-					user4:
-					{
-						[Op.eq]: "Open Seat"
-					}
-				},
-				{
-					user5:
-					{
-						[Op.eq]: "Open Seat"
-					}
-				}]
-		},
-	}).then(function (results) {
-		console.log("get tables returning data");
-		return res.send(results);
-	})
-});
 
-router.post("/cleanup", function (req, res) {
-
-	console.log("cleanup running");
-	db.gaming_table.findAll({
-		where: {
-			user1: {
-				[Op.eq]: "Open Seat"
-			},
-			user2: {
-				[Op.eq]: "Open Seat"
-			},
-			user3: {
-				[Op.eq]: "Open Seat"
-			},
-			user4: {
-				[Op.eq]: "Open Seat"
-			},
-			user5: {
-				[Op.eq]: "Open Seat"
-			}
-		}
-	})
-		.then(function (results) {
-			if (results != null) {
-				for (i = 0; i < results.length; i++) {
-					db.gaming_table.destroy({
-						where: {
-							id: {
-								[Op.eq]: results[i].id
-							}
-						}
-					})
-					console.log("deleting empty table", results[i].id)
-				}
-				res.send(results);
-			}
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
 module.exports = router;
