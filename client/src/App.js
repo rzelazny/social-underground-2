@@ -36,6 +36,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    // <Casino />
   );
 }
 

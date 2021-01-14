@@ -3,8 +3,8 @@
 ///////////////////////////////////////////////
 
 var players = document.querySelector('#players');
-var directions = document.querySelector('#directions');
-var endRoundDiv = document.querySelector('#endRoundDiv');
+// var directions = document.querySelector('#directions');
+// var endRoundDiv = document.querySelector('#endRoundDiv');
 
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
@@ -12,7 +12,7 @@ var hitBtn = document.querySelector('#hit');
 var standBtn = document.querySelector('#stand');
 var goBackBtn = document.querySelector('#goBack');
 
-let hand = [];
+// let hand = [];
 var divPlayer = null;
 var divHand = null;
 var divPoints = null;
@@ -25,7 +25,7 @@ var winnerDisplay = null;
 var scoresDisplay = null;
 var scoresDisplayHousePlayer = null;
 
-let playerArray = [];
+// let playerArray = [];
 
 ///////////////////////////////////////////////
 //                Functions                  //
@@ -34,7 +34,7 @@ let playerArray = [];
 // this function will be called when the start btn is pressed //
 function onStart() {
     // will call the displayBtns function //
-    displayBtns();
+    // displayBtns();
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
     // will draw cards for all players using the drawCards function //
@@ -42,41 +42,41 @@ function onStart() {
     drawCards();
 }
 
-// this function is called at the start of the game //
-function displayBtns() {
-    // the start button is hidden //
-    if (startBtn.style.display === 'block') {
-        startBtn.style.display = 'none'
-    }
-    if (endRoundDiv.style.display === 'block') {
-        endRoundDiv.style.display = 'none'
-    }
+// // this function is called at the start of the game //
+// function displayBtns() {
+//     // the start button is hidden //
+//     // if (startBtn.style.display === 'block') {
+//     //     startBtn.style.display = 'none'
+//     // }
+//     // if (endRoundDiv.style.display === 'block') {
+//     //     endRoundDiv.style.display = 'none'
+//     // }
     
-    if (directions.style.display === 'block') {
-        directions.style.display = 'none'
-    }
-    // the hit button is displayed //
-    if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'inline'
-    }
-    // the stand button is displayed //
-    if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'inline'
-    }
-    // the restart button is displayed and replaces the spot of the start button //
-    if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'inline'
-    }
-}
+//     // if (directions.style.display === 'block') {
+//     //     directions.style.display = 'none'
+//     // }
+//     // the hit button is displayed //
+//     // if (hitBtn.style.display === 'none') {
+//     //     hitBtn.style.display = 'inline'
+//     // }
+//     // // the stand button is displayed //
+//     // if (standBtn.style.display === 'none') {
+//     //     standBtn.style.display = 'inline'
+//     // }
+//     // // the restart button is displayed and replaces the spot of the start button //
+//     // if (restartBtn.style.display === 'none') {
+//     //     restartBtn.style.display = 'inline'
+//     // }
+// }
 
-// hard coded for one player to play against the House //
-function addPlayers() {
-    // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
-    var player1 = { Name: 'Player1', ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
-    // appends the objects created above to the playerArray //
-    playerArray.push(house, player1);
-}
+// // hard coded for one player to play against the House //
+// function addPlayers() {
+//     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
+//     var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
+//     var player1 = { Name: 'Player1', ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
+//     // appends the objects created above to the playerArray //
+//     playerArray.push(house, player1);
+// }
 
 // setting i to 0 so that we can control the synchronicity //
 var i = 0;
