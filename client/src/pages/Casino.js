@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import $ from "jquery";
 import socketIOClient from "socket.io-client";
 import GamingTable from "../components/GamingTable";
-import $ from "jquery";
+import {ChatContainer, ChatItem, ChatWindow} from "../components/ChatLog/ChatLog";
+
 
 const ENDPOINT = process.env.PORT || "http://localhost:3000";
 
@@ -39,6 +41,11 @@ function Casino() {
                 It's <time dateTime={response}>{response}</time>
             </p>
         <GamingTable />
+        <br />
+        <ChatWindow>
+            <ChatItem />
+        </ChatWindow>
+        <ChatContainer />
         {/* // Footer will go here */}
         </div>
     )
