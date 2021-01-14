@@ -1,6 +1,8 @@
 import React from "react";
 import { Container } from "reactstrap";
+import NeonSign from "../components/NeonSign/NeonSign";
 import $ from "jquery";
+import NewBtn from "../components/NewBtn/NewBtn";
 
 function Home() {
 
@@ -131,22 +133,21 @@ function Home() {
         });
     }
 
-    return (
+        return (
         <Container>
-            <div className="wrapper">
-                <div className="neon-wrapper">
-                    <div className="neon-text">Welcome to the <br />Social Underground
-                </div>
-                </div>
-            </div>
+
+            <NeonSign />
             <div className="contianer" id="enterance">
                 <div className="col=md=4" id="current-tables0"></div>
                 <div className="col=md=4" id="current-tables1"></div>
                 <div className="col=md=4" id="current-tables2"></div>
             </div>
-            <div id="newTableSpan" onClick={createTable} style={{ position: "relative; left:40" }}>
-                <ul>
-                    <li>
+
+            <NewBtn />
+
+            {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
+                <ul className="homeList">
+                    <li className="buttonList">
                         <a href="#">
                             <span></span>
                             <span></span>
@@ -156,7 +157,7 @@ function Home() {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </Container>
     )
 }
