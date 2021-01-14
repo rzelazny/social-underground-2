@@ -1,16 +1,8 @@
-#House,
-#Player1 {
+#house,
+#player1 {
     text-align: center;
     margin: 10px;
-}
-
-#pointsHouse,
-#pointsPlayer1,
-#scoreHouse,
-#scorePlayer1,
-#House,
-#Player1 {
-    color:white;
+    background-color: black;
 }
 
 #cardOneHouse,

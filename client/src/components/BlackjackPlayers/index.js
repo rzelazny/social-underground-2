@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css"
-import { Container } from 'reactstrap';
+import { Container, Card, CardTitle, CardImg, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import API from "../../utils/API";
 
@@ -185,9 +185,20 @@ function BlackjackPlayers() {
 
     return (
         <Container id="players">
-            <button onClick={addPlayers} >add players</button>
-            <button onClick={consolePlayers} >see console log</button>
-    </Container>
+            <div>
+                <button onClick={addPlayers} >add players</button>
+                <button onClick={consolePlayers} >see console log</button>
+            </div>
+            <Card id="house">
+                <CardTitle tag="h5">{house.Name}</CardTitle>
+                <CardImg id="cardOneHouse" src={houseHand[0].imgUrl} alt="{houseHand[0].code}" />
+                <CardImg id="cardTwoHouse" src={houseHand[1].imgUrl} alt="{houseHand[1].code}" />
+            </Card>
+            <Card id="player1">
+                <CardTitle tag="h5">{player1.Name}</CardTitle>
+            </Card>
+
+        </Container>
     );
 }
 
