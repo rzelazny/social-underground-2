@@ -60,7 +60,7 @@ function Login() {
 
     function logout(){
         console.log(`logging out`)
-        $.post("/api/logout")
+        $.get("/api/logout")
             .then(function (user) {
                 // If there's an error, log the error
             })

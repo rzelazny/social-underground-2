@@ -21,12 +21,13 @@ router.post("/signup", ({ body }, res) => {
 //login functionality
 // Endpoint: /api/login
 router.post("/login", passport.authenticate("local"), function (req, res) {
-	console.log("Loging in ", req.body.email);
+	console.log("Loging in ", req.user.email);
 	res.setHeader('content-type', 'text/plain');
 	res.json(req.user);
 });
 
 //logout functionality
+// Endpoint: /api/logout
 router.get("/logout", function (req, res) {
 	console.log("Logging out ", req);
 	req.logout();
@@ -34,20 +35,20 @@ router.get("/logout", function (req, res) {
 });
 
 // // // Route for getting some data about our user to be used client side
-// router.get("/api/user_data", function (req, res) {
-// 	console.log("get api user data is running")
-// 	if (!req.user) {
-// 		// The user is not logged in, send back an empty object
-// 		res.json({});
-// 	} else {
-// 		// Otherwise send back the user's email and id
-// 		// Sending back a password, even a hashed password, isn't a good idea
-// 		res.json({
-// 			email: req.user.email,
-// 			id: req.user.id
-// 		});
-// 	}
-// });
+router.get("/user_data", function (req, res) {
+	console.log("get api user data is running")
+	if (!req.user) {
+		// The user is not logged in, send back an empty object
+		res.json({});
+	} else {
+		// Otherwise send back the user's email and id
+		// Sending back a password, even a hashed password, isn't a good idea
+		res.json({
+			email: req.user.email,
+			id: req.user.id
+		});
+	}
+});
 
 
 // //get all running games for the setup page
@@ -181,7 +182,7 @@ router.get("/logout", function (req, res) {
 // 		});
 // });
 
-app.get("/tables", function (req, res) {
+router.get("/tables", function (req, res) {
 	db.gaming_table.findAll({
 		where: {
 			game_ended: {
@@ -225,7 +226,7 @@ app.get("/tables", function (req, res) {
 	})
 });
 
-app.post("/cleanup", function (req, res) {
+router.post("/cleanup", function (req, res) {
 
 	console.log("cleanup running");
 	db.gaming_table.findAll({
