@@ -14,8 +14,8 @@ const ChatLog = new Schema({
     },
     // chat logs are per gaming table
     table_id: {
-        type: Number,
-        allowNull: false,
+        type: Schema.Types.ObjectId,
+        ref: "Table"
     },
     });
 

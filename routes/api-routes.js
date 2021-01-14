@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../models");
-var passport = require("../config/passport");
+const passport = require("../config/passport");
+const gameControl = require("../controllers/gameController");
 
 console.log("API Routes running");
 //signup functionality
@@ -54,6 +55,7 @@ router.get("/user_data", function (req, res) {
 // Route for finding tables with open seats
 // Endpoint: /api/tables
 router.get("/tables", function (req, res) {
+	console.log("Getting all tables");
 	db.Table.find({
 		game_ended: {
 			$eq: false
@@ -135,6 +137,42 @@ router.post("/cleanup", function (req, res) {
 		});
 });
 
+//create a new gaming table
+//Endpoint: api/newtable
+router.post("/newtable", function (req, res) {
+	console.log("Creating a new table");
+
+	db.Table.create({
+		game: "Just Chatting",
+		game_started: false,
+		user1: req.user.email
+	})
+		.then(function (results) {
+			console.log("sending new table data back")
+			return res.json(results);
+		})
+		.catch(function (err) {
+			return res.status(401).json(err);
+		});
+});
+
+//post a new chat message
+//Endpoint: api/chat
+router.post("/chat", function (req, res) {
+	console.log("post chat running ", req.body);
+	db.ChatLog.create({
+		user: req.user.email,
+		message: req.body.message,
+		table_id: req.body.table
+	})
+		.then(function (results) {
+			console.log("sending new table data back")
+			res.send(results);
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
 
 // //get all running games for the setup page
 // // Endpoint: /allgames

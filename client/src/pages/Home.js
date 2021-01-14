@@ -7,16 +7,16 @@ function Home() {
     function init() {
         //make sure the user is logged in
         $.get("/api/user_data")
-        .then((userData)=>{
-            console.log(userData)
-            if(!userData.email){
-                window.location.replace("/login");
-            }
-            else{
-                console.log("You're logged in!");
-                cleanupTables()
-            }
-        })
+            .then((userData) => {
+                console.log(userData)
+                if (!userData.email) {
+                    window.location.replace("/login");
+                }
+                else {
+                    console.log("You're logged in!");
+                    cleanupTables()
+                }
+            })
     }
 
     init();
@@ -110,25 +110,26 @@ function Home() {
                 })
             })
         }
-
-        // Create a new gaming table on click
-        $("#newTableSpan").on("click", function (event) {
-            console.log("Making a new gaming table ");
-            //create a new gaming table
-            $.post("/api/newtable").then(function (newTable) {
-                //post the joining chat message
-                let newMessage = {
-                    message: " has entered chat.",
-                    table: newTable.id
-                }
-                $.post("/api/chat/", newMessage, function () {
-                    //join the table
-                    window.location.assign("/casino" + newTable.id);
-                });
-            });
-        })
-
     };
+
+    // Create a new gaming table on click
+    function createTable() {
+        console.log("Making a new gaming table ");
+        //create a new gaming table
+        $.post("/api/newtable")
+        .then(function (newTable) {
+            //post the joining chat message
+            console.log("newtable: ", newTable);
+            let newMessage = {
+                message: " has entered chat.",
+                table: newTable._id
+            }
+            $.post("/api/chat/", newMessage, function () {
+                //join the table
+                window.location.assign("/casino" + newTable._id);
+            });
+        });
+    }
 
     return (
         <Container>
@@ -143,7 +144,7 @@ function Home() {
                 <div className="col=md=4" id="current-tables1"></div>
                 <div className="col=md=4" id="current-tables2"></div>
             </div>
-            <div id="newTableSpan" style={{ position: "relative; left:40" }}>
+            <div id="newTableSpan" onClick={createTable} style={{ position: "relative; left:40" }}>
                 <ul>
                     <li>
                         <a href="#">
