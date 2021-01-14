@@ -27,7 +27,7 @@ function App() {
           <Route exact path={"/home"}>
             <Home />
           </Route>
-          <Route path={"/casino"}>
+          <Route path={"/casino/"}>
             <Casino />
           </Route>
           <Route>
