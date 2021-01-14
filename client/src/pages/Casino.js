@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import socketIOClient from "socket.io-client";
 import GamingTable from "../components/GamingTable";
-import Nav from "../components/Nav/Navbar"
 import $ from "jquery";
 
+const ENDPOINT = process.env.PORT || "http://localhost:3000";
+
 function Casino() {
+    const [response, setResponse] = useState("");
+
+    useEffect(() => {
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("FromAPI", data => {
+            setResponse(data);
+        });
+
+        return () => socket.disconnect();
+    }, []);
+
     function init() {
         //make sure the user is logged in
         $.get("/api/user_data")
@@ -21,9 +34,13 @@ function Casino() {
     init();
 
     return (
-        <Nav />,
+        <div>
+            <p>
+                It's <time dateTime={response}>{response}</time>
+            </p>
         <GamingTable />
-        // Footer will go here
+        {/* // Footer will go here */}
+        </div>
     )
 }
 
