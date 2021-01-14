@@ -13,10 +13,10 @@ var standBtn = document.querySelector('#stand');
 var goBackBtn = document.querySelector('#goBack');
 
 // let hand = [];
-var divPlayer = null;
-var divHand = null;
-var divPoints = null;
-var divScore = null;
+// var divPlayer = null;
+// var divHand = null;
+// var divPoints = null;
+// var divScore = null;
 
 var roundOver = null;
 var pointDisplay = null;
@@ -31,16 +31,16 @@ var scoresDisplayHousePlayer = null;
 //                Functions                  //
 ///////////////////////////////////////////////
 
-// this function will be called when the start btn is pressed //
-function onStart() {
-    // will call the displayBtns function //
-    // displayBtns();
-    // will add the players hard coded in the allPlayers function to the session //
-    // addPlayers();
-    // will draw cards for all players using the drawCards function //
+// // this function will be called when the start btn is pressed //
+// function onStart() {
+//     // will call the displayBtns function //
+//     // displayBtns();
+//     // will add the players hard coded in the allPlayers function to the session //
+//     // addPlayers();
+//     // will draw cards for all players using the drawCards function //
 
-    drawCards();
-}
+//     drawCards();
+// }
 
 // // this function is called at the start of the game //
 // function displayBtns() {
@@ -116,7 +116,7 @@ function onStart() {
         // if there isnt any more players it will stop drawing cards and run the following functions //
         // else {
             // totalPoints();
-            createElements();
+            // createElements();
         // }
 //     })
 // }
@@ -152,59 +152,59 @@ function onStart() {
 //     }
 // }
 
-// this function dynamically creates elements to display the game to the user  //
-function createElements() {
-    players.innerHTML = ''; // this clears the gameboard //
+// // this function dynamically creates elements to display the game to the user  //
+// function createElements() {
+//     players.innerHTML = ''; // this clears the gameboard //
 
-    // in this loop, we will create elements for each player //
-    for (var i = 0; i < playerArray.length; i++) {
+//     // in this loop, we will create elements for each player //
+//     for (var i = 0; i < playerArray.length; i++) {
 
-        // creates div where all player data will be held, displays name //
-        divPlayer = document.createElement('div');
-        divPlayer.className = ('player');
-        divPlayer.id = playerArray[i].Name;
-        divPlayer.innerHTML = (playerArray[i].Name);
+//         // creates div where all player data will be held, displays name //
+//         divPlayer = document.createElement('div');
+//         divPlayer.className = ('player');
+//         divPlayer.id = playerArray[i].Name;
+//         divPlayer.innerHTML = (playerArray[i].Name);
 
-        //creates div where cards will be appended //
-        divHand = document.createElement("div");
-        divHand.id = ("hand" + playerArray[i].Name);
+//         //creates div where cards will be appended //
+//         divHand = document.createElement("div");
+//         divHand.id = ("hand" + playerArray[i].Name);
 
-        // creates element to display card one image //
-        var cardOneImg = document.createElement('img');
-        cardOneImg.id = ('cardOne' + playerArray[i].Name)
-        cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
+//         // creates element to display card one image //
+//         var cardOneImg = document.createElement('img');
+//         cardOneImg.id = ('cardOne' + playerArray[i].Name)
+//         cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
 
-        // creates element to display card two image //
-        var cardTwoImg = document.createElement('img');
-        cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
-        cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
+//         // creates element to display card two image //
+//         var cardTwoImg = document.createElement('img');
+//         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
+//         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
 
-        // creates div where the point value of the hand will be held and displayed  //
-        divPoints = document.createElement('div');
-        divPoints.className = ('points');
-        divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+//         // creates div where the point value of the hand will be held and displayed  //
+//         divPoints = document.createElement('div');
+//         divPoints.className = ('points');
+//         divPoints.id = ('points' + playerArray[i].Name);
+//         divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
 
-        // creates div where the users session score will be held and displayed //
-        divScore = document.createElement('div');
-        divScore.className = ('score');
-        divScore.id = ('score' + playerArray[i].Name);
-        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
+//         // creates div where the users session score will be held and displayed //
+//         divScore = document.createElement('div');
+//         divScore.className = ('score');
+//         divScore.id = ('score' + playerArray[i].Name);
+//         divScore.innerHTML = `Score: ${playerArray[i].Score} `;
 
-        // appends cards to hand div //
-        divHand.appendChild(cardOneImg);
-        divHand.appendChild(cardTwoImg);
+//         // appends cards to hand div //
+//         divHand.appendChild(cardOneImg);
+//         divHand.appendChild(cardTwoImg);
 
-        // appends hand, points, and score divs to the player div //
-        divPlayer.appendChild(divScore);
-        divPlayer.appendChild(divHand);
-        divPlayer.appendChild(divPoints);
+//         // appends hand, points, and score divs to the player div //
+//         divPlayer.appendChild(divScore);
+//         divPlayer.appendChild(divHand);
+//         divPlayer.appendChild(divPoints);
 
 
-        // appends all the data held in the player div to the gameboard
-        players.appendChild(divPlayer);
-    }
-}
+//         // appends all the data held in the player div to the gameboard
+//         players.appendChild(divPlayer);
+//     }
+// }
 
 // this function will be called when the user presses restart button //
 function onRestart() {

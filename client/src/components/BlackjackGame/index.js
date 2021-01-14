@@ -7,12 +7,15 @@ import BlackjackPlayers from "../BlackjackPlayers"
 
 function BlackjackGame() {
 
+    function restart() {
+        console.log("I see this restart")
+    }
+
     return (
         <Container id="gameBody" >
-            <p>The blackjack game will go here.</p>
-                <BlackjackPlayers />
-                <BlackjackButtons />
-    </Container>
+            <BlackjackPlayers />
+            <BlackjackButtons />
+        </Container>
     );
 }
 
