@@ -34,7 +34,7 @@ var scoresDisplayHousePlayer = null;
 // this function will be called when the start btn is pressed //
 function onStart() {
     // will call the displayBtns function //
-    displayBtns();
+    // displayBtns();
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
     // will draw cards for all players using the drawCards function //
@@ -42,32 +42,32 @@ function onStart() {
     drawCards();
 }
 
-// this function is called at the start of the game //
-function displayBtns() {
-    // the start button is hidden //
-    // if (startBtn.style.display === 'block') {
-    //     startBtn.style.display = 'none'
-    // }
-    if (endRoundDiv.style.display === 'block') {
-        endRoundDiv.style.display = 'none'
-    }
+// // this function is called at the start of the game //
+// function displayBtns() {
+//     // the start button is hidden //
+//     // if (startBtn.style.display === 'block') {
+//     //     startBtn.style.display = 'none'
+//     // }
+//     // if (endRoundDiv.style.display === 'block') {
+//     //     endRoundDiv.style.display = 'none'
+//     // }
     
-    // if (directions.style.display === 'block') {
-    //     directions.style.display = 'none'
-    // }
-    // the hit button is displayed //
-    // if (hitBtn.style.display === 'none') {
-    //     hitBtn.style.display = 'inline'
-    // }
-    // // the stand button is displayed //
-    // if (standBtn.style.display === 'none') {
-    //     standBtn.style.display = 'inline'
-    // }
-    // // the restart button is displayed and replaces the spot of the start button //
-    // if (restartBtn.style.display === 'none') {
-    //     restartBtn.style.display = 'inline'
-    // }
-}
+//     // if (directions.style.display === 'block') {
+//     //     directions.style.display = 'none'
+//     // }
+//     // the hit button is displayed //
+//     // if (hitBtn.style.display === 'none') {
+//     //     hitBtn.style.display = 'inline'
+//     // }
+//     // // the stand button is displayed //
+//     // if (standBtn.style.display === 'none') {
+//     //     standBtn.style.display = 'inline'
+//     // }
+//     // // the restart button is displayed and replaces the spot of the start button //
+//     // if (restartBtn.style.display === 'none') {
+//     //     restartBtn.style.display = 'inline'
+//     // }
+// }
 
 // // hard coded for one player to play against the House //
 // function addPlayers() {
