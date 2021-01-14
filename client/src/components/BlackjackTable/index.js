@@ -7,28 +7,28 @@ import BlackjackGame from "../BlackjackGame";
 // import BlackjackScoreCard from "../BlackjackScoreCard";
 
 function BlackjackTable() {
-
+    const [directions, setDirections] = useState(true);
     const [startGame, setStartGame] = useState(false);
 
     function onStart() {
         console.log("clicking start btn");
         setStartGame(true);
+        setDirections(false);
     }
 
     return (
         <Container id="blackjackTable">
             <h2>Single Player Blackjack</h2>
             <br />
-            <BlackjackDirections 
+            {directions
+            && <BlackjackDirections 
             onStart={onStart}
-            /> 
-            {/* hide the directions on click of start */}
+            />}
             {/* <BlackjackScoreCard /> */}
             {/* have this card hidden until the end of game is called */}
             {startGame 
             && <BlackjackGame /> 
             }
-            {/* display this hidden component on click of start btn */}
         </Container>
     );
 }
