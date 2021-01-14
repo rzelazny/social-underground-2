@@ -31,7 +31,11 @@ function Navbar() {
                             </Link>
                             {dropdown && <Dropdown />}
                         </li>
-                        
+                        <li className="nav-item">
+                            <Link to ="/" className="nav-links" onClick={closeMobileMenu}>
+                                Member
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
