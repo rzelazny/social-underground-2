@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackDirections from "../BlackjackDirections";
 import BlackjackGame from "../BlackjackGame";
-import BlackjackScoreCard from "../BlackjackScoreCard";
+// import BlackjackScoreCard from "../BlackjackScoreCard";
 
 function BlackjackTable() {
 
+    const [startGame, setStartGame] = useState(false);
+
     function onStart() {
-        console.log("clicking start btn")
+        console.log("clicking start btn");
+        setStartGame(true);
     }
 
     return (
@@ -20,9 +23,11 @@ function BlackjackTable() {
             onStart={onStart}
             /> 
             {/* hide the directions on click of start */}
-            <BlackjackScoreCard />
+            {/* <BlackjackScoreCard /> */}
             {/* have this card hidden until the end of game is called */}
-            <BlackjackGame />
+            {startGame 
+            && <BlackjackGame /> 
+            }
             {/* display this hidden component on click of start btn */}
         </Container>
     );
