@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import "./Navbar.css";
+import Dropdown from "../Dropdown/Dropdown"
 
 function Navbar() {
     const [click, setClick] = useState(false);
+    const [dropdown, setDropdown] = useState (false)
+
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
     return (
@@ -24,9 +27,11 @@ function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link to ="/casino" className="nav-links" onClick={closeMobileMenu}>
-                                Casino
+                                Casino 
                             </Link>
+                            {dropdown && <Dropdown />}
                         </li>
+                        
                     </ul>
                 </div>
             </nav>
