@@ -9,4 +9,4 @@ export const DropItem = [
         path: '/GamingTable',
         cName: "dropdown-link"
     }
-]
+];
