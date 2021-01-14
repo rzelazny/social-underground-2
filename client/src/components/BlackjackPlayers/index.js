@@ -9,7 +9,7 @@ function BlackjackPlayers() {
     const [house, setHouse] = useState({});
     const [player1, setPlayer1] = useState({});
 
-    function addPlayers() {
+    function addPlayers(props) {
 
         setHouse({
             Name: 'House', 
@@ -17,7 +17,7 @@ function BlackjackPlayers() {
             Score: 0, 
             Points: 0, 
             Bust: false, 
-            Hand: null, 
+            Hand: props.houseHand, 
             Stand: false
         });
     
@@ -27,7 +27,7 @@ function BlackjackPlayers() {
             Score: 0, 
             Points: 0, 
             Bust: false, 
-            Hand: null, 
+            Hand: props.player1Hand,
             Stand: false
         });
     }
