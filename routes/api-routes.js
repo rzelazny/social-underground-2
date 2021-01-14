@@ -54,7 +54,7 @@ router.get("/user_data", function (req, res) {
 // Route for finding tables with open seats
 // Endpoint: /api/tables
 router.get("/tables", function (req, res) {
-	db.gaming_table.find({
+	db.Table.find({
 		game_ended: {
 			$eq: false
 		},
@@ -100,7 +100,7 @@ router.get("/tables", function (req, res) {
 router.post("/cleanup", function (req, res) {
 
 	console.log("cleanup running");
-	db.gaming_table.find({
+	db.Table.find({
 		user1: {
 			$eq: "Open Seat"
 		},

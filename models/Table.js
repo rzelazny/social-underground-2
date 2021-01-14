@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
         default: "Just Chatting"
     },
     game_ended: {
-        type: DataTypes.BOOLEAN,
+        type: Boolean,
         default: false
     },
     // There must be at least one player at a table
