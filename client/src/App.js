@@ -9,7 +9,6 @@ import Nav from "./components/Nav/Navbar";
 
 function App() {
   return (
-<<<<<<< HEAD
     <Home />
     // <Router>
     //   <div>
@@ -27,25 +26,6 @@ function App() {
     //     </Switch>
     //   </div>
     // </Router>
-=======
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route exact path={["/", "/login"]}>
-            <Login />
-          </Route>
-          <Route exact path={"/signup"}>
-            <Signup />
-          </Route>
-          <Route>
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-    // <Casino />
->>>>>>> main
   );
 }
 

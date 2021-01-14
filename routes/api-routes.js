@@ -31,7 +31,7 @@ router.get("/logout", function (req, res) {
 });
 
 // // Route for getting some data about our user to be used client side
-router.get("/api/user_data", function (req, res) {
+router.get("/user_data", function (req, res) {
 	console.log("get api user data is running")
 	if (!req.user) {
 		// The user is not logged in, send back an empty object
@@ -48,7 +48,7 @@ router.get("/api/user_data", function (req, res) {
 
 
 //get all running games for the setup page
-router.get("/api/allgames", function (req, res) {
+router.get("/allgames", function (req, res) {
 	db.Game.find({})
 		.populate("players")
 		.then(function (results) {
@@ -58,7 +58,7 @@ router.get("/api/allgames", function (req, res) {
 });
 
 //create a new game
-router.post("/api/newGame", ({ body }, res) => {
+router.post("/newGame", ({ body }, res) => {
 	console.log("Storing new game");
 
 	db.Game.create(body)
@@ -73,7 +73,7 @@ router.post("/api/newGame", ({ body }, res) => {
 });
 
 //create a new player
-router.post("/api/newPlayer", ({ body }, res) => {
+router.post("/newPlayer", ({ body }, res) => {
 	console.log("Storing new player");
 	console.log(body);
 	db.Player.create({ name: body.name })
@@ -88,7 +88,7 @@ router.post("/api/newPlayer", ({ body }, res) => {
 });
 
 //get the current game state
-router.get("/api/gameState/:id", (req, res) => {
+router.get("/gameState/:id", (req, res) => {
 	db.Game.findById(req.params.id)
 		.populate("players")
 		.then(gameData => {
@@ -102,7 +102,7 @@ router.get("/api/gameState/:id", (req, res) => {
 });
 
 //get a player's data
-router.get("/api/playerState/:id", (req, res) => {
+router.get("/playerState/:id", (req, res) => {
 	db.Player.findById(req.params.id)
 		.populate("constructedBuildings")
 		.then(playerData => {
@@ -116,7 +116,7 @@ router.get("/api/playerState/:id", (req, res) => {
 });
 
 //update the game collection's phase and round
-router.post("/api/updatePhase/:id", (req, res) => {
+router.post("/updatePhase/:id", (req, res) => {
 	db.Game.updateOne(
 		{ _id: req.params.id },
 		{
@@ -137,7 +137,7 @@ router.post("/api/updatePhase/:id", (req, res) => {
 });
 
 //update the game collection
-router.post("/api/updateGame/:id", (req, res) => {
+router.post("/updateGame/:id", (req, res) => {
 	db.Game.updateOne(
 		{ _id: req.params.id }, req.body)
 		.then(gameData => {
@@ -151,7 +151,7 @@ router.post("/api/updateGame/:id", (req, res) => {
 });
 
 //update a player collection
-router.post("/api/updatePlayer/:id", (req, res) => {
+router.post("/updatePlayer/:id", (req, res) => {
 	db.Player.updateOne(
 		{ _id: req.params.id }, req.body)
 		.then(playerData => {
