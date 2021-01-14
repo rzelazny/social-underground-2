@@ -1,8 +1,23 @@
-// $(document).ready(function() {
+import React from "react";
+import { Container } from "reactstrap";
+import $ from "jquery";
 
-//     function init(){
-//         cleanupTables()
-//     }
+function Home() {
+
+    function init() {
+        //make sure the user is logged in
+        $.get("/api/user_data")
+        .then((userData)=>{
+            console.log(userData)
+            if(!userData.email){
+                window.location.replace("/login");
+            }
+            else{
+                console.log("You're logged in!");
+                cleanupTables()
+            }
+        })
+    }
 
 //     init();
 

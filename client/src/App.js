@@ -8,7 +8,7 @@ import NoMatch from "./pages/NoMatch";
 
 
 import Nav from "./components/Nav/Navbar";
-import  Casino from "./pages/Casino";
+
 
 function App() {
 
