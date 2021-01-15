@@ -20,7 +20,7 @@ function Home() {
             })
     }
 
-//     init();
+    //     init();
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables() {
@@ -66,7 +66,7 @@ function Home() {
                 $("#current-tables" + columnCount).append(card);
             };
         });
-        // }
+        }
 
         //function lets user join an existing table
         function joinTable() {
@@ -129,35 +129,23 @@ function Home() {
                 //join the table
                 window.location.assign("/casino/" + newTable._id);
             });
-        });
-    }
+    })
 
-        return (
-        <Container>
 
-            <NeonSign />
-            <div className="contianer" id="enterance">
-                <div className="col=md=4" id="current-tables0"></div>
-                <div className="col=md=4" id="current-tables1"></div>
-                <div className="col=md=4" id="current-tables2"></div>
-            </div>
+    
+    return (
+        <body>
+            <Container id="homebody">
+                <NeonSign />
+                <div className="contianer" id="enterance">
+                    <div className="col=md=4" id="current-tables0"></div>
+                    <div className="col=md=4" id="current-tables1"></div>
+                    <div className="col=md=4" id="current-tables2"></div>
+                </div>
+                <NewBtn />
+            </Container>
+        </body>
 
-            <NewBtn onClick={createTable} />
-
-            {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
-                <ul className="homeList">
-                    <li className="buttonList">
-                        <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span>New</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
-        </Container>
     )
 }
 
