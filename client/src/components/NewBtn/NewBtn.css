@@ -1,30 +1,29 @@
-/* .gameOptions {
-    text-align: center;
-} */
-/*Buttons*/
 ul {
-    position: relative;
+    position: absolute;
     display: flex;
     transform-style: preserve-3d;
 }
+
 ul li {
-    list-style: none;
     position: relative;
-    height: 60px;
+    list-style: none;
     width: 60px;
+    height: 60px;
     margin: 0px 20px;
 }
+
 ul li:before {
-    position: absolute;
     content: "";
+    position: absolute;
+    bottom: -10px;
     left: -5px;
     width: 100%;
-    bottom: -10px;
-    background: #2a2a2a;
     height: 10px;
-    transform: skewX(-41deg);
+    background: #2a2a2a;
     transform-origin: top;
+    transform: skewX(-41deg);
 }
+
 ul li:after {
     content: "";
     position: absolute;
@@ -36,6 +35,7 @@ ul li:after {
     transform-origin: right;
     transform: skewY(-49deg);
 }
+
 ul li span {
     position: absolute;
     top: 0;
@@ -47,51 +47,54 @@ ul li span {
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 22px !important;
+    font-size: 30px !important;
     transition: 1.5s ease-out;
 }
+
 ul li:hover span {
     z-index: 1000;
     transition: 0.3s;
     color: #fff;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
 }
+
 ul li:hover span:nth-child(5) {
     transform: translate(40px, -40px);
     opacity: 1;
 }
+
 ul li:hover span:nth-child(4) {
     transform: translate(30px, -30px);
     opacity: 0.8;
 }
+
 ul li:hover span:nth-child(3) {
     transform: translate(20px, -20px);
     opacity: 0.6;
 }
+
 ul li:hover span:nth-child(2) {
     transform: translate(10px, -10px);
     opacity: 0.4;
 }
+
 ul li:hover span:nth-child(1) {
     transform: translate(0px, 0px);
     opacity: 0.2;
 }
-ul li:nth-child(1):hover span {
-    background: #d60000 !important;
-}
-ul li:nth-child(2):hover span {
-    background: #062ddf !important;
-}
-ul li:nth-child(3):hover span {
-    background: #009919 !important;
-}
-ul li:nth-child(4):hover span {
-    background: #8200b6 !important;
-} 
 
-#hit, 
-#stand,
-#restart {
-    margin: 50px;
-    text-align: center;
+ul li:nth-child(1):hover span {
+    background: #e42424 !important;
+}
+
+ul li:nth-child(2):hover span {
+    background: #021fa3 !important;
+}
+
+ul li:nth-child(3):hover span {
+    background: #ea6e96 !important;
+}
+
+ul li:nth-child(4):hover span {
+    background: #fceb00 !important;
 }

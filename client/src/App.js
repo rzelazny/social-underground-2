@@ -19,6 +19,7 @@ function App() {
     <Router>
       <div>
         <Nav />
+        <Home />
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />
@@ -29,7 +30,7 @@ function App() {
           <Route exact path={"/home"}>
             <Home />
           </Route>
-          <Route exact path={"/casino"}>
+          <Route path={"/casino/"}>
             <Casino />
           </Route>
           <Route exact path={"/members"}>
