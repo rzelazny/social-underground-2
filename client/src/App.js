@@ -18,6 +18,7 @@ function App() {
     <Router>
       <div>
         <Nav />
+        <Home />
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />
@@ -34,7 +35,6 @@ function App() {
           <Route>
             <NoMatch />
           </Route>
-          <Route path ="/casino" component = {Casino} />
         </Switch>
       </div>
     </Router>

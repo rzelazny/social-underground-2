@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const db = require("../models");
-const passport = require("../config/passport");
-const gameControl = require("../controllers/gameController");
+var passport = require("../config/passport");
 
 console.log("API Routes running");
 //signup functionality
@@ -35,8 +34,7 @@ router.get("/logout", function (req, res) {
 	res.redirect("/");
 });
 
-// Route for checking login status on the client
-// Endpoint: /api/user_data
+// // Route for getting some data about our user to be used client side
 router.get("/user_data", function (req, res) {
 	console.log("get api user data is running")
 	if (!req.user) {
@@ -50,110 +48,6 @@ router.get("/user_data", function (req, res) {
 			id: req.user.id
 		});
 	}
-});
-
-// Route for finding tables with open seats
-// Endpoint: /api/tables
-router.get("/tables", function (req, res) {
-	console.log("Getting all tables");
-	db.Table.find({
-		game_ended: {
-			$eq: false
-		},
-		$or: [
-			{
-				user1:
-				{
-					$eq: "Open Seat"
-				}
-			},
-			{
-				user2:
-				{
-					$eq: "Open Seat"
-				}
-			},
-			{
-				user3:
-				{
-					$eq: "Open Seat"
-				}
-			},
-			{
-				user4:
-				{
-					$eq: "Open Seat"
-				}
-			},
-			{
-				user5:
-				{
-					$eq: "Open Seat"
-				}
-			}]
-	}).then(function (results) {
-		console.log("get tables returning data");
-		return res.send(results);
-	})
-});
-
-// Route for removing from the db tables that no longer have players
-// Endpoint: /api/cleanup
-router.post("/cleanup", function (req, res) {
-
-	console.log("cleanup running");
-	db.Table.find({
-		user1: {
-			$eq: "Open Seat"
-		},
-		user2: {
-			$eq: "Open Seat"
-		},
-		user3: {
-			$eq: "Open Seat"
-		},
-		user4: {
-			$eq: "Open Seat"
-		},
-		user5: {
-			$eq: "Open Seat"
-		}
-	})
-		.then(function (results) {
-			if (results != null) {
-				for (i = 0; i < results.length; i++) {
-					db.gaming_table.deleteOne({
-						id: {
-							$eq: results[i].id
-						}
-					})
-					console.log("deleting empty table", results[i].id)
-				}
-				res.send(results);
-			}
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
-
-//create a new gaming table
-//Endpoint: api/newtable
-router.post("/newtable", function (req, res) {
-	console.log("Creating a new table");
-
-	db.Table.create({
-		game: "Just Chatting",
-		game_started: false,
-		user1: req.user.email
-	})
-		.then(function (results) {
-			console.log("sending new table data back")
-			return res.json(results);
-		})
-		.catch(function (err) {
-			return res.status(401).json(err);
-		});
 });
 
 //post a new chat message
@@ -174,16 +68,94 @@ router.post("/chat", function (req, res) {
 		});
 });
 
-// //get all running games for the setup page
-// // Endpoint: /allgames
-// router.get("/allgames", function (req, res) {
-// 	db.Game.find({})
-// 		.populate("players")
-// 		.then(function (results) {
-// 			console.log("get tables returning data");
-// 			return res.send(results);
-// 		})
-// });
+//find all existing game tables for the homepage
+//Endpoint: api/tables
+router.get("/tables", function (req, res) {
+	db.gaming_table.findAll({
+		where: {
+			game_ended: {
+				[Op.eq]: false
+			},
+			[Op.or]: [
+				{
+					user1:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user2:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user3:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user4:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				},
+				{
+					user5:
+					{
+						[Op.eq]: "Open Seat"
+					}
+				}]
+		},
+	}).then(function (results) {
+		console.log("get tables returning data");
+		return res.send(results);
+	})
+});
 
+//Remove empty tables before display them on the homepage
+//Endpoint: api/cleanup
+router.post("/cleanup", function (req, res) {
+
+	console.log("cleanup running");
+	db.gaming_table.findAll({
+		where: {
+			user1: {
+				[Op.eq]: "Open Seat"
+			},
+			user2: {
+				[Op.eq]: "Open Seat"
+			},
+			user3: {
+				[Op.eq]: "Open Seat"
+			},
+			user4: {
+				[Op.eq]: "Open Seat"
+			},
+			user5: {
+				[Op.eq]: "Open Seat"
+			}
+		}
+	})
+		.then(function (results) {
+			if (results != null) {
+				for (i = 0; i < results.length; i++) {
+					db.gaming_table.destroy({
+						where: {
+							id: {
+								[Op.eq]: results[i].id
+							}
+						}
+					})
+					console.log("deleting empty table", results[i].id)
+				}
+				res.send(results);
+			}
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
 
 module.exports = router;
