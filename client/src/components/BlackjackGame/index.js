@@ -186,13 +186,42 @@ function BlackjackGame() {
     function hit() {
         console.log("hit triggered")
         player1Hit();
+        // setTimeout(function () {
+        //     resetPlayer();;
+        // }, 500);
         //check for bust
+    }
+
+    function resetPlayer() {
+        // let pointVal;
+        //     if (player1Hand.length = 3) {
+        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value)
+        //     }
+        //     else if (player1Hand.length = 4) {
+        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value)
+        //     }
+        //     else if (player1Hand.length = 5) {
+        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value + player1Hand[4].value)
+        //     }
+        //     else {
+        //         console.log("must be an error")
+        //     }
+        console.log(player1Hand);
+        setPlayer1({
+            Name: 'Player1', 
+            ID: 1, 
+            Score: player1Score, 
+            Points: null, 
+            Bust: false, 
+            Hand: player1Hand,
+            Stand: false
+        });
     }
 
     function player1Hit() {
             API.drawHitPlayer1(player1Hand)
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     let hitCardVal;
                     // sets value of face card //
                     if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
@@ -288,6 +317,12 @@ function BlackjackGame() {
                     <div id="player1Hand">
                         <CardImg id="cardOnePlayer1" src={player1Hand[0].imgUrl} alt="{player1Hand[0].code}" />
                         <CardImg id="cardTwoPlayer1" src={player1Hand[1].imgUrl} alt="{player1Hand[1].code}" />
+                        {player1Hand.length >= 3
+                        && <CardImg className="hitCardPlayer1" src={player1Hand[2].imgUrl} alt="{player1Hand[2].code}" />}
+                        {player1Hand.length >= 4
+                        && <CardImg className="hitCardPlayer1" src={player1Hand[3].imgUrl} alt="{player1Hand[3].code}" />}
+                        {player1Hand.length >= 5
+                        && <CardImg className="hitCardPlayer1" src={player1Hand[4].imgUrl} alt="{player1Hand[4].code}" />}
                     </div>
                 </Card>
             </Container>
