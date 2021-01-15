@@ -2,4 +2,14 @@
   background-color: black;
   background-image: url(../src/images/moonbackground.jpg);
   background-size: cover;
+  min-height: 800px;
+  min-width: 100%;
+}
+
+#loginbody {
+  background-color: black;
+  background-image: url(../src/images/takeoff.jpeg);
+  background-size: cover;
+  min-height: 800px;
+  min-width: 100%;
 }
