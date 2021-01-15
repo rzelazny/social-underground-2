@@ -6,18 +6,18 @@
 
 @font-face {
     font-family: neon;
-    src: url(./Neon\ Planet\ Display.ttf)
+    src: url(./AstronBoyWonder.ttf)
 }
 
 .neon-text {
     font-family: neon;
     font-size: 75px;
-    color: white;
+    color: rgb(8, 136, 87);
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;
     animation: glow 1s ease-in-out infinite alternate;
 }
-@-webkit-keyframes glow {
+@keyframes glow {
     from {text-shadow:  
     0 0 10px rgb(230, 255, 230), 0 0 20px rgb(204, 255, 204), 0 0 40px rgb(153, 255, 153),
     0 0 50px rgb(128, 255, 128), 0 0 60px rgb(0, 204, 0), 0 0 80px rgb(0, 102, 0);
