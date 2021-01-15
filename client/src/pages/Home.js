@@ -134,29 +134,13 @@ function Home() {
 
         return (
         <Container>
-
             <NeonSign />
             <div className="contianer" id="enterance">
                 <div className="col=md=4" id="current-tables0"></div>
                 <div className="col=md=4" id="current-tables1"></div>
                 <div className="col=md=4" id="current-tables2"></div>
             </div>
-
             <NewBtn />
-
-            {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
-                <ul className="homeList">
-                    <li className="buttonList">
-                        <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span>New</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
         </Container>
     )
 }
