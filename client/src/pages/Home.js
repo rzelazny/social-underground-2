@@ -1,22 +1,23 @@
 import React from "react";
 import { Container } from "reactstrap";
+import NeonSign from "../components/NeonSign/NeonSign";
 import $ from "jquery";
-
+import NewBtn from "../components/NewBtn/newBtn"
 function Home() {
 
     function init() {
         //make sure the user is logged in
         $.get("/api/user_data")
-        .then((userData)=>{
-            console.log(userData)
-            if(!userData.email){
-                window.location.replace("/login");
-            }
-            else{
-                console.log("You're logged in!");
-                cleanupTables()
-            }
-        })
+            .then((userData) => {
+                console.log(userData)
+                if (!userData.email) {
+                    window.location.replace("/login");
+                }
+                else {
+                    console.log("You're logged in!");
+                    cleanupTables()
+                }
+            })
     }
 
 //     init();
@@ -110,42 +111,42 @@ function Home() {
                 })
             })
         }
-
-        // Create a new gaming table on click
-        $("#newTableSpan").on("click", function (event) {
-            console.log("Making a new gaming table ");
-            //create a new gaming table
-            $.post("/api/newtable").then(function (newTable) {
-                //post the joining chat message
-                let newMessage = {
-                    message: " has entered chat.",
-                    table: newTable.id
-                }
-                $.post("/api/chat/", newMessage, function () {
-                    //join the table
-                    window.location.assign("/casino" + newTable.id);
-                });
-            });
-        })
-
     };
 
-    return (
+    // Create a new gaming table on click
+    function createTable() {
+        console.log("Making a new gaming table ");
+        //create a new gaming table
+        $.post("/api/newtable")
+        .then(function (newTable) {
+            //post the joining chat message
+            console.log("newtable: ", newTable);
+            let newMessage = {
+                message: " has entered chat.",
+                table: newTable._id
+            }
+            $.post("/api/chat/", newMessage, function () {
+                //join the table
+                window.location.assign("/casino/" + newTable._id);
+            });
+        });
+    }
+
+        return (
         <Container>
-            <div className="wrapper">
-                <div className="neon-wrapper">
-                    <div className="neon-text">Welcome to the <br />Social Underground
-                </div>
-                </div>
-            </div>
+
+            <NeonSign />
             <div className="contianer" id="enterance">
                 <div className="col=md=4" id="current-tables0"></div>
                 <div className="col=md=4" id="current-tables1"></div>
                 <div className="col=md=4" id="current-tables2"></div>
             </div>
-            <div id="newTableSpan" style={{ position: "relative; left:40" }}>
-                <ul>
-                    <li>
+
+            <NewBtn />
+
+            {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
+                <ul className="homeList">
+                    <li className="buttonList">
                         <a href="#">
                             <span></span>
                             <span></span>
@@ -155,7 +156,7 @@ function Home() {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </Container>
     )
 }

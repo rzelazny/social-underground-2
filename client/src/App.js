@@ -5,8 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Casino from "./pages/Casino";
 import NoMatch from "./pages/NoMatch";
-import Members from "./pages/Members";
-
+import Members from "./pages/Members"
 
 import Nav from "./components/Nav/Navbar";
 
@@ -19,6 +18,7 @@ function App() {
     <Router>
       <div>
         <Nav />
+        {/* <Home /> */}
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />
@@ -29,12 +29,10 @@ function App() {
           <Route exact path={"/home"}>
             <Home />
           </Route>
-          <Route exact path={"/casino"}>
+          <Route path={"/casino"}>
             <Casino />
           </Route>
-          <Route exact path={"/members"}>
-            <Members />
-          </Route>
+          <Route path ="/member" component = {Members} />
           <Route>
             <NoMatch />
           </Route>
