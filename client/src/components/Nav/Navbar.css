@@ -1,75 +1,64 @@
-.navbar{
-    background: linear-gradient(90deg, rgb(28, 27, 27)0%, rgb(26, 23, 23)100% );
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20px;
-    max-width: 1500px;
+.navbar {
+  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }
 
 .navbar-logo {
-    color: white;
-    justify-self: start;
-    margin-left: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
+  color: #fff;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
 }
-.fas fa-bahai {
-    margin-left: 0.5rem;
-    font-size: 1.8rem;
+
+.fa-firstdraft {
+  margin-left: 0.5rem;
+  font-size: 1.6rem;
 }
 
 .nav-menu {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px;
-    list-style: none;
-    text-align: center;
-    width: 60vw;
-    justify-content: end;
-    margin-right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  justify-content: end;
+  margin-right: 2rem;
 }
 
 .nav-item {
-    height: 80px;
+  display: flex;
+  align-items: center;
+  height: 80px;
 }
 
 .nav-links {
-    color: white;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    height: 100%;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
 }
 
 .nav-links:hover {
-    border-bottom: 4px solid white;
-    transition: all 0.2s ease-out;
+  background-color: #1888ff;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
 }
 
 .fa-bars {
-    color: white;
+  color: #fff;
 }
 
 .nav-links-mobile {
-    display: none;
+  display: none;
 }
 
 .menu-icon {
-    display: none;
+  display: none;
 }
+
