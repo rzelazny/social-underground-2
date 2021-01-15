@@ -6,6 +6,10 @@ import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
 
+var houseScore = 0;
+console.log(houseScore);
+var player1Score = 0;
+console.log(player1Score);
 
 function BlackjackGame() {
 
@@ -46,7 +50,6 @@ function BlackjackGame() {
         if (!houseHand) {
             return;
         }
-
         API.drawHouse(houseHand)
             .then(data => {
                 // console.log(data);
@@ -78,7 +81,6 @@ function BlackjackGame() {
                 else{
                     card2Val = parseInt(data.data.cards[1].value);
                 }
-
                 setHouseHand(
                     [
                         {
@@ -96,14 +98,12 @@ function BlackjackGame() {
                     ]
                 )
             })
-            // .catch(err => setHouseHand.error(err));
     }, []);
 
     useEffect(() => {
         if (!player1Hand) {
             return;
         }
-
         API.drawPlayer1(player1Hand)
                 .then(data => {
                     // console.log(data)
@@ -119,7 +119,6 @@ function BlackjackGame() {
                 else{
                     card1Val = parseInt(data.data.cards[0].value);
                 }
-
                 let card2Val;
                 // sets value of face card //
                 if (data.data.cards[1].value === "JACK" || data.data.cards[1].value === "QUEEN" || data.data.cards[1].value === "KING") {
@@ -152,35 +151,27 @@ function BlackjackGame() {
                     ]
                     )
                 })
-                // .catch(err => setPlayer1Hand.error(err));
     }, []);
 
     function addPlayers() {
-
         setHouse({
             Name: 'House', 
             ID: 0, 
-            Score: 0, 
+            Score: houseScore, 
             Points: houseHand[0].value + houseHand[1].value, 
             Bust: false, 
             Hand: houseHand, 
             Stand: false
         });
-    
         setPlayer1({
             Name: 'Player1', 
             ID: 1, 
-            Score: 0, 
+            Score: player1Score, 
             Points: player1Hand[0].value + player1Hand[1].value, 
             Bust: false, 
             Hand: player1Hand,
             Stand: false
         });
-    }
-
-    function consolePlayers() {
-        console.log(house);
-        console.log(player1);
     }
 
     function restart() {
@@ -189,17 +180,48 @@ function BlackjackGame() {
         // gameBody.innerHTML = "";
         // BlackjackGame()
         window.location.reload(false); //ok, so this reload back to directions
+        // figure out better way to do this without reloading the entire page
     }
 
     function hit() {
         console.log("hit triggered")
-        //player one hit - call api, generate card, add to hand, recalculate point value
-        //check for bust- see if points are >22... if so end round ... if not run hit house logic
+        player1Hit();
+        //check for bust
     }
 
-    //player one hit
+    function player1Hit() {
+            API.drawHitPlayer1(player1Hand)
+                .then(data => {
+                    console.log(data);
+                    let hitCardVal;
+                    // sets value of face card //
+                    if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
+                        hitCardVal = 10;
+                    }
+                    // sets value for ace  //
+                    else if (data.data.cards[0].value === "ACE") {
+                        hitCardVal = 11;
+                    } 
+                    else{
+                        hitCardVal = parseInt(data.data.cards[0].value);
+                    }
+                    setPlayer1Hand(
+                    [
+                        ...player1Hand,
+                        {
+                            code: data.data.cards[0].code,
+                            suit: data.data.cards[0].suit,
+                            value: hitCardVal,
+                            imgUrl: data.data.cards[0].image
+                        }
+                    ]
+                    )
+                })
+        }
+        // - call api, generate card, add to hand, recalculate point value
 
     // check for bust
+        // - see if points are >22... if so end round ... if not run hit house logic
 
     //house hit logic
         //if house has 17+ points it will stand 
@@ -228,15 +250,23 @@ function BlackjackGame() {
         //who wins logic:
             // if tie
             // if house wins
+                // houseScore ++;
+                // console.log(houseScore);
+                    //this will work however will be lost if the page reloads how it has been on restart
             // if player one wins
         //remove buttons
+    }
+
+    function consolePlayers() {
+        console.log(player1Hand);
+        console.log(player1);
     }
 
     return (
         <Container id="gameBody" >
             {displayScoreCard
             && <BlackjackScoreCard 
-            // add function for place again button
+            // add function for play again button
             /> 
             }
             <Container id="players">
