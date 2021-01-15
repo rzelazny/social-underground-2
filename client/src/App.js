@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Casino from "./pages/Casino";
 import NoMatch from "./pages/NoMatch";
 import Members from "./pages/Members";
+import "./App.css";
 
 
 import Nav from "./components/Nav/Navbar";
