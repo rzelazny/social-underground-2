@@ -1,12 +1,14 @@
 import React from 'react'
 import Nav from "../components/Nav/Navbar"
 // import $ from "jquery";
+import MemberSection from "../components/Members/MemberSection"
 
 function Members() {
 
   return (
       <Nav />,
-      <h1>Hi</h1>
+      <MemberSection />
+      // <MemberCard />
   )
 }
 export default Members
