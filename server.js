@@ -44,22 +44,29 @@ const io = socketIo(server);
 let interval;
 
 io.on("connection", (socket) => {
-  console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-    clearInterval(interval);
+  console.log("New client connected ");
+  // if (interval) {
+  //   clearInterval(interval);
+  // }
+  // interval = setInterval(() => getApiAndEmit(socket), 1000);
+  // socket.on("disconnect", () => {
+  //   console.log("Client disconnected");
+  //   clearInterval(interval);
+  // });
+  
+
+  //User has sent a message to the server
+  socket.on("chat-message", (chatMessage) => {
+    console.log("Server recieved message");
   });
+
 });
 
-const getApiAndEmit = socket => {
-  const response = new Date();
-  // Emitting a new message. Will be consumed by the client
-  socket.emit("FromAPI", response);
-};
+// const getApiAndEmit = socket => {
+//   const response = new Date();
+//   // Emitting a new message. Will be consumed by the client
+//   socket.emit("FromAPI", response);
+// };
 
 // Start the API server
 server.listen(PORT, function() {

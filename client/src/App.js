@@ -18,7 +18,6 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Home />
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />

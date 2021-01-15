@@ -7,21 +7,23 @@ import { ChatContainer, ChatItem, ChatWindow } from "../components/ChatLog/ChatL
 
 const ENDPOINT = process.env.PORT || "http://localhost:3000";
 var curTable = document.defaultView.location.pathname.split("casino").pop();
+var curEmail = "";
 //Elements and vars for chat log
 var chatScroll = $("#chat-log");
-var chatInput = $("#chat-input");
 let chatLength = 0;
+let socket;
 
 function Casino() {
-    const [response, setResponse] = useState("");
+    const [curSocket, setSocket] = useState("");
 
     useEffect(() => {
-        //create connection for chat log
-        const socket = socketIOClient(ENDPOINT);
-        socket.on("FromAPI", data => {
-            setResponse(data);
+        //create connection for chat logs
+        socket = socketIOClient(ENDPOINT);
+        setSocket(socket);
+        
+        socket.on("update-chat", data => {
+            getChatLogs();
         });
-
         return () => socket.disconnect();
     }, []);
 
@@ -29,12 +31,11 @@ function Casino() {
         //make sure the user is logged in
         $.get("/api/user_data")
             .then((userData) => {
-                console.log(userData)
                 if (!userData.email) {
                     window.location.replace("/login");
                 }
                 else {
-                    console.log("You're logged in!");
+                    curEmail = userData.email;
                     getChatLogs();
                 }
             })
@@ -42,11 +43,14 @@ function Casino() {
 
     init();
 
+
     //populate chat log
     function getChatLogs() {
-        $.get("/api/chat" + curTable, function (chatLog) {
+        $.get("/api/chat/" + curTable, function (chatLog) {
+            console.log("get chat running", chatLog);
             //chat length is used to check for new messages being posted
             chatLength = chatLog.length;
+            $("#chat-log").empty();
             for (let i = 0; i < chatLength; i++) {
                 var chatLine = $("<li>")
                 //chatLine.attr("list-style", "none");
@@ -60,15 +64,10 @@ function Casino() {
 
     return (
         <div>
-            <p>
-                It's <time dateTime={response}>{response}</time>
-            </p>
             <GamingTable />
             <br />
-            <ChatWindow>
-                <ChatItem />
-            </ChatWindow>
-            <ChatContainer />
+            <ChatWindow />
+            <ChatContainer socket={curSocket} email={curEmail} />
             {/* // Footer will go here */}
         </div>
     )

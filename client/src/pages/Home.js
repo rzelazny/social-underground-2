@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "reactstrap";
-import NeonSign from "../components/NeonSign/NeonSign";
 import $ from "jquery";
+import NeonSign from "../components/NeonSign/NeonSign";
 import NewBtn from "../components/NewBtn/NewBtn"
 function Home() {
 
@@ -142,7 +142,7 @@ function Home() {
                 <div className="col=md=4" id="current-tables2"></div>
             </div>
 
-            <NewBtn />
+            <NewBtn onClick={createTable} />
 
             {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
                 <ul className="homeList">

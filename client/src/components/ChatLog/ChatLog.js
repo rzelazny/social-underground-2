@@ -3,7 +3,7 @@ import "./chatlog.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function ChatContainer() {
+export function ChatContainer(socket, email) {
     const [chat, setChangeText] = useState("");
 
     //functions sends the message to the server on submit
@@ -11,12 +11,13 @@ export function ChatContainer() {
         console.log("Chat form submitted");
         event.preventDefault();
         var chatMessage = {
-            email: "",
+            email: email,
             message: chat
         };
-
+        console.log("socket and email", socket, email);
         //Send the message to the server
-        //socket.emit("chat-message", chatMessage) 
+        socket.emit("chat-message", chatMessage) 
+        console.log("chat message emitted");
     }
 
     //function updates the chat state when the user types
@@ -28,9 +29,9 @@ export function ChatContainer() {
 
     return (
         <Container fluid>
-            <form className="form-inline" id="chat-entry">
+            <form className="form-inline" id="chat-entry"onSubmit={handleSubmit}>
                 <input type="text" className="form-control" id="chat-input" placeholder="Talk smack here" onChange={handleChange} />
-                <button type="submit" className="btn btn-dark" id="send-chat"><i className="fas fa-share" onSubmit={handleSubmit}></i></button>
+                <button type="submit" className="btn btn-dark" id="send-chat"><i className="fas fa-share"  ></i></button>
             </form>
         </Container>
     );

@@ -174,6 +174,23 @@ router.post("/chat", function (req, res) {
 		});
 });
 
+//Get existing chat messages for a table
+//Endpoint: api/chat/
+router.get("/chat/:table", function (req, res) {
+	console.log("post chat running ", req.body);
+	db.ChatLog.find({
+		table_id: req.params.table
+	})
+		.then(function (results) {
+			console.log("getting chat log for table", req.params.table)
+			console.log(results);
+			res.send(results);
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
+
 // //get all running games for the setup page
 // // Endpoint: /allgames
 // router.get("/allgames", function (req, res) {
