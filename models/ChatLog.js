@@ -13,9 +13,9 @@ const ChatLog = new Schema({
         allowNull: false,
     },
     // chat logs are per gaming table
-    table_id: {
-        type: Schema.Types.ObjectId,
-        ref: "Table"
+    room: {
+        type: Number,
+        allowNull: false,
     },
     });
 
