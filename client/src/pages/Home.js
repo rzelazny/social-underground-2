@@ -142,7 +142,7 @@ function Home() {
                     <div className="col=md=4" id="current-tables1"></div>
                     <div className="col=md=4" id="current-tables2"></div>
                 </div>
-                <NewBtn />
+                <NewBtn onClick={createTable}/>
             </Container>
         </body>
 
