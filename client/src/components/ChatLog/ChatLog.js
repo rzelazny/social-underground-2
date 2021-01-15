@@ -4,15 +4,27 @@ import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function ChatContainer() {
-    const [value, onChangeText] = React.useState("Chat here");
+    const [chat, setChangeText] = useState("");
 
-    function handleChange() {
+    //functions sends the message to the server on submit
+    function handleSubmit(event) {
+        console.log("Chat form submitted");
+        event.preventDefault();
+        var chatMessage = {
+            email: "",
+            message: chat
+        };
 
+        //Send the message to the server
+        //socket.emit("chat-message", chatMessage) 
     }
 
-    function handleSubmit() {
-
-    }
+    //function updates the chat state when the user types
+    const handleChange = event => {
+        console.log("form changed");
+        const { value } = event.target;
+        setChangeText(value);
+    };
 
     return (
         <Container fluid>
