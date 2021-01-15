@@ -20,15 +20,21 @@ function App() {
         <Nav />
         <Home />
         <Switch>
-          {/* <Route exact path={["/", "/login"]}>
+          <Route exact path={["/", "/login"]}>
             <Login />
           </Route>
           <Route exact path={"/signup"}>
             <Signup />
           </Route>
+          <Route exact path={"/home"}>
+            <Home />
+          </Route>
+          <Route path={"/casino/"}>
+            <Casino />
+          </Route>
           <Route>
             <NoMatch />
-          </Route> */}
+          </Route>
         </Switch>
       </div>
     </Router>

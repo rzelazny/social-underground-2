@@ -127,7 +127,7 @@ function Home() {
             }
             $.post("/api/chat/", newMessage, function () {
                 //join the table
-                window.location.assign("/casino" + newTable._id);
+                window.location.assign("/casino/" + newTable._id);
             });
         });
     }

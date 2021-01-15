@@ -27,7 +27,7 @@ function Navbar() {
                         SU
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
-                        <i classNane={click ? "fas fa-times" : "fas fa-bars"} />
+                        <i className={click ? "fas fa-times" : "fas fa-bars"} />
                     </div>
                     <ul className={click ? "nav-menu active" : "nav-menu"}>
                         <li className="nav-item">
@@ -40,7 +40,7 @@ function Navbar() {
                             onMouseLeave={onMouseLeave}
                         >
                             <Link to="/casino" className="nav-links" onClick={closeMobileMenu}>
-                                Casino <i class="fas fa-caret-down"></i>
+                                Casino <i className="fas fa-caret-down"></i>
                             </Link>
                             {dropdown && <Dropdown />}
                         </li>
