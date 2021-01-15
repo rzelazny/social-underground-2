@@ -154,6 +154,13 @@ function BlackjackGame() {
     }, []);
 
     function addPlayers() {
+        let pointVal;
+        if (player1Hand.length === 2) {
+            pointVal = (player1Hand[0].value + player1Hand[1].value)
+        }
+            else {
+                updatePlayers()
+            }
         setHouse({
             Name: 'House', 
             ID: 0, 
@@ -167,7 +174,41 @@ function BlackjackGame() {
             Name: 'Player1', 
             ID: 1, 
             Score: player1Score, 
-            Points: player1Hand[0].value + player1Hand[1].value, 
+            Points: pointVal, 
+            Bust: false, 
+            Hand: player1Hand,
+            Stand: false
+        });
+    }
+
+    function updatePlayers() {
+        let pointVal;
+        if (player1Hand.length === 3) {
+            pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value)
+        }
+        else if (player1Hand.length === 4) {
+            pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value)
+        }
+        else if (player1Hand.length === 5) {
+            pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value + player1Hand[4].value)
+        }
+        else {
+            console.log("must be an error");
+        }
+        setHouse({
+            Name: 'House', 
+            ID: 0, 
+            Score: houseScore, 
+            Points: houseHand[0].value + houseHand[1].value, 
+            Bust: false, 
+            Hand: houseHand, 
+            Stand: false
+        });
+        setPlayer1({
+            Name: 'Player1', 
+            ID: 1, 
+            Score: player1Score, 
+            Points: pointVal, 
             Bust: false, 
             Hand: player1Hand,
             Stand: false
@@ -187,36 +228,29 @@ function BlackjackGame() {
         console.log("hit triggered")
         player1Hit();
         // setTimeout(function () {
-        //     resetPlayer();;
+        //     addPlayers();
         // }, 500);
         //check for bust
     }
 
-    function resetPlayer() {
-        // let pointVal;
-        //     if (player1Hand.length = 3) {
-        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value)
-        //     }
-        //     else if (player1Hand.length = 4) {
-        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value)
-        //     }
-        //     else if (player1Hand.length = 5) {
-        //         pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value + player1Hand[4].value)
-        //     }
-        //     else {
-        //         console.log("must be an error")
-        //     }
-        console.log(player1Hand);
-        setPlayer1({
-            Name: 'Player1', 
-            ID: 1, 
-            Score: player1Score, 
-            Points: null, 
-            Bust: false, 
-            Hand: player1Hand,
-            Stand: false
-        });
-    }
+    // function resetPlayer() {
+    //     let pointVal;
+    //     if (player1Hand.length = 2) {
+    //         pointVal = (player1Hand[0].value + player1Hand[1].value)
+    //     }
+    //         else if (player1Hand.length = 3) {
+    //             pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value)
+    //         }
+    //         else if (player1Hand.length = 4) {
+    //             pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value)
+    //         }
+    //         else if (player1Hand.length = 5) {
+    //             pointVal = (player1Hand[0].value + player1Hand[1].value + player1Hand[2].value + player1Hand[3].value + player1Hand[4].value)
+    //         }
+    //         else {
+    //             console.log("must be an error")
+    //         }
+    // }
 
     function player1Hit() {
             API.drawHitPlayer1(player1Hand)
@@ -301,6 +335,7 @@ function BlackjackGame() {
             <Container id="players">
                 <div>
                     <button onClick={addPlayers} >add players</button>
+                    <button onClick={updatePlayers} >update players</button>
                     <button onClick={consolePlayers} >see console log</button>
                 </div>
                 <Card id="house">
