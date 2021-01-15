@@ -206,25 +206,25 @@ var scoresDisplayHousePlayer = null;
 //     }
 // }
 
-// this function will be called when the user presses restart button //
-function onRestart() {
-    // reset player values //
-    playerArray[0].Bust = false;
-    playerArray[1].Bust = false;
-    playerArray[0].Stand = false;
-    playerArray[1].Stand = false;
-    // will clear everything on the gameboard //
-    players.innerHTML = '';
-    endRoundDiv.innerHTML = '';
-    // reset i back to 0 for drawCards function //
-    i = 0;
-    // makes sure the buttons are displayed in case the round ended previously and buttons were hidden //
-    displayBtns();
-    // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
-    restartBtn.value = "restart";
-    // redraws cards for all players in session //
-    drawCards();
-}
+// // this function will be called when the user presses restart button //
+// function onRestart() {
+//     // reset player values //
+//     playerArray[0].Bust = false;
+//     playerArray[1].Bust = false;
+//     playerArray[0].Stand = false;
+//     playerArray[1].Stand = false;
+//     // will clear everything on the gameboard //
+//     players.innerHTML = '';
+//     endRoundDiv.innerHTML = '';
+//     // reset i back to 0 for drawCards function //
+//     i = 0;
+//     // makes sure the buttons are displayed in case the round ended previously and buttons were hidden //
+//     displayBtns();
+//     // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
+//     restartBtn.value = "restart";
+//     // redraws cards for all players in session //
+//     drawCards();
+// }
 
 // this function will be called when the user presses the hit button //
 function onHit() {

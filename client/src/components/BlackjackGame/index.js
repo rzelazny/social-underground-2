@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
-import BlackjackPlayers from "../BlackjackPlayers"
+import BlackjackPlayers from "../BlackjackPlayers";
+import BlackjackScoreCard from "../BlackjackScoreCard";
+
 
 function BlackjackGame() {
+
+    const [displayScoreCard, setDisplayScoreCard] = useState(false);
 
     function restart() {
         console.log("restart triggered");
@@ -34,25 +38,33 @@ function BlackjackGame() {
         // if bust end round
 
     function stand() {
-        console.log("stand triggered")
-    }
-
-    // on stand logic
+        console.log("stand triggered");
+        // on stand logic
         //player 1 now stands
         // check to see if house stands, has 17+ points, or has > points - if does end round
         // if not standing run house hit again
         // if house didnt bust resend to on stand logic
+        endRound();
+    }
 
-     //end round logic
+
+    function endRound() {
+        console.log("end of round triggered");
+        setDisplayScoreCard(true);
+        //end round logic
         // if ended bc of bust... whoever didnt bust wins & show score      
         //who wins logic:
             // if tie
             // if house wins
             // if player one wins
         //remove hit & stand buttons
+    }
 
     return (
         <Container id="gameBody" >
+            {displayScoreCard
+            && <BlackjackScoreCard /> 
+            }
             <BlackjackPlayers />
             <BlackjackButtons
             restart={restart}

@@ -4,12 +4,12 @@ import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackDirections from "../BlackjackDirections";
 import BlackjackGame from "../BlackjackGame";
-import BlackjackScoreCard from "../BlackjackScoreCard";
+// import BlackjackScoreCard from "../BlackjackScoreCard";
 
 function BlackjackTable() {
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState(false);
-    const [displayScoreCard, setDisplayScoreCard] = useState(false);
+    // const [displayScoreCard, setDisplayScoreCard] = useState(false);
 
     function onStart() {
         console.log("clicking start btn");
@@ -17,10 +17,10 @@ function BlackjackTable() {
         setDisplayDirections(false);
     }
 
-    function endRound() {
-        console.log("end of round triggered");
-        setDisplayScoreCard(true);
-    }
+    // function endRound() {
+    //     console.log("end of round triggered");
+    //     setDisplayScoreCard(true);
+    // }
 
     return (
         <Container id="blackjackTable">
@@ -30,9 +30,9 @@ function BlackjackTable() {
             && <BlackjackDirections 
             onStart={onStart}
             />}
-            {displayScoreCard
+            {/* {displayScoreCard
             && <BlackjackScoreCard /> 
-            }
+            } */}
             {startGame 
             && <BlackjackGame /> 
             }
