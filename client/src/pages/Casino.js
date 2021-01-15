@@ -11,21 +11,22 @@ var curEmail = "";
 //Elements and vars for chat log
 var chatScroll = $("#chat-log");
 let chatLength = 0;
-let socket;
 
 function Casino() {
-    const [curSocket, setSocket] = useState("");
+    const [curEmail, setEmail] = useState("");
+    const [chatRoom, setRoom] = useState("");
+    let socket = socketIOClient(ENDPOINT);
 
-    useEffect(() => {
-        //create connection for chat logs
-        socket = socketIOClient(ENDPOINT);
-        setSocket(socket);
-        
-        socket.on("update-chat", data => {
-            getChatLogs();
-        });
-        return () => socket.disconnect();
-    }, []);
+    // useEffect(() => {
+    //     //create connection for chat logs
+    //     socket = socketIOClient(ENDPOINT);
+    //     setSocket(socket);
+
+    //     socket.on("update-chat", data => {
+    //         getChatLogs();
+    //     });
+    //     return () => socket.disconnect();
+    // }, []);
 
     function init() {
         //make sure the user is logged in
@@ -35,14 +36,24 @@ function Casino() {
                     window.location.replace("/login");
                 }
                 else {
-                    curEmail = userData.email;
+                    setEmail(userData.email);
                     getChatLogs();
+                    $.get("/api/table/"+ curTable)
+                    .then((tableData)=>{
+                        console.log(tableData);
+                        setRoom(tableData.roomNumber);
+                        socket.emit("join-room", chatRoom);
+                    })
                 }
             })
     }
 
     init();
 
+    socket.on("update-chat", data => {
+        console.log("update chat recieved");
+        getChatLogs();
+    });
 
     //populate chat log
     function getChatLogs() {
@@ -67,7 +78,7 @@ function Casino() {
             <GamingTable />
             <br />
             <ChatWindow />
-            <ChatContainer socket={curSocket} email={curEmail} />
+            <ChatContainer socket={socket} email={curEmail} room={chatRoom} />
             {/* // Footer will go here */}
         </div>
     )

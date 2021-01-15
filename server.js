@@ -45,28 +45,20 @@ let interval;
 
 io.on("connection", (socket) => {
   console.log("New client connected ");
-  // if (interval) {
-  //   clearInterval(interval);
-  // }
-  // interval = setInterval(() => getApiAndEmit(socket), 1000);
-  // socket.on("disconnect", () => {
-  //   console.log("Client disconnected");
-  //   clearInterval(interval);
-  // });
   
+  //User has requested to join a room
+  socket.on("join-room", (room) => {
+    console.log("Server got join room", room);
+    socket.join(room);
+  });
 
   //User has sent a message to the server
   socket.on("chat-message", (chatMessage) => {
-    console.log("Server recieved message");
+    console.log("Server got chat message", chatMessage);
+    io.in(chatMessage.room).emit("update-chat");
   });
 
 });
-
-// const getApiAndEmit = socket => {
-//   const response = new Date();
-//   // Emitting a new message. Will be consumed by the client
-//   socket.emit("FromAPI", response);
-// };
 
 // Start the API server
 server.listen(PORT, function() {

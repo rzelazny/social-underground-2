@@ -3,7 +3,7 @@ import "./chatlog.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function ChatContainer(socket, email) {
+export function ChatContainer({socket, email, room}) {
     const [chat, setChangeText] = useState("");
 
     //functions sends the message to the server on submit
@@ -12,7 +12,8 @@ export function ChatContainer(socket, email) {
         event.preventDefault();
         var chatMessage = {
             email: email,
-            message: chat
+            message: chat,
+            room: room
         };
         console.log("socket and email", socket, email);
         //Send the message to the server

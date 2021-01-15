@@ -191,6 +191,17 @@ router.get("/chat/:table", function (req, res) {
 		});
 });
 
+// Route for finding tables with open seats
+// Endpoint: /api/table/
+router.get("/table/:table", function (req, res) {
+	console.log("Getting table data for ", req.params.table);
+	db.Table.findById(req.params.table)
+	.then(function (results) {
+		console.log("Returning data for table ", req.params.table);
+		return res.send(results);
+	})
+});
+
 // //get all running games for the setup page
 // // Endpoint: /allgames
 // router.get("/allgames", function (req, res) {
