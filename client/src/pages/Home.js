@@ -123,7 +123,7 @@ function Home() {
             console.log("newtable: ", newTable);
             let newMessage = {
                 message: " has entered chat.",
-                table: newTable._id
+                room: newTable.roomNumber
             }
             $.post("/api/chat/", newMessage, function () {
                 //join the table

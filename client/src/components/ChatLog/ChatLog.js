@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
+import $ from "jquery";
 import "./chatlog.css"
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function ChatContainer({socket, email, room}) {
+export function ChatContainer({ socket, email, room }) {
     const [chat, setChangeText] = useState("");
-
+    let myEmail = email;
+    let myRoom = room;
     //functions sends the message to the server on submit
     function handleSubmit(event) {
-        console.log("Chat form submitted");
+        console.log("Chat form submitted", chat, myRoom);
         event.preventDefault();
         var chatMessage = {
-            email: email,
+            email: myEmail,
             message: chat,
-            room: room
+            room: myRoom
         };
-        console.log("socket and email", socket, email);
-        //Send the message to the server
-        socket.emit("chat-message", chatMessage) 
-        console.log("chat message emitted");
+        console.log("socket and email", socket, myEmail);
+        $.post("/api/chat", chatMessage)
+            .then((results) => {
+                console.log("post chat", results)
+
+                //Send the message to the server
+                socket.emit("chat-message", chatMessage)
+                console.log("chat message emitted");
+            })
     }
 
     //function updates the chat state when the user types
@@ -30,7 +37,7 @@ export function ChatContainer({socket, email, room}) {
 
     return (
         <Container fluid>
-            <form className="form-inline" id="chat-entry"onSubmit={handleSubmit}>
+            <form className="form-inline" id="chat-entry" onSubmit={handleSubmit}>
                 <input type="text" className="form-control" id="chat-input" placeholder="Talk smack here" onChange={handleChange} />
                 <button type="submit" className="btn btn-dark" id="send-chat"><i className="fas fa-share"  ></i></button>
             </form>

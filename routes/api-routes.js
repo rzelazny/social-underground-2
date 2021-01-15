@@ -163,7 +163,7 @@ router.post("/chat", function (req, res) {
 	db.ChatLog.create({
 		user: req.user.email,
 		message: req.body.message,
-		table_id: req.body.table
+		room: req.body.room
 	})
 		.then(function (results) {
 			console.log("chat message api ran")
@@ -176,13 +176,13 @@ router.post("/chat", function (req, res) {
 
 //Get existing chat messages for a table
 //Endpoint: api/chat/
-router.get("/chat/:table", function (req, res) {
+router.get("/chat/:room", function (req, res) {
 	console.log("post chat running ", req.body);
 	db.ChatLog.find({
-		table_id: req.params.table
+		room: req.params.room
 	})
 		.then(function (results) {
-			console.log("getting chat log for table", req.params.table)
+			console.log("getting chat log for room", req.params.room)
 			console.log(results);
 			res.send(results);
 		})

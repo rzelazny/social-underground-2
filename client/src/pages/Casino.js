@@ -57,7 +57,7 @@ function Casino() {
 
     //populate chat log
     function getChatLogs() {
-        $.get("/api/chat/" + curTable, function (chatLog) {
+        $.get("/api/chat/" + chatRoom, function (chatLog) {
             console.log("get chat running", chatLog);
             //chat length is used to check for new messages being posted
             chatLength = chatLog.length;
