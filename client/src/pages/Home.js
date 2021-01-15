@@ -2,7 +2,8 @@ import React from "react";
 import { Container } from "reactstrap";
 import NeonSign from "../components/NeonSign/NeonSign";
 import $ from "jquery";
-import NewBtn from "../components/NewBtn/NewBtn"
+import NewBtn from "../components/NewBtn/newBtn"
+
 function Home() {
 
     function init() {
@@ -20,7 +21,7 @@ function Home() {
             })
     }
 
-//     init();
+    //     init();
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables() {
@@ -118,46 +119,33 @@ function Home() {
         console.log("Making a new gaming table ");
         //create a new gaming table
         $.post("/api/newtable")
-        .then(function (newTable) {
-            //post the joining chat message
-            console.log("newtable: ", newTable);
-            let newMessage = {
-                message: " has entered chat.",
-                table: newTable._id
-            }
-            $.post("/api/chat/", newMessage, function () {
-                //join the table
-                window.location.assign("/casino/" + newTable._id);
+            .then(function (newTable) {
+                //post the joining chat message
+                console.log("newtable: ", newTable);
+                let newMessage = {
+                    message: " has entered chat.",
+                    table: newTable._id
+                }
+                $.post("/api/chat/", newMessage, function () {
+                    //join the table
+                    window.location.assign("/casino/" + newTable._id);
+                });
             });
-        });
     }
 
-        return (
-        <Container>
-
-            <NeonSign />
-            <div className="contianer" id="enterance">
-                <div className="col=md=4" id="current-tables0"></div>
-                <div className="col=md=4" id="current-tables1"></div>
-                <div className="col=md=4" id="current-tables2"></div>
-            </div>
-
-            <NewBtn />
-
-            {/* <div id="newTableSpan" style={{ position: "relative; left:40" }}>
-                <ul className="homeList">
-                    <li className="buttonList">
-                        <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span>New</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
-        </Container>
+    
+    return (
+        <body>
+            <Container id="homebody">
+                <NeonSign />
+                <div className="contianer" id="enterance">
+                    <div className="col=md=4" id="current-tables0"></div>
+                    <div className="col=md=4" id="current-tables1"></div>
+                    <div className="col=md=4" id="current-tables2"></div>
+                </div>
+                <NewBtn />
+            </Container>
+        </body>
     )
 }
 
