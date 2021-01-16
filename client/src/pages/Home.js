@@ -135,7 +135,6 @@ function Home() {
 
     
     return (
-        <body>
             <Container id="homebody">
                 <NeonSign />
                 <div className="contianer" id="enterance">
@@ -143,9 +142,10 @@ function Home() {
                     <div className="col=md=4" id="current-tables1"></div>
                     <div className="col=md=4" id="current-tables2"></div>
                 </div>
+                <br></br>
+                <br></br>
                 <NewBtn />
             </Container>
-        </body>
     )
 }
 

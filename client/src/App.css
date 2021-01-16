@@ -2,6 +2,8 @@
   background-color: black;
   background-image: url(../src/images/moonbackground.jpg);
   background-size: cover;
+  display: flex;
+  justify-content: center;
   min-height: 800px;
   min-width: 100%;
 }
