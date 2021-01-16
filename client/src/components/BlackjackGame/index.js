@@ -293,9 +293,56 @@ function BlackjackGame() {
         }
         else {
             console.log("the house will hit")
-            // run api hit
-            //house bust check
-                // if bust end round
+            API.drawHitHouse(houseHand)
+                .then(data => {
+                    // console.log(data);
+
+                    let hitCardVal;
+                    let handVal;
+
+                    // sets value of face card //
+                    if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
+                        hitCardVal = 10;
+                    }
+                    // sets value for ace  //
+                    else if (data.data.cards[0].value === "ACE") {
+                        hitCardVal = 11;
+                    } 
+                    else{
+                        hitCardVal = parseInt(data.data.cards[0].value);
+                    }
+
+                    // add current hand value and new card value //
+                    handVal = hitCardVal + housePoints;
+
+                    // add the card to the hand array //
+                    setHouseHand(
+                    [
+                        ...houseHand,
+                        {
+                            code: data.data.cards[0].code,
+                            suit: data.data.cards[0].suit,
+                            value: hitCardVal,
+                            imgUrl: data.data.cards[0].image
+                        }
+                    ]
+                    )
+
+                    // recalculate players points and update the point state //
+                    setHousePoints(
+                        handVal
+                    )
+
+                    // check to see if player busts with new card //
+                    if (handVal > 21) {
+                        console.log("busted, will end round");
+                        setHouseBust(true);
+                        endRound();
+                    }
+                    else {
+                        console.log("did not bust")
+                    }
+                })
         }
     }
 
