@@ -340,7 +340,18 @@ function BlackjackGame() {
                         endRound();
                     }
                     else {
-                        console.log("did not bust")
+                        console.log("house did not bust on hit")
+                        if (player1Stand === false) {
+                            console.log("house didnt bust, player 1 is not standing .... waiting")
+                        }
+                        else {
+                            console.log("house didnt bust and player one is standing")
+                            if (houseStand === true || handVal >= 17 || handVal > player1Points) {
+                                setHouseStand(true);
+                                console.log("both players stand, ending round triggered")
+                                endRound();
+                            }
+                        }
                     }
                 })
         }
@@ -350,12 +361,11 @@ function BlackjackGame() {
         console.log("stand triggered");
         // on stand logic
         //player 1 now stands
-        // check to see if house stands, has 17+ points, or has > points - if does end round
-        // if not standing run house hit again
-        // if house didnt bust resend to on stand logic
+        // check to see if house stands, has 17+ points, or has > points - if does state to stand and end round
+        // if not run house hit again
+            // if house didnt bust resend to on stand logic
         endRound();
     }
-
 
     function endRound() {
         updatePlayers(); //isnt getting called ?
