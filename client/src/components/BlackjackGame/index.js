@@ -13,6 +13,7 @@ console.log(player1Score);
 
 function BlackjackGame() {
 
+    const [displayButtons, setDisplayButtons] = useState(true);
     const [displayScoreCard, setDisplayScoreCard] = useState(false);
 
     const [housePoints, setHousePoints] = useState(0);
@@ -225,9 +226,9 @@ function BlackjackGame() {
 
     function hit() {
         console.log("hit triggered")
-        player1Hit();
+        player1Hit(); // calls api, generates element, updates the hand, calls bust check //
         // setTimeout(function () {
-        //     updatePlayers();
+        //     updatePlayers(); // 
         // }, 500);
     }
 
@@ -305,6 +306,7 @@ function BlackjackGame() {
         updatePlayers(); //isnt getting called ?
         console.log("end of round triggered");
         setDisplayScoreCard(true);
+        setDisplayButtons(false);
         //end round logic
         // if ended bc of bust... whoever didnt bust wins & show score      
         //who wins logic:
@@ -368,11 +370,12 @@ function BlackjackGame() {
                     </div>
                 </Card>
             </Container>
-            <BlackjackButtons
+            {displayButtons
+            && <BlackjackButtons
             restart={restart}
             hit={hit}
             stand={stand}
-            />
+            />}
         </Container>
     );
 }
