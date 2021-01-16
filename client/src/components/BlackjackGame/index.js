@@ -385,18 +385,36 @@ function BlackjackGame() {
     function endRound() {
         updatePlayers(); //isnt getting called ?
         console.log("end of round triggered");
+
+        // if a player busted //
+        if (houseBust === true) {
+            console.log("house bust, player 1 wins");
+            // increase player 1 score //
+        }
+        else if (player1Bust === true) {
+            console.log("player1 bust, house wins");
+            // increase house score //
+        }
+        // if players tie //
+        else if (housePoints === player1Points) {
+            console.log("both players tie")
+        }
+        // if house wins //
+        else if (housePoints <22 && housePoints > player1Points) {
+            console.log("house wins");
+            // increase house score //
+        }
+        // if player1 wins //
+        else if (player1Points <22 && housePoints < player1Points) {
+            console.log("player1 wins");
+            // increase player1 score //
+        }
+        else {
+            console.log("there must be an error");
+        }
+        
         setDisplayScoreCard(true);
         setDisplayButtons(false);
-        //end round logic
-        // if ended bc of bust... whoever didnt bust wins & show score      
-        //who wins logic:
-            // if tie
-            // if house wins
-                // houseScore ++;
-                // console.log(houseScore);
-                    //this will work however will be lost if the page reloads how it has been on restart
-            // if player one wins
-        //remove buttons
     }
 
     function consolePlayers() {
