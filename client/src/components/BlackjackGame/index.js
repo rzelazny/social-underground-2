@@ -359,11 +359,16 @@ function BlackjackGame() {
 
     function stand() {
         console.log("stand triggered");
-        // on stand logic
-        //player 1 now stands
-        // check to see if house stands, has 17+ points, or has > points - if does state to stand and end round
-        // if not run house hit again
-            // if house didnt bust resend to on stand logic
+        setPlayer1Stand(true);
+        if (houseStand === true || housePoints >= 17 || housePoints > player1Points) {
+            console.log("both players stand, end round");
+            setHouseStand(true);
+            endRound();
+        }
+        else {
+            console.log("player one stands, house will hit");
+            houseHitLogic();
+        }
         endRound();
     }
 
