@@ -182,7 +182,6 @@ function BlackjackGame() {
         Hand: houseHand, 
         Stand: houseStand
     });
-
     const [player1, setPlayer1] = useState({
             Name: 'Player1', 
             ID: 1, 
@@ -194,7 +193,7 @@ function BlackjackGame() {
     });
 
     function updatePlayers() {
-        console.log("iseehere)")
+        console.log("update triggered")
         setHouse({
             Name: 'House', 
             ID: 0, 
@@ -236,8 +235,10 @@ function BlackjackGame() {
             API.drawHitPlayer1(player1Hand)
                 .then(data => {
                     // console.log(data);
+
                     let hitCardVal;
                     let handVal;
+
                     // sets value of face card //
                     if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
                         hitCardVal = 10;
@@ -249,6 +250,7 @@ function BlackjackGame() {
                     else{
                         hitCardVal = parseInt(data.data.cards[0].value);
                     }
+
                     // add current hand value and new card value //
                     handVal = hitCardVal + player1Points;
 
@@ -277,20 +279,25 @@ function BlackjackGame() {
                         endRound();
                     }
                     else {
-                        // run house hit logic
                         console.log("will run hit house logic");
+                        houseHitLogic();
                     }
                 })
     }
 
-
-    //house hit logic
-        //if house has 17+ points it will stand 
-        //if it has < 17 points it will hit
-            //if hit run house bust check function
-
-    //house bust check
-        // if bust end round
+    function houseHitLogic() {
+        console.log("house hit logic function triggered");
+        if (housePoints >= 17) {
+            console.log("the house will stand")
+            setHouseStand(true);
+        }
+        else {
+            console.log("the house will hit")
+            // run api hit
+            //house bust check
+                // if bust end round
+        }
+    }
 
     function stand() {
         console.log("stand triggered");
