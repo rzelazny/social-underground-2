@@ -193,6 +193,7 @@ function BlackjackGame() {
     });
 
     function updatePlayers() {
+        console.log("iseehere)")
         setHouse({
             Name: 'House', 
             ID: 0, 
@@ -228,23 +229,6 @@ function BlackjackGame() {
         // setTimeout(function () {
         //     updatePlayers();
         // }, 500);
-            //need to manually press the button to run update players function
-        // setTimeout(function () {
-        //     checkBust();
-        // }, 500);
-            //need to manually press the button to run checkBust function
-
-    }
-
-    function checkBust() {
-        if (player1Points > 21) {
-            console.log("will end round");
-            endRound();
-        }
-        else {
-            // run house hit logic
-            console.log("will run hit house logic");
-        }
     }
 
     function player1Hit() {
@@ -264,7 +248,10 @@ function BlackjackGame() {
                     else{
                         hitCardVal = parseInt(data.data.cards[0].value);
                     }
+                    // add current hand value and new card value //
                     handVal = hitCardVal + player1Points;
+
+                    // add the card to the hand array //
                     setPlayer1Hand(
                     [
                         ...player1Hand,
@@ -276,9 +263,21 @@ function BlackjackGame() {
                         }
                     ]
                     )
+
+                    // recalculate players points and update the point state //
                     setPlayer1Points(
                         handVal
                     )
+
+                    // check to see if player busts with new card //
+                    if (handVal > 21) {
+                        console.log("will end round");
+                        endRound();
+                    }
+                    else {
+                        // run house hit logic
+                        console.log("will run hit house logic");
+                    }
                 })
     }
 
@@ -303,6 +302,7 @@ function BlackjackGame() {
 
 
     function endRound() {
+        updatePlayers(); //isnt getting called ?
         console.log("end of round triggered");
         setDisplayScoreCard(true);
         //end round logic
@@ -337,8 +337,8 @@ function BlackjackGame() {
             }
             <Container id="players">
                 <div>
-                    <button onClick={updatePlayers} >update players</button>
-                    <button onClick={checkBust} >check bust</button>
+                    <button onClick={updatePlayers} >update players after each action</button>
+                    {/* <button onClick={checkBust} >check bust after each hit</button> */}
                     <button onClick={consolePlayers} >see console log</button>
                 </div>
                 <Card id="house">
