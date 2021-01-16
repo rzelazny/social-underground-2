@@ -21,6 +21,9 @@ function BlackjackGame() {
     const [houseBust, setHouseBust] = useState(false);
     const [player1Bust, setPlayer1Bust] = useState(false);
 
+    const [houseStand, setHouseStand] = useState(false);
+    const [player1Stand, setPlayer1Stand] = useState(false);
+
     const [houseHand, setHouseHand] = useState([
         {
             code: "",
@@ -176,7 +179,7 @@ function BlackjackGame() {
         Points: housePoints, 
         Bust: houseBust, 
         Hand: houseHand, 
-        Stand: false
+        Stand: houseStand
     });
 
     const [player1, setPlayer1] = useState({
@@ -186,7 +189,7 @@ function BlackjackGame() {
             Points: player1Points, 
             Bust: player1Bust, 
             Hand: player1Hand,
-            Stand: false
+            Stand: player1Stand
     });
 
     function updatePlayers() {
@@ -197,7 +200,7 @@ function BlackjackGame() {
             Points: housePoints, 
             Bust: houseBust, 
             Hand: houseHand, 
-            Stand: false
+            Stand: houseStand
         });
         setPlayer1({
             Name: 'Player1', 
@@ -206,7 +209,7 @@ function BlackjackGame() {
             Points: player1Points, 
             Bust: player1Bust, 
             Hand: player1Hand,
-            Stand: false
+            Stand: player1Stand
         });
     }
 
