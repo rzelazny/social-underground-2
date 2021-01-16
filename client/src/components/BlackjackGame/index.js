@@ -6,6 +6,16 @@ import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
 
+///////////////////////////////////////////////////////////////////////////////////
+// things to work on //
+// when restart / play again  just restart the component not the whole page //
+// end of game update score but make it global amoungst the components //
+// hide the hit and stand buttons or disable //
+// update players automatically ??? //
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
 var houseScore = 0;
 console.log(houseScore);
 var player1Score = 0;
@@ -408,7 +418,7 @@ function BlackjackGame() {
         <Container id="gameBody" >
             {displayScoreCard
             && <BlackjackScoreCard 
-            // add function for play again button
+            playAgain={restart}
             /> 
             }
             <Container id="players">
