@@ -272,7 +272,8 @@ function BlackjackGame() {
 
                     // check to see if player busts with new card //
                     if (handVal > 21) {
-                        console.log("will end round");
+                        console.log("busted, will end round");
+                        setPlayer1Bust(true);
                         endRound();
                     }
                     else {
@@ -321,13 +322,17 @@ function BlackjackGame() {
 
     function consolePlayers() {
         console.log("----House------")
-        console.log(houseHand);
-        console.log(housePoints);
-        console.log(house);
+        console.log("House ", house);
+        console.log("Hand ", houseHand);
+        console.log("Points ", housePoints);
+        console.log("Bust ", houseBust);
+        console.log("Stand ", houseStand);
         console.log("----Player 1------")
-        console.log(player1Hand);
-        console.log(player1Points);
-        console.log(player1);
+        console.log("Player1 ", player1);
+        console.log("Hand ", player1Hand);
+        console.log("Points ", player1Points);
+        console.log("Bust ", player1Bust);
+        console.log("Stand ", player1Stand);
     }
 
     return (
