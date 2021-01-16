@@ -7,10 +7,10 @@ import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
 
 ///////////////////////////////////////////////////////////////////////////////////
-// things to work on //
+// things to work on: 
+
 // when restart / play again  just restart the component not the whole page //
 // end of game update score but make it global amoungst the components //
-// hide the hit and stand buttons or disable //
 // update players automatically ??? //
 
 
@@ -412,7 +412,7 @@ function BlackjackGame() {
         else {
             console.log("there must be an error");
         }
-        
+
         setDisplayScoreCard(true);
         setDisplayButtons(false);
     }
