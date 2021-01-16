@@ -340,7 +340,6 @@ function BlackjackGame() {
             <Container id="players">
                 <div>
                     <button onClick={updatePlayers} >update players after each action</button>
-                    {/* <button onClick={checkBust} >check bust after each hit</button> */}
                     <button onClick={consolePlayers} >see console log</button>
                 </div>
                 <Card id="house">
@@ -349,6 +348,16 @@ function BlackjackGame() {
                     <div id="houseHand">
                         <CardImg id="cardOneHouse" src={houseHand[0].imgUrl} alt="{houseHand[0].code}" />
                         <CardImg id="cardTwoHouse" src={houseHand[1].imgUrl} alt="{houseHand[1].code}" />
+                        {houseHand.length >= 3
+                        && <CardImg className="hitCardHouse" src={houseHand[2].imgUrl} alt="{houseHand[2].code}" />}
+                        {houseHand.length >= 4
+                        && <CardImg className="hitCardHouse" src={houseHand[3].imgUrl} alt="{houseHand[3].code}" />}
+                        {house.length >= 5
+                        && <CardImg className="hitCardHouse" src={houseHand[4].imgUrl} alt="{houseHand[4].code}" />}
+                        {house.length >= 6
+                        && <CardImg className="hitCardHouse" src={houseHand[5].imgUrl} alt="{houseHand[5].code}" />}
+                        {house.length >= 7
+                        && <CardImg className="hitCardHouse" src={houseHand[6].imgUrl} alt="{houseHand[6].code}" />}
                     </div>
                 </Card>
                 <Card id="player1">
