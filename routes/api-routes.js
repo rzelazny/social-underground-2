@@ -163,7 +163,7 @@ router.post("/chat", function (req, res) {
 	db.ChatLog.create({
 		user: req.user.email,
 		message: req.body.message,
-		table_id: req.body.table
+		room: req.body.room
 	})
 		.then(function (results) {
 			console.log("chat message api ran")
@@ -172,6 +172,34 @@ router.post("/chat", function (req, res) {
 		.catch(function (err) {
 			res.status(401).json(err);
 		});
+});
+
+//Get existing chat messages for a table
+//Endpoint: api/chat/
+router.get("/chat/:room", function (req, res) {
+	console.log("post chat running ", req.body);
+	db.ChatLog.find({
+		room: req.params.room
+	})
+		.then(function (results) {
+			console.log("getting chat log for room", req.params.room)
+			console.log(results);
+			res.send(results);
+		})
+		.catch(function (err) {
+			res.status(401).json(err);
+		});
+});
+
+// Route for finding tables with open seats
+// Endpoint: /api/table/
+router.get("/table/:table", function (req, res) {
+	console.log("Getting table data for ", req.params.table);
+	db.Table.findById(req.params.table)
+	.then(function (results) {
+		console.log("Returning data for table ", req.params.table);
+		return res.send(results);
+	})
 });
 
 // //get all running games for the setup page
