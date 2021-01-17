@@ -6,9 +6,11 @@ function BlackjackButtons(props) {
         <div className= "gameOptions">
             <div>
             {/* <p>The start button will be the only button to appear along with the directions before the game starts. Once the game starts, stop will be hidden and the game buttons will appear.</p> */}
-                <ul>
+                <ul 
+                className="fancyBtn"
+                >
                     <li 
-                    className="fancyBtn"
+                    // className="fancyBtn"
                     id="restart"
                     onClick={props.restart}
                     >
@@ -21,7 +23,7 @@ function BlackjackButtons(props) {
                         </a>
                     </li>
                     <li 
-                    className="fancyBtn"
+                    // className="fancyBtn"
                     id="hit"
                     onClick={props.hit}
                     >
@@ -35,7 +37,7 @@ function BlackjackButtons(props) {
                     </li>
                     <li 
                     id="stand"
-                    className="fancyBtn"
+                    // className="fancyBtn"
                     onClick={props.stand}
                     >
                         <a href="#">

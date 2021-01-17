@@ -4,8 +4,8 @@ import "./NewBtn.css"
 function NewBtn(props) {
     return (
         <div id="newTableSpan" onClick={props.onClick} style={{ position: "relative; left:40" }}>
-            <ul className="homeList">
-                <li className="buttonList fancyBtn">
+            <ul className="fancyBtn">
+                <li className="buttonList">
                     <a href="#">
                         <span></span>
                         <span></span>
