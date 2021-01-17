@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 #homebody {
   background-color: black;
   background-image: url(../src/images/moonbackground.jpg);

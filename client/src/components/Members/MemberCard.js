@@ -1,8 +1,14 @@
-import React from 'react'
-import MemberItem from "./MemberItem"
-import "./MemberCard.css"
+import React from 'react';
+import MemberItem from "./MemberItem";
+import "./MemberCard.css";
+import $ from "jquery";
 
 function MemberCard() {
+    function stats () {
+        $.get("/api/UserStats").then((results)=> console.log(results))
+    } 
+    stats();
+
     return (
         <div className="cards">
             <h1>Your Stats</h1>
