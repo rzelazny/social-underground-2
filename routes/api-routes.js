@@ -162,7 +162,6 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
-
 // Route for finding tables with open seats
 // Endpoint: /api/table/
 router.get("/table/:table", function (req, res) {
@@ -170,6 +169,21 @@ router.get("/table/:table", function (req, res) {
 	db.Table.findById(req.params.table)
 	.then(function (results) {
 		console.log("Returning data for table ", req.params.table);
+		return res.send(results);
+	})
+});
+
+// Route for adding player to table with an open seat
+// Endpoint: /api/table/
+router.post("/table/:table", function (req, res) {
+	console.log("Adding player to table ", req.params.table);
+	let tableUpdateData = { $set: {} };
+	tableUpdateData.$set[req.body.column] = req.body.data;
+	console.log("update: ",tableUpdateData);
+	db.Table.updateOne(
+		{_id: req.params.table}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
 		return res.send(results);
 	})
 });
