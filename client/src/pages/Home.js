@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "reactstrap";
 import $ from "jquery";
 import NeonSign from "../components/NeonSign/NeonSign";
-import NewBtn from "../components/NewBtn/NewBtn"
+import NewBtn from "../components/NewBtn/newBtn"
 
 function Home() {
 
@@ -138,7 +138,7 @@ function Home() {
                     <div className="col=md=4" id="current-tables1"></div>
                     <div className="col=md=4" id="current-tables2"></div>
                 </div>
-                <NewBtn onClick={createTable} />
+                <NewBtn  onClick={createTable} />
             </Container>
     )
 };

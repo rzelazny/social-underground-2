@@ -6,7 +6,7 @@ function BlackjackButtons() {
         <div className= "gameOptions">
             <div>
             {/* <p>The start button will be the only button to appear along with the directions before the game starts. Once the game starts, stop will be hidden and the game buttons will appear.</p> */}
-                <ul>
+                <ul id="blackjackbuttonstyle">
                     <li id="restart">
                         <a href="#">
                             <span></span>
