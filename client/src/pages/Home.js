@@ -51,7 +51,7 @@ function Home() {
                 var joinBtn = $('<button/>', {
                     text: "Join Table",
                     id: "btnJoin",
-                    table: curTables[i].id,
+                    table: curTables[i]._id,
                     click: joinTable
                 })
                 //append stats to the card
@@ -72,21 +72,22 @@ function Home() {
         let tableId = $(this).attr("table")
         let newMessage = {};
         let openSeat = ""
-        $.get("/api/table" + tableId).then(function (tableData) {
+        $.get("/api/table/" + tableId).then(function (tableData) {
+            console.log("table data",tableData)
             //make sure there's room at the table
-            if (tableData[0].user1 === "Open Seat") {
+            if (tableData.user1 === "Open Seat") {
                 openSeat = "user1";
-            } else if (tableData[0].user2 === "Open Seat") {
+            } else if (tableData.user2 === "Open Seat") {
                 openSeat = "user2";
-            } else if (tableData[0].user3 === "Open Seat") {
+            } else if (tableData.user3 === "Open Seat") {
                 openSeat = "user3";
-            } else if (tableData[0].user4 === "Open Seat") {
+            } else if (tableData.user4 === "Open Seat") {
                 openSeat = "user4";
-            } else if (tableData[0].user5 === "Open Seat") {
+            } else if (tableData.user5 === "Open Seat") {
                 openSeat = "user5";
             } else {
                 //if the table is full refresh the page, it shouldn't show up as available anymore
-                window.location.reload();
+                //window.location.reload();
                 return
             }
             $.get("/api/user_data", function (userData) {
@@ -95,17 +96,17 @@ function Home() {
                     data: userData.email
                 }
                 //update the table with the new user
-                $.post("/api/table" + tableId, tableUpdate).then(function () {
+                $.post("/api/table/" + tableId, tableUpdate).then(function () {
                     //post message that player has joined the table
-                    newMessage = {
-                        message: " has entered chat.",
-                        table: tableId
-                    }
-                    //post the joining chat message
-                    $.post("/api/chat/", newMessage, function () {
+                    // newMessage = {
+                    //     message: " has entered chat.",
+                    //     table: tableId
+                    // }
+                    // //post the joining chat message
+                    // $.post("/api/chat/", newMessage, function () {
                         //join the table
-                        window.location.assign("/casino" + tableId);
-                    });
+                        window.location.assign("/casino/" + tableId);
+                    //});
                 })
             })
         })

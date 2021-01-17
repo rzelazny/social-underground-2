@@ -37,13 +37,15 @@ function Casino() {
                     .then((tableData)=>{
                         console.log(tableData);
                         setRoom(tableData.roomNumber);
-                        socket.emit("join-room", chatRoom);
+                        socket.emit("join-room", tableData.roomNumber);
                         //send welcome message
                         let message = {
                             email: userData.email,
-                            message: " has joined the chat."
+                            message: " has joined the chat.",
+                            room: tableData.roomNumber
                         }
                         displayChat(message);
+                        socket.emit("chat-message", message)
                     })
                 }
             })
