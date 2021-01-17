@@ -1,0 +1,20 @@
+#players {
+    margin-top: 40px
+}
+
+#house,
+#player1 {
+    text-align: center;
+    margin: 10px;
+    background-color: black;
+}
+
+#cardOneHouse,
+#cardTwoHouse,
+#cardOnePlayer1,
+#cardTwoPlayer1,
+.hitCardHouse,
+.hitCardPlayer1 {
+    width:100px;
+    height:150px;
+}

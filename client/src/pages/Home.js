@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "reactstrap";
 import $ from "jquery";
 import NeonSign from "../components/NeonSign/NeonSign";
-import NewBtn from "../components/NewBtn/NewBtn"
+import NewBtn from "../components/NewBtn"
 
 function Home() {
 
