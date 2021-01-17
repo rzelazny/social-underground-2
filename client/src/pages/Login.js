@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import $ from 'jquery';
 
 function Login() {
-    var script = document.createElement('script');
-    script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-    script.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(script);
+    // var script = document.createElement('script');
+    // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+    // script.type = 'text/javascript';
+    // document.getElementsByTagName('head')[0].appendChild(script);
 
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
@@ -70,7 +70,7 @@ function Login() {
     }
 
     return (
-        <div className="container box">
+        <div id="loginbody">
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Login Form</h2>

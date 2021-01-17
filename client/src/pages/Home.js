@@ -1,25 +1,27 @@
 import React from "react";
 import { Container } from "reactstrap";
 import $ from "jquery";
+import NeonSign from "../components/NeonSign/NeonSign";
+import NewBtn from "../components/NewBtn"
 
 function Home() {
 
     function init() {
         //make sure the user is logged in
         $.get("/api/user_data")
-        .then((userData)=>{
-            console.log(userData)
-            if(!userData.email){
-                window.location.replace("/login");
-            }
-            else{
-                console.log("You're logged in!");
-                cleanupTables()
-            }
-        })
+            .then((userData) => {
+                console.log(userData)
+                if (!userData.email) {
+                    window.location.replace("/login");
+                }
+                else {
+                    console.log("You're logged in!");
+                    cleanupTables()
+                }
+            })
     }
 
-//     init();
+    //     init();
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables() {
@@ -55,109 +57,92 @@ function Home() {
                 //append stats to the card
                 cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
                 card.append(cardBody);
-
                 //there are 3 columns we append in sequence, the 4th table should be in the first column again.
                 while (columnCount > 2) {
                     columnCount -= 3;
                 }
-
                 //append card to the correct column on the homepage
                 $("#current-tables" + columnCount).append(card);
             };
         });
-        // }
+    }
 
-        //function lets user join an existing table
-        function joinTable() {
-            let tableId = $(this).attr("table")
-            let newMessage = {};
-            let openSeat = ""
-            $.get("/api/table" + tableId).then(function (tableData) {
-                //make sure there's room at the table
-                if (tableData[0].user1 === "Open Seat") {
-                    openSeat = "user1";
-                } else if (tableData[0].user2 === "Open Seat") {
-                    openSeat = "user2";
-                } else if (tableData[0].user3 === "Open Seat") {
-                    openSeat = "user3";
-                } else if (tableData[0].user4 === "Open Seat") {
-                    openSeat = "user4";
-                } else if (tableData[0].user5 === "Open Seat") {
-                    openSeat = "user5";
-                } else {
-                    //if the table is full refresh the page, it shouldn't show up as available anymore
-                    window.location.reload();
-                    return
+    //function lets user join an existing table
+    function joinTable() {
+        let tableId = $(this).attr("table")
+        let newMessage = {};
+        let openSeat = ""
+        $.get("/api/table" + tableId).then(function (tableData) {
+            //make sure there's room at the table
+            if (tableData[0].user1 === "Open Seat") {
+                openSeat = "user1";
+            } else if (tableData[0].user2 === "Open Seat") {
+                openSeat = "user2";
+            } else if (tableData[0].user3 === "Open Seat") {
+                openSeat = "user3";
+            } else if (tableData[0].user4 === "Open Seat") {
+                openSeat = "user4";
+            } else if (tableData[0].user5 === "Open Seat") {
+                openSeat = "user5";
+            } else {
+                //if the table is full refresh the page, it shouldn't show up as available anymore
+                window.location.reload();
+                return
+            }
+            $.get("/api/user_data", function (userData) {
+                let tableUpdate = {
+                    column: openSeat,
+                    data: userData.email
                 }
-                $.get("/api/user_data", function (userData) {
-                    let tableUpdate = {
-                        column: openSeat,
-                        data: userData.email
+                //update the table with the new user
+                $.post("/api/table" + tableId, tableUpdate).then(function () {
+                    //post message that player has joined the table
+                    newMessage = {
+                        message: " has entered chat.",
+                        table: tableId
                     }
-                    //update the table with the new user
-                    $.post("/api/table" + tableId, tableUpdate).then(function () {
-                        //post message that player has joined the table
-                        newMessage = {
-                            message: " has entered chat.",
-                            table: tableId
-                        }
-                        //post the joining chat message
-                        $.post("/api/chat/", newMessage, function () {
-                            //join the table
-                            window.location.assign("/casino" + tableId);
-                        });
-                    })
+                    //post the joining chat message
+                    $.post("/api/chat/", newMessage, function () {
+                        //join the table
+                        window.location.assign("/casino" + tableId);
+                    });
                 })
             })
-        }
+        })
+    }
 
-        // Create a new gaming table on click
-        $("#newTableSpan").on("click", function (event) {
-            console.log("Making a new gaming table ");
-            //create a new gaming table
-            $.post("/api/newtable").then(function (newTable) {
+    // Create a new gaming table on click
+    function createTable() {
+        console.log("Making a new gaming table ");
+        //create a new gaming table
+        $.post("/api/newtable")
+            .then(function (newTable) {
                 //post the joining chat message
+                console.log("newtable: ", newTable);
                 let newMessage = {
                     message: " has entered chat.",
-                    table: newTable.id
+                    room: newTable.roomNumber
                 }
                 $.post("/api/chat/", newMessage, function () {
                     //join the table
-                    window.location.assign("/casino" + newTable.id);
+                    window.location.assign("/casino/" + newTable._id);
                 });
-            });
-        })
-
-    };
+            })
+    }
 
     return (
-        <Container>
-            <div className="wrapper">
-                <div className="neon-wrapper">
-                    <div className="neon-text">Welcome to the <br />Social Underground
+        <body>
+            <Container id="homebody">
+                <NeonSign />
+                <div className="contianer" id="enterance">
+                    <div className="col=md=4" id="current-tables0"></div>
+                    <div className="col=md=4" id="current-tables1"></div>
+                    <div className="col=md=4" id="current-tables2"></div>
                 </div>
-                </div>
-            </div>
-            <div className="contianer" id="enterance">
-                <div className="col=md=4" id="current-tables0"></div>
-                <div className="col=md=4" id="current-tables1"></div>
-                <div className="col=md=4" id="current-tables2"></div>
-            </div>
-            <div id="newTableSpan" style={{ position: "relative; left:40" }}>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span>New</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </Container>
+                <NewBtn onClick={createTable} />
+            </Container>
+        </body>
     )
-}
+};
 
 export default Home;
