@@ -1,15 +1,17 @@
-$(document).ready(function() {
+import React from 'react'
+import Nav from "../components/Nav/Navbar"
+// import $ from "jquery";
+import MemberSection from "../components/Members/MemberSection"
+import MemberCard from "../components/Members/MemberCard"
 
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
-  $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.email);
-  });
+function Members() {
 
-  // $.get("/api/user_stat").then (function(data){
-  //   $(".card-text-w/l").text(data.gamePoints);
-  // });
-
-//creating common utilitize 
-
-});
+  return (
+    <>
+      {/* <Nav />, */}
+      <MemberSection />
+      <MemberCard />
+    </>
+  )
+}
+export default Members
