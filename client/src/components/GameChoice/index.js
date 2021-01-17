@@ -5,13 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 
 function GamingTable() {
-
+    const [formDisplay, setFormDisplay] = useState(true);
     const [blackjackGame, setBlackjackGame] = useState(false);
     const [rpsGame, setRpsGame] = useState(false);
+
+    function onStartPlaying() {
+        setFormDisplay(false);
+        setBlackjackGame(true);
+    }
 
 
     return (
         <Container className="text-center">
+            {formDisplay
+            &&
             <Card id="gameChoice" className="text-center mx-auto">
                 <CardTitle tag="h3">Game Mode</CardTitle>
                 <Form>
@@ -34,15 +41,17 @@ function GamingTable() {
                     <FormGroup>
                         <Label for="exampleSelect">Select</Label>
                         <Input type="select" name="select" id="exampleSelect">
-                            <option>1</option>
-                            <option>2</option>
+                            <option>Rock Paper Scissors</option>
+                            <option>Blackjack</option>
                         </Input>
                     </FormGroup>
-                    <Button>Start Playing</Button>
+                    <Button onClick={onStartPlaying}>Start Playing</Button>
                 </Form>
                 {/* options: hard coded blackjack for now */}
             </Card>
-            <BlackjackTable />
+            }
+            {blackjackGame
+            && <BlackjackTable />}
         </Container>
 
 
