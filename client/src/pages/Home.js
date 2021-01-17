@@ -131,7 +131,7 @@ function Home() {
     }
 
     return (
-        <body>
+        <div>
             <Container id="homebody">
                 <NeonSign />
                 <div className="contianer" id="enterance">
@@ -141,7 +141,7 @@ function Home() {
                 </div>
                 <NewBtn onClick={createTable} />
             </Container>
-        </body>
+        </div>
     )
 };
 
