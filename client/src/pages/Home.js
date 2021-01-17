@@ -70,10 +70,9 @@ function Home() {
     //function lets user join an existing table
     function joinTable() {
         let tableId = $(this).attr("table")
-        let newMessage = {};
         let openSeat = ""
         $.get("/api/table/" + tableId).then(function (tableData) {
-            console.log("table data",tableData)
+            console.log("table data", tableData)
             //make sure there's room at the table
             if (tableData.user1 === "Open Seat") {
                 openSeat = "user1";
@@ -87,7 +86,7 @@ function Home() {
                 openSeat = "user5";
             } else {
                 //if the table is full refresh the page, it shouldn't show up as available anymore
-                //window.location.reload();
+                window.location.reload();
                 return
             }
             $.get("/api/user_data", function (userData) {
@@ -97,16 +96,7 @@ function Home() {
                 }
                 //update the table with the new user
                 $.post("/api/table/" + tableId, tableUpdate).then(function () {
-                    //post message that player has joined the table
-                    // newMessage = {
-                    //     message: " has entered chat.",
-                    //     table: tableId
-                    // }
-                    // //post the joining chat message
-                    // $.post("/api/chat/", newMessage, function () {
-                        //join the table
-                        window.location.assign("/casino/" + tableId);
-                    //});
+                    window.location.assign("/casino/" + tableId);
                 })
             })
         })
@@ -118,16 +108,7 @@ function Home() {
         //create a new gaming table
         $.post("/api/newtable")
             .then(function (newTable) {
-                //post the joining chat message
-                // console.log("newtable: ", newTable);
-                // let newMessage = {
-                //     message: " has entered chat.",
-                //     room: newTable.roomNumber
-                // }
-                // $.post("/api/chat/", newMessage, function () {
-                //     //join the table
                 window.location.assign("/casino/" + newTable._id);
-                // });
             })
     }
 
