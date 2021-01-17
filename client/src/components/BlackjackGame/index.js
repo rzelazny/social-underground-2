@@ -18,6 +18,8 @@ import API from "../../utils/API";
 var houseScore = 0;
 var player1Score = 0;
 
+var winner = "";
+
 // temporarily hard coded -- pull from db //
 var player1Name = "Player 1";
 
@@ -374,12 +376,14 @@ function BlackjackGame() {
 
         if (isBusted === "player1 busted") {
             console.log("player1 bust, house wins");
+            winner = "House";
             houseScore++
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
         }
         else if (isBusted === "house busted") {
             console.log("house bust, player1 wins");
+            winner = player1Name;
             player1Score++
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
@@ -388,12 +392,14 @@ function BlackjackGame() {
             // if players tie //
             if (housePoints === player1Points) {
                 console.log("both players tie, no ones scores increased")
+                winner = "Players tie, no one";
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
             }
             // if house wins //
             else if (housePoints < 22 && housePoints > player1Points) {
                 console.log("house wins");
+                winner = "House";
                 houseScore++
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
@@ -401,6 +407,7 @@ function BlackjackGame() {
             // if player1 wins //
             else if (player1Points < 22 && housePoints < player1Points) {
                 console.log("player1 wins");
+                winner = player1Name;
                 player1Score++
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
@@ -434,6 +441,10 @@ function BlackjackGame() {
         <Container id="gameBody" >
             {displayScoreCard
                 && <BlackjackScoreCard
+                    winner={winner}
+                    player1Name={player1Name}
+                    houseScore={houseScore}
+                    player1Score={player1Score}
                     playAgain={restart}
                 />
             }

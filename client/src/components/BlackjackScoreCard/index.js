@@ -1,22 +1,29 @@
 import React from "react";
 import "./style.css"
-import { Container, Card } from 'reactstrap';
+import { Card, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function BlackjackScoreCard(props) {
     return (
-        <Container>
         <Card id="scoreCard" className="card mx-auto pt-3 pb-3">
-            <p>This card will show at end of round.</p>
-            {/* winner declaration */}
-            {/* final points */}
-            {/* restart game button - props */}
+            <CardTitle>
+            {props.winner} wins this round.
+            </CardTitle>
+            <CardSubtitle>
+                Scores:
+            </CardSubtitle>
+            <CardText>
+                House: {props.houseScore}
+            </CardText>
+            <CardText>
+                {props.player1Name}: {props.player1Score}
+            </CardText>
+            <button 
+            className="btn"
+            id="playAgain"
+            onClick={props.playAgain}
+            >Play Again</button>
         </Card>
-        <button 
-        id="playAgain"
-        onClick={props.playAgain}
-        >Play Again</button>
-        </Container>
     );
 }
 
