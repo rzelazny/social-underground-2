@@ -1,3 +1,7 @@
+#players {
+    margin-top: 40px
+}
+
 #house,
 #player1 {
     text-align: center;
@@ -13,20 +17,4 @@
 .hitCardPlayer1 {
     width:100px;
     height:150px;
-}
-
-#pointDisplay,
-#pointDisplayHousePlayer,
-#scoresDisplay,
-#scoresDisplayHousePlayer {
-    margin: 5px;
-    padding: 5px;
-
-}
-
-#roundOver,
-#winnerDisplay {
-    margin: 10px;
-    padding: 10px;
-
 }

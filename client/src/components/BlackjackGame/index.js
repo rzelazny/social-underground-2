@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css"
-import { Container, Card, CardTitle, CardImg, CardText } from 'reactstrap';
+import { Alert, Container, Card, CardTitle, CardImg, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
@@ -11,6 +11,7 @@ import API from "../../utils/API";
 // to do :
     //connect the score with the users membership page
     //currently hard coded... change the players name from player 1 to the players username
+    //fix play again btn
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,6 +19,7 @@ import API from "../../utils/API";
 var houseScore = 0;
 var player1Score = 0;
 
+// to keep track of the winner for the scorecard //
 var winner = "";
 
 // temporarily hard coded -- pull from db //
@@ -380,6 +382,11 @@ function BlackjackGame() {
             houseScore++
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
+            // return (
+            //     <Alert color="primary">
+            //     {player1Name} Busted!
+            //     </Alert>
+            // )
         }
         else if (isBusted === "house busted") {
             console.log("house bust, player1 wins");
@@ -387,6 +394,11 @@ function BlackjackGame() {
             player1Score++
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
+            // return (
+            //     <Alert color="primary">
+            //     The House Busted!
+            //     </Alert>
+            // )
         }
         else if (isBusted === "both stand") {
             // if players tie //
@@ -424,18 +436,18 @@ function BlackjackGame() {
         setDisplayButtons(false);
     }
 
-    function consolePlayers() {
-        console.log("----House------")
-        console.log("Hand ", houseHand);
-        console.log("Points ", housePoints);
-        console.log("Bust ", houseBust);
-        console.log("Stand ", houseStand);
-        console.log("----Player 1------")
-        console.log("Hand ", player1Hand);
-        console.log("Points ", player1Points);
-        console.log("Bust ", player1Bust);
-        console.log("Stand ", player1Stand);
-    }
+    // function consolePlayers() {
+    //     console.log("----House------")
+    //     console.log("Hand ", houseHand);
+    //     console.log("Points ", housePoints);
+    //     console.log("Bust ", houseBust);
+    //     console.log("Stand ", houseStand);
+    //     console.log("----Player 1------")
+    //     console.log("Hand ", player1Hand);
+    //     console.log("Points ", player1Points);
+    //     console.log("Bust ", player1Bust);
+    //     console.log("Stand ", player1Stand);
+    // }
 
     return (
         <Container id="gameBody" >
@@ -449,9 +461,9 @@ function BlackjackGame() {
                 />
             }
             <Container id="players">
-                <div>
+                {/* <div>
                     <button onClick={consolePlayers} >see console log</button>
-                </div>
+                </div> */}
                 <Card id="house">
                     <CardTitle tag="h5">House</CardTitle>
                     <CardText>Points: {housePoints}</CardText>
