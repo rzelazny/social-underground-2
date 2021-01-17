@@ -6,39 +6,31 @@ import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
 
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// to do :
+    //connect the score with the users membership page
+    //currently hard coded... change the players name from player 1 to the players username
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// to be saved in the players db //
 var houseScore = 0;
-console.log(houseScore);
 var player1Score = 0;
-console.log(player1Score);
+
+// temporarily hard coded -- pull from db //
+var player1Name = "Player 1";
 
 function BlackjackGame() {
-
-    // useEffect(() => {
-    //     console.log(houseHand);
-    //     console.log(displayButtons)
-    //     console.log(displayScoreCard)
-    //     console.log(housePoints)
-    //     console.log(player1Points)
-    //     console.log(houseStand)
-    //     console.log(player1Stand)
-    //     console.log(houseBust)
-    //     console.log(player1Bust)
-    //     console.log(player1Hand)
-    // })
-    
-
+    // set states //
     const [displayButtons, setDisplayButtons] = useState(true);
     const [displayScoreCard, setDisplayScoreCard] = useState(false);
-
     const [housePoints, setHousePoints] = useState(0);
     const [player1Points, setPlayer1Points] = useState(0);
-
     const [houseBust, setHouseBust] = useState(false);
     const [player1Bust, setPlayer1Bust] = useState(false);
-
     const [houseStand, setHouseStand] = useState(false);
     const [player1Stand, setPlayer1Stand] = useState(false);
-
     const [houseHand, setHouseHand] = useState([
         {
             code: "",
@@ -68,6 +60,12 @@ function BlackjackGame() {
         }
     ]);
 
+    useEffect(() => {
+        if (!houseHand) {
+            return;
+        }
+        houseApi();
+    }, []);
     function houseApi() {
         API.drawHouse(houseHand, housePoints)
             .then(data => {
@@ -127,12 +125,11 @@ function BlackjackGame() {
     }
 
     useEffect(() => {
-        if (!houseHand) {
+        if (!player1Hand) {
             return;
         }
-        houseApi();
+        player1Api();
     }, []);
-
     function player1Api() {
         API.drawPlayer1(player1Hand, player1Points)
             .then(data => {
@@ -188,16 +185,10 @@ function BlackjackGame() {
             })
     }
 
-    useEffect(() => {
-        if (!player1Hand) {
-            return;
-        }
-        player1Api();
-    }, []);
-
-
     function restart() {
         console.log("restart function entered");
+
+        // will reset the states to original values //
         setDisplayButtons(true);
         setDisplayScoreCard(false);
         setHousePoints(0);
@@ -230,35 +221,16 @@ function BlackjackGame() {
             value: "",
             imgUrl: ""
         }])
-        // setHouse({
-        //     Name: 'House',
-        //     ID: 0,
-        //     Score: houseScore,
-        //     Points: housePoints,
-        //     Bust: houseBust,
-        //     Hand: houseHand,
-        //     Stand: houseStand
-        // })
-        // setPlayer1({
-        //     Name: 'Player1',
-        //     ID: 1,
-        //     Score: player1Score,
-        //     Points: player1Points,
-        //     Bust: player1Bust,
-        //     Hand: player1Hand,
-        //     Stand: player1Stand
-        // })
+
+        // will re-deal the cards //
         houseApi();
         player1Api();
     }
-
 
     function player1Hit() {
         console.log("hit function entered")
         API.drawHitPlayer1(player1Hand)
             .then(data => {
-                // console.log(data);
-
                 let hitCardVal;
                 let handVal;
 
@@ -299,7 +271,6 @@ function BlackjackGame() {
                 if (handVal > 21) {
                     console.log("busted, will end round");
                     setPlayer1Bust(true);
-                    // console.log("player1Bust ", player1Bust)
                     endRound("player1 busted");
                 }
                 else {
@@ -319,8 +290,6 @@ function BlackjackGame() {
             console.log("the house will hit")
             API.drawHitHouse(houseHand)
                 .then(data => {
-                    // console.log(data);
-
                     let hitCardVal;
                     let handVal;
 
@@ -491,7 +460,7 @@ function BlackjackGame() {
                     </div>
                 </Card>
                 <Card id="player1">
-                    <CardTitle tag="h5">Player One</CardTitle>
+                    <CardTitle tag="h5">{player1Name}</CardTitle>
                     <CardText>Points: {player1Points}</CardText>
                     <div id="player1Hand">
                         <CardImg id="cardOnePlayer1" src={player1Hand[0].imgUrl} alt="{player1Hand[0].code}" />
