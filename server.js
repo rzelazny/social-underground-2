@@ -41,8 +41,6 @@ const io = socketIo(server);
  * game based on the input it receives. Everything here runs asynchronously.
  */
 
-let interval;
-
 io.on("connection", (socket) => {
   console.log("New client connected ");
   
