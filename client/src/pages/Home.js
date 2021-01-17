@@ -21,7 +21,7 @@ function Home() {
             })
     }
 
-    //     init();
+    init();
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables() {
@@ -125,7 +125,7 @@ function Home() {
                 // }
                 // $.post("/api/chat/", newMessage, function () {
                 //     //join the table
-                    window.location.assign("/casino/" + newTable._id);
+                window.location.assign("/casino/" + newTable._id);
                 // });
             })
     }
