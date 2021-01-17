@@ -118,15 +118,15 @@ function Home() {
         $.post("/api/newtable")
             .then(function (newTable) {
                 //post the joining chat message
-                console.log("newtable: ", newTable);
-                let newMessage = {
-                    message: " has entered chat.",
-                    room: newTable.roomNumber
-                }
-                $.post("/api/chat/", newMessage, function () {
-                    //join the table
+                // console.log("newtable: ", newTable);
+                // let newMessage = {
+                //     message: " has entered chat.",
+                //     room: newTable.roomNumber
+                // }
+                // $.post("/api/chat/", newMessage, function () {
+                //     //join the table
                     window.location.assign("/casino/" + newTable._id);
-                });
+                // });
             })
     }
 
