@@ -1,13 +1,9 @@
 import React from "react";
 import { Container } from "reactstrap";
 import $ from "jquery";
-<<<<<<< HEAD
-import NewBtn from "../components/NewBtn/newBtn"
-=======
+import NewBtn from "../components/NewBtn/";
 import NeonSign from "../components/NeonSign/NeonSign";
-import NewBtn from "../components/NewBtn"
 
->>>>>>> b3e4debfae425e3c73727c9ff9be3ac7e20f2cb6
 function Home() {
 
     function init() {
