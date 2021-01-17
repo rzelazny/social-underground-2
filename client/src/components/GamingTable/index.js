@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css"
+import "./GTstyle.css"
 import BlackjackTable from "../BlackjackTable";
 
 function GamingTable() {
