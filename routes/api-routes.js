@@ -12,6 +12,12 @@ router.post("/signup", ({ body }, res) => {
 		.then(dbUser => {
 			console.log(dbUser);
 			res.json(dbUser);
+			db.UserStats.create(dbUser._id)
+			.then(stats => {
+				console.log(stats);
+				console.log(dbUser._id);
+				db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
+			})
 		})
 		.catch(err => {
 			console.log(err);
@@ -184,6 +190,17 @@ router.post("/chat", function (req, res) {
 // 			return res.send(results);
 // 		})
 // });
+
+router.get("/UserStats", function (req, res) {
+	console.log(req.user);
+	db.User.findOne({
+		email: req.user.email
+	}).populate("userstats")
+	.then(function (results) {
+		console.log("get tables returning data", results);
+		return res.send(results.email);
+	})
+});
 
 
 module.exports = router;

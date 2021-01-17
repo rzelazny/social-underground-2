@@ -13,7 +13,11 @@ const User = new Schema({
 	password: {
 		type: String,
 		allowNull: false
-	}
+	},
+	userstats: {
+        type: Schema.Types.ObjectId,
+        ref: "UserStats"
+    }
 });
 
 //Validate hashed password
