@@ -16,37 +16,29 @@ function GamingTable() {
                 <CardTitle tag="h3">Game Mode</CardTitle>
                 <Form>
                     <FormGroup tag="fieldset">
-                        <legend>Radio Buttons</legend>
-                        <FormGroup check>
+                        <FormGroup check className="form-check-inline">
                             <Label check>
                                 <Input type="radio" name="radio1" />{' '}
-            Option one is this and that—be sure to include why it's great
-          </Label>
+                                Multiplayer
+                            </Label>
                         </FormGroup>
-                        <FormGroup check>
+                        <FormGroup check className="form-check-inline">
                             <Label check>
                                 <Input type="radio" name="radio1" />{' '}
-            Option two can be something else and selecting it will deselect option one
-          </Label>
-                        </FormGroup>
-                        <FormGroup check disabled>
-                            <Label check>
-                                <Input type="radio" name="radio1" disabled />{' '}
-            Option three is disabled
-          </Label>
+                                Single Player
+                            </Label>
                         </FormGroup>
                     </FormGroup>
+                    <br />
+                    <CardTitle tag="h3">Choose a game</CardTitle>
                     <FormGroup>
                         <Label for="exampleSelect">Select</Label>
                         <Input type="select" name="select" id="exampleSelect">
                             <option>1</option>
                             <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
                         </Input>
                     </FormGroup>
-                    <Button>Submit</Button>
+                    <Button>Start Playing</Button>
                 </Form>
                 {/* options: hard coded blackjack for now */}
             </Card>
