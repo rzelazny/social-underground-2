@@ -70,7 +70,7 @@ function Login() {
     }
 
     return (
-        <div className="container box">
+        <div id="loginbody">
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Login Form</h2>

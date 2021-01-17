@@ -34,6 +34,12 @@ const Schema = mongoose.Schema;
     user5: {
         type: String,
         default: "Open Seat"
+    },
+    roomNumber: {
+        type: Number,
+        default: function(){
+            return Math.floor(Math.random()*10000);
+        }
     }
     });
 

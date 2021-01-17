@@ -1,9 +1,9 @@
 import React from "react";
 import "./NewBtn.css"
 
-function NewBtn() {
+function NewBtn(props) {
     return (
-        <div id="newTableSpan" style={{ position: "relative; left:40" }}>
+        <div id="newTableSpan" onClick={props.onClick} style={{ position: "relative; left:40" }}>
             <ul className="homeList">
                 <li className="buttonList">
                     <a href="#">
