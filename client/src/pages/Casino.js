@@ -27,18 +27,18 @@ function Casino() {
                     window.location.replace("/login");
                 }
                 else {
-                    setEmail(userData.email);
                     $.get("/api/table/"+ curTable)
-                    .then((tableData)=>{
-                        console.log(tableData);
-                        setRoom(tableData.roomNumber);
-                        console.log("emitting room:", tableData.roomNumber)
-                        socket.emit("join-room", tableData.roomNumber);
+                    .then((data)=>{
+                        console.log(data);
+                        setRoom(data.roomNumber);
+                        setEmail(userData.email);
+                        console.log("emitting room:", data.roomNumber)
+                        socket.emit("join-room", data.roomNumber);
                         //send welcome message
                         let message = {
                             email: userData.email,
                             message: " has joined the chat.",
-                            room: tableData.roomNumber
+                            room: data.roomNumber
                         }
                         displayChat(message);
                         socket.emit("chat-message", message)
