@@ -3,7 +3,7 @@ import "./style.css"
 import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
-import { hashSync } from "bcryptjs";
+import RPSTable from "../RPSTable";
 
 function GamingTable() {
     const [formDisplay, setFormDisplay] = useState(true);
@@ -98,7 +98,7 @@ function GamingTable() {
             {displayBlackjackGame
             && <BlackjackTable />}
             {displayRpsGame
-            && <p>rps comp would go here</p>}
+            && <RPSTable />}
         </Container>
 
 
