@@ -7,8 +7,6 @@ import Casino from "./pages/Casino";
 import NoMatch from "./pages/NoMatch";
 import Members from "./pages/Members";
 import "./App.css";
-
-
 import Nav from "./components/Nav/Navbar";
 
 
@@ -20,7 +18,7 @@ function App() {
     <Router>
       <div>
         <Nav />
-        {/* <Home /> */}
+
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />
@@ -34,7 +32,7 @@ function App() {
           <Route path={"/casino"}>
             <Casino />
           </Route>
-          <Route path ="/member" component = {Members} />
+          <Route path ="/members" component = {Members} />
           <Route>
             <NoMatch />
           </Route>

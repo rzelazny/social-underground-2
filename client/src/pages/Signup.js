@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import $ from 'jquery';
+import { Container } from "reactstrap";
 
 function Signup() {
     var script = document.createElement('script');
@@ -62,32 +63,33 @@ function Signup() {
     }
 
     return (
-        <div className="container box">
-            <div className="row">
-                <div className="col-md-6 col-md-offset-3">
-                    <h2>Sign Up Form</h2>
-                    <form className="signup" onSubmit={handleFormSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control" id="email-input" placeholder="Email" 
-                            onChange={handleEmailChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input type="password" className="form-control" id="password-input" placeholder="Password"
-                            onChange={handlePassChange}  />
-                        </div>
-                        <div style={{display: "none"}} id="alert" className="alert alert-danger" role="alert">
-                            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span className="sr-only">Error:</span> <span className="msg"></span>
-                        </div>
-                        <button type="submit" className="btn btn-default">Sign Up</button>
-                    </form>
-                    <br />
-                    <p>Or login <a href="/login">here</a></p>
+        <Container id="signinbody">
+            <div className="container box">
+                <div className="row">
+                    <div className="col-md-6 col-md-offset-3">
+                        <h2>Sign Up Form</h2>
+                        <form className="signup" onSubmit={handleFormSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Email address</label>
+                                <input type="email" className="form-control" id="email-input" placeholder="Email"
+                                    onChange={handleEmailChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <input type="password" className="form-control" id="password-input" placeholder="Password"
+                                    onChange={handlePassChange} />
+                            </div>
+                            <div style={{ display: "none" }} id="alert" className="alert alert-danger" role="alert">
+                                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span className="sr-only">Error:</span> <span className="msg"></span>
+                            </div>
+                            <button type="submit" className="btn btn-success">Sign Up</button>
+                        </form>
+                        <p>Or login <a href="/login">here</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }
 

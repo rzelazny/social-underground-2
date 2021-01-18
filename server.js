@@ -35,13 +35,11 @@ const socketIo = require('socket.io');
 
 const server = http.createServer(app);
 
-const io = socketIo(server);
+const io = socketIo(server, {cors: {origins:"social-underground-2.herokuapp.com/:* https://social-underground-2.herokuapp.com/:*"}}); //{origins:"social-underground-2.herokuapp.com/:* https://social-underground-2.herokuapp.com/:*"}
 /**
  * Server side input handler, modifies the state of the players and the
  * game based on the input it receives. Everything here runs asynchronously.
  */
-
-let interval;
 
 io.on("connection", (socket) => {
   console.log("New client connected ");
@@ -55,7 +53,7 @@ io.on("connection", (socket) => {
   //User has sent a message to the server
   socket.on("chat-message", (chatMessage) => {
     console.log("Server got chat message", chatMessage);
-    io.in(chatMessage.room).emit("update-chat");
+    socket.to(chatMessage.room).emit("update-chat", chatMessage);
   });
 
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 //import {Row, Col} from "reactstrap";
 import $ from 'jquery';
+import {Container} from "reactstrap";
 
 function Login() {
     // var script = document.createElement('script');
@@ -58,19 +59,11 @@ function Login() {
             });
     }
 
-    function logout(){
-        console.log(`logging out`)
-        $.get("/api/logout")
-            .then(function (user) {
-                // If there's an error, log the error
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
+    
 
     return (
-        <div id="loginbody">
+        <Container id="loginbody">
+        <div className="container box">
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Login Form</h2>
@@ -85,15 +78,14 @@ function Login() {
                             <input type="password" className="form-control" id="password-input" placeholder="Password"
                                 onChange={handlePassChange} />
                         </div>
-                        <button type="submit" className="btn btn-default">Login</button>
+                        <button type="submit" className="btn btn-success">Login</button>
                     </form>
-                    <br />
                     <p>Or sign up <a href="/signup">here</a></p>
                     <br />
-                    <button className="btn btn-default" onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>
+        </Container>
     );
 }
 
