@@ -36,7 +36,7 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 //logout functionality
 // Endpoint: /api/logout
 router.get("/logout", function (req, res) {
-	console.log("Logging out ", req);
+	console.log("Logging out ", req.user);
 	req.logout();
 	res.redirect("/");
 });

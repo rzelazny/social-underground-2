@@ -37,6 +37,7 @@ function Casino() {
                     .then((tableData)=>{
                         console.log(tableData);
                         setRoom(tableData.roomNumber);
+                        console.log("emitting room:", tableData.roomNumber)
                         socket.emit("join-room", tableData.roomNumber);
                         //send welcome message
                         let message = {
