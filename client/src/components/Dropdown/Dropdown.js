@@ -10,13 +10,13 @@ function Dropdown() {
 
   return (
     <>
-      <ul
+      <div
         onClick={handleClick}
         className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
       >
         {DropItems.map((item, index) => {
           return (
-            <li key={index}>
+            <div key={index}>
               <Link
                 className={item.cName}
                 to={item.path}
@@ -24,10 +24,10 @@ function Dropdown() {
               >
                 {item.title}
               </Link>
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </>
   );
 }
