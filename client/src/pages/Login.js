@@ -88,8 +88,8 @@ function Login() {
                                 onChange={handlePassChange} />
                         </div>
                         <button type="submit" className="btn btn-success">Login</button>
-                        <button className="btn btn-danger" onClick={logout}>Logout</button>
                     </form>
+                    <button className="btn btn-danger" onClick={logout}>Logout</button>
                     <p>Or sign up <a href="/signup">here</a></p>
                     <br />
                 </div>

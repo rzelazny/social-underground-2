@@ -33,7 +33,7 @@ function Home() {
 
     //get the gaming tables that already exist and display them
     function getTables() {
-        $.get("api/tables", function (curTables) {
+        $.get("api/alltables", function (curTables) {
 
             for (let i = 0; i < curTables.length; i++) {
                 var columnCount = i;
