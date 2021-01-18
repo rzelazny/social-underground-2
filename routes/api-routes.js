@@ -12,6 +12,12 @@ router.post("/signup", ({ body }, res) => {
 		.then(dbUser => {
 			console.log(dbUser);
 			res.json(dbUser);
+			db.UserStats.create(dbUser._id)
+			.then(stats => {
+				console.log(stats);
+				console.log(dbUser._id);
+				db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
+			})
 		})
 		.catch(err => {
 			console.log(err);
@@ -156,41 +162,6 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
-//post a new chat message
-//Endpoint: api/chat
-router.post("/chat", function (req, res) {
-	console.log("post chat running ", req.body);
-	db.ChatLog.create({
-		user: req.user.email,
-		message: req.body.message,
-		room: req.body.room
-	})
-		.then(function (results) {
-			console.log("chat message api ran")
-			res.send(results);
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
-
-//Get existing chat messages for a table
-//Endpoint: api/chat/
-router.get("/chat/:room", function (req, res) {
-	console.log("post chat running ", req.body);
-	db.ChatLog.find({
-		room: req.params.room
-	})
-		.then(function (results) {
-			console.log("getting chat log for room", req.params.room)
-			console.log(results);
-			res.send(results);
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
-
 // Route for finding tables with open seats
 // Endpoint: /api/table/
 router.get("/table/:table", function (req, res) {
@@ -198,6 +169,21 @@ router.get("/table/:table", function (req, res) {
 	db.Table.findById(req.params.table)
 	.then(function (results) {
 		console.log("Returning data for table ", req.params.table);
+		return res.send(results);
+	})
+});
+
+// Route for adding player to table with an open seat
+// Endpoint: /api/table/
+router.post("/table/:table", function (req, res) {
+	console.log("Adding player to table ", req.params.table);
+	let tableUpdateData = { $set: {} };
+	tableUpdateData.$set[req.body.column] = req.body.data;
+	console.log("update: ",tableUpdateData);
+	db.Table.updateOne(
+		{_id: req.params.table}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
 		return res.send(results);
 	})
 });
@@ -213,5 +199,28 @@ router.get("/table/:table", function (req, res) {
 // 		})
 // });
 
+router.get("/UserStats", function (req, res) {
+	console.log(req.user);
+	db.User.findOne({
+		email: req.user.email
+	}).populate("userstats")
+	.then(function (results) {
+		console.log("get tables returning data", results);
+		return res.send(results.email);
+	})
+});
+
+router.post("/UserStats/:id", (req, res) => {
+	db.UserStats.updateOne(
+		{ _id: req.params.id }, req.body)
+		.then(gameData => {
+			console.log("Game Data: ", gameData);
+			res.json(gameData);
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(404).json(err);
+		});
+});
 
 module.exports = router;

@@ -7,12 +7,12 @@
     text-align: start;
   }
   
-  .dropdown-menu li {
+  .dropdown-menu div {
     background: #1888ff;
     cursor: pointer;
   }
   
-  .dropdown-menu li:hover {
+  .dropdown-menu div:hover {
     background: #5cabff;
   }
   

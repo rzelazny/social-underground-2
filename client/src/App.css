@@ -1,9 +1,39 @@
+body {
+  background-color: black;
+}
+
 #homebody {
   background-color: black;
   background-image: url(../src/images/moonbackground.jpg);
   background-size: cover;
+  text-align: center;
+  justify-content: center;
   min-height: 800px;
   min-width: 100%;
+}
+
+#newTableSpan {
+margin-left: 42%;
+}
+
+#enterance {
+  display: flex;
+}
+
+.game-table {
+  background-image: url(../src/images/pokerfelt.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8%;
+  border-width: 6px;
+  border-color: snow;
+  width: 350px;
+  height: 350px;
+  margin: 5px;
+}
+
+.card-text {
+  color: snow
 }
 
 #loginbody {
@@ -12,4 +42,20 @@
   background-size: cover;
   min-height: 800px;
   min-width: 100%;
+}
+
+#signinbody {
+  background-color: black;
+  background-image: url(../src/images/takeoff.jpeg);
+  background-size: cover;
+  min-height: 800px;
+  min-width: 100%;
+}
+
+.btn-danger {
+  margin: 5px;
+}
+
+ul {
+  display: flex;
 }
