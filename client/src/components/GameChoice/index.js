@@ -9,9 +9,23 @@ function GamingTable() {
     const [blackjackGame, setBlackjackGame] = useState(false);
     const [rpsGame, setRpsGame] = useState(false);
 
+    const [multi, setMulti] = useState(false);
+    const [single, setSingle] = useState(false);
+
+
     function onStartPlaying() {
         setFormDisplay(false);
         setBlackjackGame(true);
+    }
+
+    function ifMulti() {
+        setMulti(true);
+        setSingle(false);
+    }
+
+    function ifSingle() {
+        setSingle(true);
+        setMulti(false);
     }
 
 
@@ -25,13 +39,21 @@ function GamingTable() {
                     <FormGroup tag="fieldset">
                         <FormGroup check className="form-check-inline">
                             <Label check>
-                                <Input type="radio" name="radio1" />{' '}
+                                <Input 
+                                type="radio" 
+                                name="radio1"
+                                onClick={ifMulti}
+                                />{' '}
                                 Multiplayer
                             </Label>
                         </FormGroup>
                         <FormGroup check className="form-check-inline">
                             <Label check>
-                                <Input type="radio" name="radio1" />{' '}
+                                <Input 
+                                type="radio" 
+                                name="radio1" 
+                                onClick={ifSingle}
+                                />{' '}
                                 Single Player
                             </Label>
                         </FormGroup>
@@ -41,8 +63,14 @@ function GamingTable() {
                     <FormGroup>
                         <Label for="exampleSelect">Select</Label>
                         <Input type="select" name="select" id="exampleSelect">
-                            <option>Rock Paper Scissors</option>
-                            <option>Blackjack</option>
+                            {
+                                multi
+                                && <option>Rock Paper Scissors</option>
+                                }
+                            {
+                                single
+                                && <option>Blackjack</option>
+                                }
                         </Input>
                     </FormGroup>
                     <Button onClick={onStartPlaying}>Start Playing</Button>
