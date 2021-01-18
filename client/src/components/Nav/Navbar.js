@@ -20,7 +20,7 @@ function Navbar() {
 
     return (
 
-        <>
+        <div>
             <nav className='navbar'>
                 <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     SU
@@ -61,7 +61,7 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
-        </>
+        </div>
     );
 }
 

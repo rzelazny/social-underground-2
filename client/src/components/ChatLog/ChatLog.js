@@ -17,15 +17,17 @@ export function ChatContainer({ socket, email, room }) {
             message: chat,
             room: myRoom
         };
-        console.log("socket and email", socket, myEmail);
-        $.post("/api/chat", chatMessage)
-            .then((results) => {
-                console.log("post chat", results)
+        socket.emit("chat-message", chatMessage)
+        console.log("chat message emitted", chatMessage);
+        displayChat(chatMessage);
+        // $.post("/api/chat", chatMessage)
+        //     .then((results) => {
+        //         console.log("post chat", results)
 
-                //Send the message to the server
-                socket.emit("chat-message", chatMessage)
-                console.log("chat message emitted");
-            })
+        //         //Send the message to the server
+        //         socket.emit("chat-message", chatMessage)
+        //         console.log("chat message emitted");
+        //     })
     }
 
     //function updates the chat state when the user types
@@ -53,7 +55,17 @@ export function ChatWindow({ children }) {
     );
 }
 
-export function ChatItem({ children }) {
-    return <li className="list-group-item">{children}</li>;
+export function displayChat(message) {
+    console.log("displaying message: ", message)
+    let chatLine = $("<li>")
+    let chatScroll = $("#chat-log");
+
+    chatLine.text(message.email + ": " + message.message);
+    $("#chat-log").append(chatLine);
+    //scroll to the bottom
+    chatScroll.scrollTop(1000);
 }
+// export function ChatItem({ children }) {
+//     return <li className="list-group-item">{children}</li>;
+// }
 
