@@ -35,7 +35,7 @@ const socketIo = require('socket.io');
 
 const server = http.createServer(app);
 
-const io = socketIo(server, {cors: {origin: '*'}}); //{origins:"social-underground-2.herokuapp.com/:* https://social-underground-2.herokuapp.com/:*"}
+const io = socketIo(server, {cors: {origins:"social-underground-2.herokuapp.com/:* https://social-underground-2.herokuapp.com/:*"}}); //{origins:"social-underground-2.herokuapp.com/:* https://social-underground-2.herokuapp.com/:*"}
 /**
  * Server side input handler, modifies the state of the players and the
  * game based on the input it receives. Everything here runs asynchronously.
