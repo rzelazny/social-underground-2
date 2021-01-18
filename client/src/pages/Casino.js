@@ -4,7 +4,7 @@ import {socket} from "../components/Socket/Socket";
 import GamingTable from "../components/GamingTable";
 import { ChatContainer, ChatWindow, displayChat } from "../components/ChatLog/ChatLog";
 
-var curTable = document.defaultView.location.pathname.split("casino").pop();
+var curTable = document.defaultView.location.pathname.split("casino/").pop();
 
 function Casino() {
     const [curEmail, setEmail] = useState("");
