@@ -4,6 +4,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("./config/passport");
 const routes = require("./routes");
+var cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(session({ secret: "games rule", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors())
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
