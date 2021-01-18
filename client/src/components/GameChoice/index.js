@@ -3,19 +3,30 @@ import "./style.css"
 import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
+import { hashSync } from "bcryptjs";
 
 function GamingTable() {
     const [formDisplay, setFormDisplay] = useState(true);
-    const [blackjackGame, setBlackjackGame] = useState(false);
-    const [rpsGame, setRpsGame] = useState(false);
+
+    const [displayBlackjackGame, setDisplayBlackjackGame] = useState(false);
+    const [displayRpsGame, setDisplayRpsGame] = useState(false);
+
 
     const [multi, setMulti] = useState(false);
     const [single, setSingle] = useState(false);
 
 
-    function onStartPlaying() {
+    function handleSubmit(event) {
+        event.preventDefault();
         setFormDisplay(false);
-        setBlackjackGame(true);
+        if("blackjackGame") {
+            setDisplayBlackjackGame(true);
+            setDisplayRpsGame(false);
+        }
+        else if("rpsGame") {
+            setDisplayRpsGame(true);
+            setDisplayBlackjackGame(false);
+        }
     }
 
     function ifMulti() {
@@ -35,7 +46,9 @@ function GamingTable() {
             &&
             <Card id="gameChoice" className="text-center mx-auto">
                 <CardTitle tag="h3">Game Mode</CardTitle>
-                <Form>
+                <Form 
+                onSubmit={handleSubmit}
+                >
                     <FormGroup tag="fieldset">
                         <FormGroup check className="form-check-inline">
                             <Label check>
@@ -62,24 +75,30 @@ function GamingTable() {
                     <CardTitle tag="h3">Choose a game</CardTitle>
                     <FormGroup>
                         <Label for="exampleSelect">Select</Label>
-                        <Input type="select" name="select" id="exampleSelect">
+                        <Input type="select" onChange="this.form.submit" name="select" id="exampleSelect">
                             {
                                 multi
-                                && <option>Rock Paper Scissors</option>
+                                && <option
+                                value={"rpsGame"}
+                                >Rock Paper Scissors</option>
                                 }
                             {
                                 single
-                                && <option>Blackjack</option>
+                                && <option
+                                value={"blackjackGame"}
+                                >Blackjack</option>
                                 }
                         </Input>
                     </FormGroup>
-                    <Button onClick={onStartPlaying}>Start Playing</Button>
+                    <Button type="submit">Start Playing</Button>
                 </Form>
                 {/* options: hard coded blackjack for now */}
             </Card>
             }
-            {blackjackGame
+            {displayBlackjackGame
             && <BlackjackTable />}
+            {displayRpsGame
+            && <p>rps comp would go here</p>}
         </Container>
 
 
