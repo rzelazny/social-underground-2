@@ -8,27 +8,31 @@ import { hashSync } from "bcryptjs";
 function GamingTable() {
     const [formDisplay, setFormDisplay] = useState(true);
 
-    // const [displayBlackjackGame, setDisplayBlackjackGame] = useState(false);
-    // const [displayRpsGame, setDisplayRpsGame] = useState(false);
-
     const [displayGame, setDisplayGame] = useState();
-
 
     const [multi, setMulti] = useState(false);
     const [single, setSingle] = useState(false);
 
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //     setFormDisplay(false);
+    //     if(this.state.value === "blackjackGame") {
+    //         setDisplayGame("blackjack");
+    //     }
+    //     else if(this.state.vale === "rpsGame") {
+    //         setDisplayGame("rps");
+    //     }
+    // }
+
+    function blackjack() {
         setFormDisplay(false);
-        if("blackjackGame") {
-            setDisplayGame("blackjack");
-            // setDisplayRpsGame(false);
-        }
-        else if("rpsGame") {
-            setDisplayGame("rps");
-            // setDisplayBlackjackGame(false);
-        }
+        setDisplayGame("blackjack");
+    }
+
+    function rps() {
+        setFormDisplay(false);
+        setDisplayGame("rps");
     }
 
     function ifMulti() {
@@ -49,7 +53,7 @@ function GamingTable() {
             <Card id="gameChoice" className="text-center mx-auto">
                 <CardTitle tag="h3">Game Mode</CardTitle>
                 <Form 
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmit}
                 >
                     <FormGroup tag="fieldset">
                         <FormGroup check className="form-check-inline">
@@ -74,25 +78,40 @@ function GamingTable() {
                         </FormGroup>
                     </FormGroup>
                     <br />
-                    <CardTitle tag="h3">Choose a game</CardTitle>
-                    <FormGroup>
+                    {multi 
+                    &&
+                    <CardTitle tag="h3">Choose a game</CardTitle>}
+                    {single
+                    &&
+                    <CardTitle tag="h3">Choose a game</CardTitle>}
+                    {/* <CardTitle tag="h3">Choose a game</CardTitle> */}
+                    {/* <FormGroup>
                         <Label for="exampleSelect">Select</Label>
-                        <Input type="select" onChange="this.form.submit" name="select" id="exampleSelect">
+                        <Input type="select" value={this.state.value} 
+                        // onChange="this.form.submit" 
+                        name="select" id="exampleSelect">
                             {
                                 multi
                                 && <option
-                                value={"rpsGame"}
+                                value="rpsGame"
                                 >Rock Paper Scissors</option>
                                 }
                             {
                                 single
                                 && <option
-                                value={"blackjackGame"}
+                                value="blackjackGame"
                                 >Blackjack</option>
                                 }
                         </Input>
-                    </FormGroup>
-                    <Button type="submit">Start Playing</Button>
+                    </FormGroup> */}
+
+                    {multi
+                        &&
+                        <Button color="danger" onClick={blackjack}>Blackjack</Button>
+                        }
+                        {single
+                            && <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
+                            }
                 </Form>
                 {/* options: hard coded blackjack for now */}
             </Card>
