@@ -5,15 +5,10 @@ import GamingTable from "../components/GamingTable";
 import { ChatContainer, ChatWindow, displayChat } from "../components/ChatLog/ChatLog";
 
 var curTable = document.defaultView.location.pathname.split("casino").pop();
-//Elements and vars for chat log
-// var chatScroll = $("#chat-log");
-// let chatLength = 0;
 
 function Casino() {
     const [curEmail, setEmail] = useState("");
     const [chatRoom, setRoom] = useState("");
-
-    //setSocket(mySocket);
 
     useEffect(() => {
         init();
@@ -51,33 +46,6 @@ function Casino() {
                 }
             })
     }
-
-    // socket.on("update-chat", data => {
-    //     console.log("update chat recieved");
-    //     getChatLogs();
-    // });
-
-    //populate chat log
-    // function getChatLogs() {
-    //     console.log("mychat room: ", chatRoom);
-    //     if(!chatRoom) return
-    //     else{
-    //         $.get("/api/chat/" + chatRoom, function (chatLog) {
-    //             console.log("get chat running", chatLog);
-    //             //chat length is used to check for new messages being posted
-    //             chatLength = chatLog.length;
-    //             $("#chat-log").empty();
-    //             for (let i = 0; i < chatLength; i++) {
-    //                 var chatLine = $("<li>")
-    //                 //chatLine.attr("list-style", "none");
-    //                 chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
-    //                 $("#chat-log").append(chatLine);
-    //             };
-    //             //scroll to the bottom
-    //             chatScroll.scrollTop(1000);
-    //         });
-    //     }
-    // }
 
     return (
         <div>
