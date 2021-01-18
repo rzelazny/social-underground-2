@@ -162,41 +162,6 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
-//post a new chat message
-//Endpoint: api/chat
-router.post("/chat", function (req, res) {
-	console.log("post chat running ", req.body);
-	db.ChatLog.create({
-		user: req.user.email,
-		message: req.body.message,
-		room: req.body.room
-	})
-		.then(function (results) {
-			console.log("chat message api ran")
-			res.send(results);
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
-
-//Get existing chat messages for a table
-//Endpoint: api/chat/
-router.get("/chat/:room", function (req, res) {
-	console.log("post chat running ", req.body);
-	db.ChatLog.find({
-		room: req.params.room
-	})
-		.then(function (results) {
-			console.log("getting chat log for room", req.params.room)
-			console.log(results);
-			res.send(results);
-		})
-		.catch(function (err) {
-			res.status(401).json(err);
-		});
-});
-
 // Route for finding tables with open seats
 // Endpoint: /api/table/
 router.get("/table/:table", function (req, res) {
@@ -204,6 +169,21 @@ router.get("/table/:table", function (req, res) {
 	db.Table.findById(req.params.table)
 	.then(function (results) {
 		console.log("Returning data for table ", req.params.table);
+		return res.send(results);
+	})
+});
+
+// Route for adding player to table with an open seat
+// Endpoint: /api/table/
+router.post("/table/:table", function (req, res) {
+	console.log("Adding player to table ", req.params.table);
+	let tableUpdateData = { $set: {} };
+	tableUpdateData.$set[req.body.column] = req.body.data;
+	console.log("update: ",tableUpdateData);
+	db.Table.updateOne(
+		{_id: req.params.table}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
 		return res.send(results);
 	})
 });

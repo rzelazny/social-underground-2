@@ -21,7 +21,7 @@ function Home() {
             })
     }
 
-    //     init();
+    init();
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables() {
@@ -51,7 +51,7 @@ function Home() {
                 var joinBtn = $('<button/>', {
                     text: "Join Table",
                     id: "btnJoin",
-                    table: curTables[i].id,
+                    table: curTables[i]._id,
                     click: joinTable
                 })
                 //append stats to the card
@@ -70,19 +70,19 @@ function Home() {
     //function lets user join an existing table
     function joinTable() {
         let tableId = $(this).attr("table")
-        let newMessage = {};
         let openSeat = ""
-        $.get("/api/table" + tableId).then(function (tableData) {
+        $.get("/api/table/" + tableId).then(function (tableData) {
+            console.log("table data", tableData)
             //make sure there's room at the table
-            if (tableData[0].user1 === "Open Seat") {
+            if (tableData.user1 === "Open Seat") {
                 openSeat = "user1";
-            } else if (tableData[0].user2 === "Open Seat") {
+            } else if (tableData.user2 === "Open Seat") {
                 openSeat = "user2";
-            } else if (tableData[0].user3 === "Open Seat") {
+            } else if (tableData.user3 === "Open Seat") {
                 openSeat = "user3";
-            } else if (tableData[0].user4 === "Open Seat") {
+            } else if (tableData.user4 === "Open Seat") {
                 openSeat = "user4";
-            } else if (tableData[0].user5 === "Open Seat") {
+            } else if (tableData.user5 === "Open Seat") {
                 openSeat = "user5";
             } else {
                 //if the table is full refresh the page, it shouldn't show up as available anymore
@@ -95,17 +95,8 @@ function Home() {
                     data: userData.email
                 }
                 //update the table with the new user
-                $.post("/api/table" + tableId, tableUpdate).then(function () {
-                    //post message that player has joined the table
-                    newMessage = {
-                        message: " has entered chat.",
-                        table: tableId
-                    }
-                    //post the joining chat message
-                    $.post("/api/chat/", newMessage, function () {
-                        //join the table
-                        window.location.assign("/casino" + tableId);
-                    });
+                $.post("/api/table/" + tableId, tableUpdate).then(function () {
+                    window.location.assign("/casino/" + tableId);
                 })
             })
         })
@@ -117,16 +108,7 @@ function Home() {
         //create a new gaming table
         $.post("/api/newtable")
             .then(function (newTable) {
-                //post the joining chat message
-                console.log("newtable: ", newTable);
-                let newMessage = {
-                    message: " has entered chat.",
-                    room: newTable.roomNumber
-                }
-                $.post("/api/chat/", newMessage, function () {
-                    //join the table
-                    window.location.assign("/casino/" + newTable._id);
-                });
+                window.location.assign("/casino/" + newTable._id);
             })
     }
 

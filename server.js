@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
   //User has sent a message to the server
   socket.on("chat-message", (chatMessage) => {
     console.log("Server got chat message", chatMessage);
-    io.in(chatMessage.room).emit("update-chat");
+    socket.to(chatMessage.room).emit("update-chat", chatMessage);
   });
 
 });
