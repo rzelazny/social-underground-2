@@ -8,8 +8,10 @@ import { hashSync } from "bcryptjs";
 function GamingTable() {
     const [formDisplay, setFormDisplay] = useState(true);
 
-    const [displayBlackjackGame, setDisplayBlackjackGame] = useState(false);
-    const [displayRpsGame, setDisplayRpsGame] = useState(false);
+    // const [displayBlackjackGame, setDisplayBlackjackGame] = useState(false);
+    // const [displayRpsGame, setDisplayRpsGame] = useState(false);
+
+    const [displayGame, setDisplayGame] = useState();
 
 
     const [multi, setMulti] = useState(false);
@@ -20,12 +22,12 @@ function GamingTable() {
         event.preventDefault();
         setFormDisplay(false);
         if("blackjackGame") {
-            setDisplayBlackjackGame(true);
-            setDisplayRpsGame(false);
+            setDisplayGame("blackjack");
+            // setDisplayRpsGame(false);
         }
         else if("rpsGame") {
-            setDisplayRpsGame(true);
-            setDisplayBlackjackGame(false);
+            setDisplayGame("rps");
+            // setDisplayBlackjackGame(false);
         }
     }
 
@@ -95,9 +97,9 @@ function GamingTable() {
                 {/* options: hard coded blackjack for now */}
             </Card>
             }
-            {displayBlackjackGame
+            {displayGame === "blackjack"
             && <BlackjackTable />}
-            {displayRpsGame
+            {displayGame === "rps"
             && <p>rps comp would go here</p>}
         </Container>
 
