@@ -2,19 +2,19 @@
     text-align: center;
 } */
 /*Buttons*/
-.fancyBtn ul {
+  ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
 }
-.fancyBtn ul li {
+  ul li {
     list-style: none;
     position: relative;
     height: 60px;
     width: 60px;
     margin: 0px 20px;
 }
-.fancyBtn ul li:before {
+  ul li:before {
     position: absolute;
     content: "";
     left: -5px;
@@ -25,7 +25,7 @@
     transform: skewX(-41deg);
     transform-origin: top;
 }
-.fancyBtn ul li:after {
+  ul li:after {
     content: "";
     position: absolute;
     top: 5px;
@@ -36,7 +36,7 @@
     transform-origin: right;
     transform: skewY(-49deg);
 }
-.fancyBtn ul li span {
+  ul li span {
     position: absolute;
     top: 0;
     left: 0;
@@ -50,46 +50,46 @@
     font-size: 22px !important;
     transition: 1.5s ease-out;
 }
-.fancyBtn ul li:hover span {
+  ul li:hover span {
     z-index: 1000;
     transition: 0.3s;
     color: #fff;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
 }
-.fancyBtn ul li:hover span:nth-child(5) {
+  ul li:hover span:nth-child(5) {
     transform: translate(40px, -40px);
     opacity: 1;
 }
-.fancyBtn ul li:hover span:nth-child(4) {
+  ul li:hover span:nth-child(4) {
     transform: translate(30px, -30px);
     opacity: 0.8;
 }
-.fancyBtn ul li:hover span:nth-child(3) {
+  ul li:hover span:nth-child(3) {
     transform: translate(20px, -20px);
     opacity: 0.6;
 }
-.fancyBtn ul li:hover span:nth-child(2) {
+  ul li:hover span:nth-child(2) {
     transform: translate(10px, -10px);
     opacity: 0.4;
 }
-.fancyBtn ul li:hover span:nth-child(1) {
+  ul li:hover span:nth-child(1) {
     transform: translate(0px, 0px);
     opacity: 0.2;
 }
-.fancyBtn ul li:nth-child(1):hover span {
+  ul li:nth-child(1):hover span {
     background: #d60000 !important;
 }
-.fancyBtn ul li:nth-child(2):hover span {
+  ul li:nth-child(2):hover span {
     background: #062ddf !important;
 }
-.fancyBtn ul li:nth-child(3):hover span {
+  ul li:nth-child(3):hover span {
     background: #009919 !important;
 }
-.fancyBtn ul li:nth-child(4):hover span {
+  ul li:nth-child(4):hover span {
     background: #8200b6 !important;
 } 
 
-.fancyBtn {
+  {
     margin: 50px;
     text-align: center;
 }

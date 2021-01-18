@@ -29,13 +29,13 @@ function Navbar() {
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
-                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                    <li className='nav-item'>
+                <div className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <div className='nav-item'>
                         <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                             Home
                         </Link>
-                    </li>
-                    <li
+                    </div>
+                    <div
                         className='nav-item'
                         onMouseEnter={onMouseEnter}
                         onMouseLeave={onMouseLeave}
@@ -48,8 +48,8 @@ function Navbar() {
                             Casino <i className='fas fa-caret-down' />
                         </Link>
                         {dropdown && <Dropdown />}
-                    </li>
-                    <li className='nav-item'>
+                    </div>
+                    <div className='nav-item'>
                         <Link
                             to='/members'
                             className='nav-links'
@@ -57,8 +57,8 @@ function Navbar() {
                         >
                             Member
                         </Link>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </nav>
         </>
     );
