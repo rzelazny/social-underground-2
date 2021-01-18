@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import $ from 'jquery';
 import Dropdown from '../Dropdown/Dropdown';
 
 function Navbar() {
@@ -18,13 +19,24 @@ function Navbar() {
     //         setDropdown(false);     
     // };
 
+    function logout(){
+        console.log(`logging out`)
+        $.get("/api/logout")
+            .then(function (user) {
+                // If there's an error, log the error
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
+
     return (
 
         <div>
             <nav className='navbar'>
                 <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     SU
-                <i class='fab fa-firstdraft' />
+                <i className='fab fa-firstdraft' />
                 </Link>
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -57,6 +69,15 @@ function Navbar() {
                             onClick={closeMobileMenu}
                         >
                             Member
+                        </Link>
+                    </div>
+                    <div className='nav-item'>
+                        <Link
+                            to='/'
+                            className='nav-links'
+                            onClick={logout}
+                        >
+                            Logout
                         </Link>
                     </div>
                 </div>
