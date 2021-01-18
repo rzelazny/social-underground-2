@@ -1,32 +1,74 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MemberItem from "./MemberItem";
 import "./MemberCard.css";
 import $ from "jquery";
 
 function MemberCard() {
-    function stats () {
-        $.get("/api/UserStats").then((results)=> console.log(results))
-    } 
+
+    function stats() {
+        $.get("/api/UserStats").then((results) => console.log(results))
+    }
     stats();
+
+    function MyComponent() {
+        const [error, setError] = useState(null);
+        const [isLoaded, setIsLoaded] = useState(false);
+        const [items, setItems] = useState([]);
+
+        // Note: the empty deps array [] means
+        // this useEffect will run once
+        // similar to componentDidMount()
+        useEffect(() => {
+            fetch("http://localhost:3000/UserStats")
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        setIsLoaded(true);
+                        setItems(result);
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        setIsLoaded(true);
+                        setError(error);
+                    }
+                )
+        }, [])
+
+        if (error) {
+            return <div>Error: {error.message}</div>;
+        } else if (!isLoaded) {
+            return <div>Loading...</div>;
+        } else {
+            return (
+                <ul>
+                    {items.map(item => (
+                        <li key={item.id}>
+                            {item.name} 
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+    }
+    MyComponent();
 
     return (
         <div className="cards">
             <h1>Your Stats</h1>
             <div className="cards__container">
                 <div className="cards__wrapper">
-                    <ul className="cards__items">
+                    <div className="cards__items">
                         <MemberItem
                             src="images/avatar.webp"
-                            text="
-                            Name: exmaple name
-                            Wins/ losess: 
+                            text=" 
+                            Name: {item.name}"
                             
-                            
-                            "
                             label="Stats"
-                            path="/portfolio"
+                            path="/member"
                         />
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -210,5 +210,17 @@ router.get("/UserStats", function (req, res) {
 	})
 });
 
+router.post("/UserStats/:id", (req, res) => {
+	db.UserStats.updateOne(
+		{ _id: req.params.id }, req.body)
+		.then(gameData => {
+			console.log("Game Data: ", gameData);
+			res.json(gameData);
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(404).json(err);
+		});
+});
 
 module.exports = router;
