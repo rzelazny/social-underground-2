@@ -2,31 +2,29 @@
     height: 80%;
     overflow: hidden; 
     overflow-y: scroll;
-
-    margin: 10px;
-    padding:10px;
+    margin-left: 10.5px;
+    padding: 10px;
     text-align: left;
     height: 200px;
-    width: 90%;
-    background-image: url(../../images/dicebackground.jpg);
-    background-size: contain;
+    width: 50%;
+    background-image: url(../../images/spacedice.jpg);
+    background-size: cover;
     color: white;
     border-color: black;
     border-style: solid;
     border-width: 2px;
-    border-radius: 0px 0px 20px 20px;
 }
 
 #chat-log li{
     font-size: 18px;
     font-weight: bold;
     list-style-type: none;
-    -webkit-text-stroke-width: .5px;
-    -webkit-text-stroke-color: red;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(153, 0, 255);
 }
 
 #chat-input{
-    width: 90%;
+    width: 47%;
     background-color: rgb(109, 104, 104);
     color: white;
 }
