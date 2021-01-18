@@ -12,6 +12,27 @@ body {
   min-width: 100%;
 }
 
+#enterance {
+  display: flex;
+}
+
+.game-table {
+  background-image: url(../src/images/pokerfelt.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8%;
+  border-width: 6px;
+  border-color: snow;
+  width: 350px;
+  height: 350px;
+  margin-bottom: 5px;
+  padding: 0px, 10px;
+}
+
+.card-text {
+  color: snow
+}
+
 #loginbody {
   background-color: black;
   background-image: url(../src/images/takeoff.jpeg);

@@ -117,9 +117,9 @@ function Home() {
             <Container id="homebody">
                 <NeonSign />
                 <div className="contianer" id="enterance">
-                    <div className="col=md=4" id="current-tables0"></div>
-                    <div className="col=md=4" id="current-tables1"></div>
-                    <div className="col=md=4" id="current-tables2"></div>
+                    <div className="col=md-4" id="current-tables0"></div>
+                    <div className="col=md-4" id="current-tables1"></div>
+                    <div className="col=md-4" id="current-tables2"></div>
                 </div>
                 <NewBtn onClick={createTable} />
             </Container>
