@@ -32,7 +32,7 @@ function App() {
           <Route path={"/casino"}>
             <Casino />
           </Route>
-          <Route path ="/member" component = {Members} />
+          <Route path ="/members" component = {Members} />
           <Route>
             <NoMatch />
           </Route>
