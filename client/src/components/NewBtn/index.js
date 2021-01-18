@@ -5,7 +5,7 @@ function NewBtn(props) {
     return (
         <div id="newTableSpan" onClick={props.onClick}>
             <ul className="homeList">
-                <li className="buttonList fancyBtn">
+                <li className="buttonList">
                     <a href="#">
                         <span></span>
                         <span></span>

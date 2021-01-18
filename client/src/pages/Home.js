@@ -33,7 +33,7 @@ function Home() {
 
     //get the gaming tables that already exist and display them
     function getTables() {
-        $.get("api/tables", function (curTables) {
+        $.get("api/alltables", function (curTables) {
 
             for (let i = 0; i < curTables.length; i++) {
                 var columnCount = i;
@@ -42,7 +42,7 @@ function Home() {
                 cardBody.attr("id", "resultCardBody");
 
                 //create stats to append
-                var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
+                var id = $("<h4>").addClass("card-text").text(curTables[i].game + " Table");
                 var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
                 var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
                 var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);

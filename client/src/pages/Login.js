@@ -59,16 +59,7 @@ function Login() {
             });
     }
 
-    function logout(){
-        console.log(`logging out`)
-        $.get("/api/logout")
-            .then(function (user) {
-                // If there's an error, log the error
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
+    
 
     return (
         <Container id="loginbody">
@@ -88,7 +79,6 @@ function Login() {
                                 onChange={handlePassChange} />
                         </div>
                         <button type="submit" className="btn btn-success">Login</button>
-                        <button className="btn btn-danger" onClick={logout}>Logout</button>
                     </form>
                     <p>Or sign up <a href="/signup">here</a></p>
                     <br />
