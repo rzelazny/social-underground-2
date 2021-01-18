@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import $ from 'jquery';
-import {Container} from "reactstrap";
+import { Container } from "reactstrap";
 
 function Signup() {
     var script = document.createElement('script');
@@ -83,9 +83,8 @@ function Signup() {
                                 <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                 <span className="sr-only">Error:</span> <span className="msg"></span>
                             </div>
-                            <button type="submit" className="btn btn-default">Sign Up</button>
+                            <button type="submit" className="btn btn-success">Sign Up</button>
                         </form>
-                        <br />
                         <p>Or login <a href="/login">here</a></p>
                     </div>
                 </div>

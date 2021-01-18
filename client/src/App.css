@@ -12,6 +12,10 @@ body {
   min-width: 100%;
 }
 
+#newTableSpan {
+margin-left: 42%;
+}
+
 #enterance {
   display: flex;
 }
@@ -25,8 +29,7 @@ body {
   border-color: snow;
   width: 350px;
   height: 350px;
-  margin-bottom: 5px;
-  padding: 0px, 10px;
+  margin: 5px;
 }
 
 .card-text {
@@ -47,4 +50,8 @@ body {
   background-size: cover;
   min-height: 800px;
   min-width: 100%;
+}
+
+.btn-danger {
+  margin: 5px;
 }

@@ -87,12 +87,11 @@ function Login() {
                             <input type="password" className="form-control" id="password-input" placeholder="Password"
                                 onChange={handlePassChange} />
                         </div>
-                        <button type="submit" className="btn btn-default">Login</button>
+                        <button type="submit" className="btn btn-success">Login</button>
+                        <button className="btn btn-danger" onClick={logout}>Logout</button>
                     </form>
-                    <br />
                     <p>Or sign up <a href="/signup">here</a></p>
                     <br />
-                    <button className="btn btn-default" onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>
