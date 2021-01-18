@@ -5,18 +5,18 @@ import Dropdown from '../Dropdown/Dropdown';
 
 function Navbar() {
     const [click, setClick] = useState(false);
-    const [dropdown, setDropdown] = useState(false);
+    // const [dropdown, setDropdown] = useState(false);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
-    const onMouseEnter = () => {
-            setDropdown(true);
-    };
+    // const onMouseEnter = () => {
+    //         setDropdown(true);
+    // };
 
-    const onMouseLeave = () => {
-            setDropdown(false);     
-    };
+    // const onMouseLeave = () => {
+    //         setDropdown(false);     
+    // };
 
     return (
 
@@ -37,17 +37,18 @@ function Navbar() {
                     </div>
                     <div
                         className='nav-item'
-                        onMouseEnter={onMouseEnter}
-                        onMouseLeave={onMouseLeave}
+                        // onMouseEnter={onMouseEnter}
+                        // onMouseLeave={onMouseLeave}
                     >
                         <Link
                             to='/Casino'
                             className='nav-links'
                             onClick={closeMobileMenu}
                         >
-                            Casino <i className='fas fa-caret-down' />
+                            Casino 
+                            {/* <i className='fas fa-caret-down' /> */}
                         </Link>
-                        {dropdown && <Dropdown />}
+                        {/* {dropdown && <Dropdown />} */}
                     </div>
                     <div className='nav-item'>
                         <Link
