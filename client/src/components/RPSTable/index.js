@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css"
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RPSTable() {
@@ -17,7 +17,7 @@ function RPSTable() {
         <Container id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
-            <div class="row">
+            <Row>
                 <div class="col-lg-4">
                     <video id="webcam" autoplay playsinline width="320" height="240"></video>
                     <canvas id="snapShot" class="d-none"></canvas>
@@ -34,14 +34,14 @@ function RPSTable() {
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <img id="my-photo" style="visibility: hidden; height:240px; width:100%;" src="" />
+                    <img id="my-photo" style={{visibility: "hidden", height:"240px", width:"100%"}} src="" />
                     <div id="rpsCountdown"></div>
                 </div>
                 <div class="col-lg-4">
                     <img id="their-photo" style="display: none;" src="" />
                 </div>
-            </div>
-            <div class="row">
+            </Row>
+            <Row>
                 <div class="col-md-12">
                     <form>
                         <label for="form-group row">Who do you challenge?</label>
@@ -54,14 +54,14 @@ function RPSTable() {
                         </select>
                     </form>
                 </div>
-            </div>
-            <div class="row">
+            </Row>
+            <Row>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <button id="camBtnRPS" class="btn btn-dark mb-2">Play Rock Paper Scissors</button>
                 </div>
                 <div class="col-md-4"></div>
-            </div>
+            </Row>
         </Container>
     );
 }
