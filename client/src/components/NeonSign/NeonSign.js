@@ -5,7 +5,7 @@ function NeonSign() {
     return (
     <div className="wrapper">
         <div className="neon-wrapper">
-            <div className="neon-text">Welcome to the <br />Social Underground</div>
+            <div className="neon-text" text="center">Welcome to the <br />Social Underground</div>
         </div>
     </div>
     )
