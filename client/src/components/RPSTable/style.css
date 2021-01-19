@@ -9,3 +9,12 @@
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
 }
+#my-photo{
+    visibility: hidden;
+    height: 240px;
+    width: 100%
+}
+
+#their-photo{
+    display: none;
+}
