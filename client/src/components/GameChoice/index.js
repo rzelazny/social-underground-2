@@ -54,7 +54,7 @@ function GamingTable() {
             {formDisplay
                 &&
                 <Card className="text-center mx-auto gameChoice">
-                    <CardTitle tag="h3">Game Mode</CardTitle>
+                    <CardTitle tag="h2">Game Mode</CardTitle>
                     <Form
                     // onSubmit={handleSubmit}
                     >
@@ -84,7 +84,7 @@ function GamingTable() {
 
                         {single
                             &&
-                            <CardTitle tag="h3">Choose a game</CardTitle>
+                            <CardTitle tag="h4">Choose a game:</CardTitle>
                         }
                         {single
                             && <Button color="danger" onClick={blackjack}>Blackjack</Button>
@@ -92,7 +92,7 @@ function GamingTable() {
 
                         {multi
                             &&
-                            <CardTitle tag="h3">How many players?</CardTitle>
+                            <CardTitle tag="h4">How many players?</CardTitle>
                         }
                         {multi
                             &&
@@ -123,7 +123,7 @@ function GamingTable() {
                         }
                         {players
                             &&
-                            <CardTitle tag="h3">Choose a game</CardTitle>
+                            <CardTitle tag="h4">Choose a game:</CardTitle>
                         }
 
                         {players === "two"
