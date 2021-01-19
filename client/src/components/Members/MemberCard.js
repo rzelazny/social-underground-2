@@ -61,7 +61,6 @@ function MemberCard() {
                 <div className="cards__wrapper">
                     <div className="cards__items">
                         <MemberItem
-                            src="images/avatar.webp"
                             text=" 
                             Name: {item.name}"
                             
