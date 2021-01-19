@@ -19,7 +19,7 @@ function MemberCard() {
         // this useEffect will run once
         // similar to componentDidMount()
         useEffect(() => {
-            fetch("http://localhost:3000/UserStats")
+            fetch("api/UserStats")
                 .then(res => res.json())
                 .then(
                     (result) => {
