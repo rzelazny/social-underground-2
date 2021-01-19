@@ -105,8 +105,8 @@ function GamingTable() {
                                                 name="radio1"
                                                 onClick={twoPlayers}
                                             />{' '}
-                                2
-                            </Label>
+                                            2
+                                        </Label>
                                     </FormGroup>
                                     <FormGroup check className="form-check-inline">
                                         <Label check>
@@ -115,8 +115,8 @@ function GamingTable() {
                                                 name="radio1"
                                                 onClick={threePlusPlayers}
                                             />{' '}
-                                3+
-                            </Label>
+                                            3+
+                                        </Label>
                                     </FormGroup>
                                 </FormGroup>
                             </Form>
