@@ -4,26 +4,35 @@ import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, Form
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
+import WerewolfTable from "../WerewolfTable";
 
 function GamingTable() {
-    const [formDisplay, setFormDisplay] = useState(true);
 
+    const [formDisplay, setFormDisplay] = useState(true);
     const [displayGame, setDisplayGame] = useState();
 
     const [multi, setMulti] = useState(false);
     const [single, setSingle] = useState(false);
 
+    const [players, setPlayers] = useState();
 
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-    //     setFormDisplay(false);
-    //     if(this.state.value === "blackjackGame") {
-    //         setDisplayGame("blackjack");
-    //     }
-    //     else if(this.state.vale === "rpsGame") {
-    //         setDisplayGame("rps");
-    //     }
-    // }
+    function ifSingle() {
+        setSingle(true);
+        setMulti(false);
+    }
+
+    function ifMulti() {
+        setMulti(true);
+        setSingle(false);
+    }
+
+    function twoPlayers() {
+        setPlayers("two")
+    }
+
+    function threePlusPlayers() {
+        setPlayers("threePlus")
+    }
 
     function blackjack() {
         setFormDisplay(false);
@@ -35,99 +44,105 @@ function GamingTable() {
         setDisplayGame("rps");
     }
 
-    function ifMulti() {
-        setMulti(true);
-        setSingle(false);
+    function werewolf() {
+        setFormDisplay(false);
+        setDisplayGame("werewolf");
     }
-
-    function ifSingle() {
-        setSingle(true);
-        setMulti(false);
-    }
-
 
     return (
         <Container className="text-center">
             {formDisplay
-            &&
-            <Card id="gameChoice" className="text-center mx-auto">
-                <CardTitle tag="h3">Game Mode</CardTitle>
-                <Form 
-                // onSubmit={handleSubmit}
-                >
-                    <FormGroup tag="fieldset">
-                        <FormGroup check className="form-check-inline">
-                            <Label check>
-                                <Input 
-                                type="radio" 
-                                name="radio1"
-                                onClick={ifMulti}
-                                />{' '}
+                &&
+                <Card className="text-center mx-auto gameChoice">
+                    <CardTitle tag="h2">Game Mode</CardTitle>
+                    <Form
+                    // onSubmit={handleSubmit}
+                    >
+                        <FormGroup tag="fieldset">
+                            <FormGroup check className="form-check-inline">
+                                <Label check>
+                                    <Input
+                                        type="radio"
+                                        name="radio1"
+                                        onClick={ifMulti}
+                                    />{' '}
                                 Multiplayer
                             </Label>
-                        </FormGroup>
-                        <FormGroup check className="form-check-inline">
-                            <Label check>
-                                <Input 
-                                type="radio" 
-                                name="radio1" 
-                                onClick={ifSingle}
-                                />{' '}
+                            </FormGroup>
+                            <FormGroup check className="form-check-inline">
+                                <Label check>
+                                    <Input
+                                        type="radio"
+                                        name="radio1"
+                                        onClick={ifSingle}
+                                    />{' '}
                                 Single Player
                             </Label>
+                            </FormGroup>
                         </FormGroup>
-                    </FormGroup>
-                    <br />
-                    {multi 
-                    &&
-                    <CardTitle tag="h3">Choose a game</CardTitle>}
-                    {single
-                    &&
-                    <CardTitle tag="h3">Choose a game</CardTitle>}
-                    {/* <CardTitle tag="h3">Choose a game</CardTitle> */}
-                    {/* <FormGroup>
-                        <Label for="exampleSelect">Select</Label>
-                        <Input type="select" value={this.state.value} 
-                        // onChange="this.form.submit" 
-                        name="select" id="exampleSelect">
-                            {
-                                multi
-                                && <option
-                                value="rpsGame"
-                                >Rock Paper Scissors</option>
-                                }
-                            {
-                                single
-                                && <option
-                                value="blackjackGame"
-                                >Blackjack</option>
-                                }
-                        </Input>
-                    </FormGroup> */}
+                        <br />
 
-                    {multi
-                        &&
-                        <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
+                        {single
+                            &&
+                            <CardTitle tag="h4">Choose a game:</CardTitle>
                         }
                         {single
                             && <Button color="danger" onClick={blackjack}>Blackjack</Button>
-                            }
-                </Form>
-                {/* options: hard coded blackjack for now */}
-            </Card>
+                        }
+
+                        {multi
+                            &&
+                            <CardTitle tag="h4">How many players?</CardTitle>
+                        }
+                        {multi
+                            &&
+                            <Form>
+                                <FormGroup tag="fieldset">
+                                    <FormGroup check className="form-check-inline">
+                                        <Label check>
+                                            <Input
+                                                type="radio"
+                                                name="radio1"
+                                                onClick={twoPlayers}
+                                            />{' '}
+                                            2
+                                        </Label>
+                                    </FormGroup>
+                                    <FormGroup check className="form-check-inline">
+                                        <Label check>
+                                            <Input
+                                                type="radio"
+                                                name="radio1"
+                                                onClick={threePlusPlayers}
+                                            />{' '}
+                                            3+
+                                        </Label>
+                                    </FormGroup>
+                                </FormGroup>
+                            </Form>
+                        }
+                        {players
+                            &&
+                            <CardTitle tag="h4">Choose a game:</CardTitle>
+                        }
+
+                        {players === "two"
+                            &&
+                            <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
+                        }
+                        {players === "threePlus"
+                            && <Button color="danger" onClick={werewolf}>Beast</Button>
+                        }
+                    </Form>
+                </Card>
             }
             {displayGame === "blackjack"
-            && <BlackjackTable />}
-
+                && <BlackjackTable />}
             {displayGame === "rps"
-            && <RPSTable />}
-
+                && <RPSTable />}
+            {displayGame === "werewolf"
+                && <WerewolfTable />}
         </Container>
-
-
-
-
-
     );
 }
 
