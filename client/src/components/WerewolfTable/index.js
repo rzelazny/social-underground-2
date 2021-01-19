@@ -3,6 +3,10 @@ import "./style.css"
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import WerewolfGame3 from "../WerewolfGame3";
+import WerewolfGame4 from "../WerewolfGame4";
+import WerewolfGame5 from "../WerewolfGame5";
+import WerewolfGame6 from "../WerewolfGame6";
+import WerewolfGame7 from "../WerewolfGame7";
 
 var players = 0;
 
@@ -13,7 +17,6 @@ function WerewolfTable() {
 
     function three() {
         players = 3;
-        console.log("Amount of players: ", players);
     }
 
     function four() {
@@ -40,7 +43,7 @@ function WerewolfTable() {
         console.log("clicking start btn");
         setStartGame(players);
         setDisplayDirections(false);
-        console.log(players);
+        console.log("Players: ", players);
     }
 
     return (
@@ -121,6 +124,22 @@ function WerewolfTable() {
             {startGame === 3
                 &&
                 <WerewolfGame3 />
+            }
+            {startGame === 4
+                &&
+                <WerewolfGame4 />
+            }
+            {startGame === 5
+                &&
+                <WerewolfGame5 />
+            }
+            {startGame === 6
+                &&
+                <WerewolfGame6 />
+            }
+            {startGame === 7
+                &&
+                <WerewolfGame7 />
             }
         </Container>
     )

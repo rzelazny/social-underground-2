@@ -4,7 +4,7 @@ import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, Form
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
-import WerewolfTable from "../WerewolfGame";
+import WerewolfTable from "../WerewolfTable";
 
 function GamingTable() {
 
