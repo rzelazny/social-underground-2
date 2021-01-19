@@ -4,7 +4,7 @@ import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, Form
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
-import WerewolfGame from "../WerewolfGame";
+import WerewolfTable from "../WerewolfGame";
 
 function GamingTable() {
 
@@ -131,7 +131,7 @@ function GamingTable() {
                             <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
                         }
                         {players === "threePlus"
-                            && <Button color="danger" onClick={werewolf}>Werewolf</Button>
+                            && <Button color="danger" onClick={werewolf}>Beast</Button>
                         }
                     </Form>
                 </Card>
@@ -141,7 +141,7 @@ function GamingTable() {
             {displayGame === "rps"
                 && <RPSTable />}
             {displayGame === "werewolf"
-                && <WerewolfGame />}
+                && <WerewolfTable />}
         </Container>
     );
 }

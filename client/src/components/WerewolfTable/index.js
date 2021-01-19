@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import "./style.css"
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import WerewolfGame3 from "../WerewolfGame3";
 
 var players = 0;
 
-function WerewolfGame() {
+function WerewolfTable() {
 
     const [displayDirections, setDisplayDirections] = useState(true);
-    const [startGame, setStartGame] = useState(false);
+    const [startGame, setStartGame] = useState();
 
     function three() {
         players = 3;
-        console.log(players);
+        console.log("Amount of players: ", players);
     }
 
     function four() {
@@ -37,19 +38,19 @@ function WerewolfGame() {
 
     function onStart() {
         console.log("clicking start btn");
-        setStartGame(true);
+        setStartGame(players);
         setDisplayDirections(false);
         console.log(players);
     }
 
     return (
         <Container id="werewolfTable">
-            <h2>Werewolf</h2>
+            <h2>Beast</h2>
             <br />
             {displayDirections
                 &&
                 <div id="directions">
-                    <p>some basic instructions will go here</p>
+                    <p>some basic instructions will go here - our spin on werewolf</p>
                     <Form>
                         <h4>How many players?</h4>
                         <FormGroup tag="fieldset">
@@ -117,12 +118,12 @@ function WerewolfGame() {
                     <Button color="danger" onClick={onStart}>Start</Button>
                 </div>
             }
-            {startGame
+            {startGame === 3
                 &&
-                <p>The game will display here</p>
+                <WerewolfGame3 />
             }
         </Container>
     )
 }
 
-export default WerewolfGame;
+export default WerewolfTable;
