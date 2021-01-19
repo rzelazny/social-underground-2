@@ -213,12 +213,12 @@ router.get("/UserStats", function (req, res) {
 	})
 });
 
-router.post("/UserStats/:id", (req, res) => {
-	db.UserStats.updateOne(
+router.post("UserStats/:id", (req, res) => {
+	db.userstats.updateOne(
 		{ _id: req.params.id }, req.body)
-		.then(gameData => {
-			console.log("Game Data: ", gameData);
-			res.json(gameData);
+		.then(statsData => {
+			console.log("Stats Data: ", statsData);
+			res.json(statsData);
 		})
 		.catch(err => {
 			console.log(err);
