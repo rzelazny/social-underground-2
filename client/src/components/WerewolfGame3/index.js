@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css"
-import { Container, Button, CarouselControl } from 'reactstrap';
+import { Container, Button, Card, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //hard coded players from now but pull from db//
@@ -27,15 +27,38 @@ function WerewolfGame3() {
     var player2Character = threeOptions[1];
     var player3Character = threeOptions[2];
 
+    var townsfolkInstructions = "put townsfolk instructions here";
+    var beastInstructions = "put townsfolk instructions here";
+
     return(
         <Container>
             <p>3 player game goes here</p>
-            {/* <Button>set characters</Button> */}
+            <Card id="player1">
+                <CardTitle>{player1Character}</CardTitle>
+                <CardSubtitle>{player1Name}</CardSubtitle>
+                <CardText>
+                    {
+                    player1Character === "townsfolk"
+                    &&
+                    townsfolkInstructions
+                    }
+                    {
+                    player1Character === "beast"
+                    &&
+                    beastInstructions
+                    }
+                </CardText>
+                <Button>Vote to kill {player2Name} </Button>
+                <Button>Vote to kill {player3Name} </Button>
+            </Card>
+
             {/* // 3 cards (one for each player -- will only display to that player)
             // username
             // character assigned
             // instructions -- players can chat 
             // vote to kill buttons */}
+            <Card id="player2"></Card>
+            <Card id="player3"></Card>
         </Container>
     )
 }
