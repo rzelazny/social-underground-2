@@ -2,3 +2,14 @@
     margin: 10px;
     padding: 10px;
 }
+#werewolfTable{
+    background-color: black;
+    margin: 10px;
+    padding:10px;
+    text-align: left;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px 20px 0px 0px;
+}
