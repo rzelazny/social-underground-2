@@ -1,5 +1,6 @@
 import Camera from "react-webcam";
 import React, { useState, useEffect } from "react";
+import "./style.css";
 
 export function Webcam() {
     const webcamRef = React.useRef(null);
@@ -11,7 +12,7 @@ export function Webcam() {
             mirrored={true}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            style={{ height: "360px", width: "360px" }}
+            style={{ height: "360px", width: "360px", display: "block" }}
         />
     </div>)
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import {Webcam} from "../Webcam";
+import { Webcam } from "../Webcam";
 
 import "./style.css"
 
@@ -8,11 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RPSTable() {
 
+    const [camState, setCamState] = useState(false);
+
     // //Turn on the camera
-    // function webcamOn(event) {
-    //     //prompt user to start their camera
-    //     webcam.start();
-    // }
+    function enableWebcam(event) {
+        //prompt user to start their camera
+        setCamState(!camState);
+    }
 
     // //Turn off the camera
     // function webcamOff(event) {
@@ -72,14 +74,21 @@ function RPSTable() {
         <div id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
+            {camState ? (
+                <Webcam  />
+            ) : (
+                    <button type="button" onClick={enableWebcam}>
+                        Enable webcam
+                    </button>
+                )}
             <Row>
                 <Col lg="4">
                     <Row>
                         <Col lg="4">
-                            <button id="camBtnOn" className="btn btn-dark mb-1" >Cam On</button>
+                            <button id="camBtnOn" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam On</button>
                         </Col>
                         <Col lg="4">
-                            <button id="camBtnOff" className="btn btn-dark mb-1" >Cam Off</button>
+                            <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam Off</button>
                         </Col>
                         <Col lg="4">
                             <button id="camSnap" className="btn btn-dark mb-1">Snapshot</button>
