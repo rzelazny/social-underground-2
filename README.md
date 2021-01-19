@@ -22,7 +22,7 @@ Welcome to the Social Underground, a place where you can meet with friends and p
 
 <img src="client/public/images/jointable.png">
 
-3) You can choose multiplayer for rock, paper, & scissor or single player for blackjack. Also if you notice on the bottom you have a chat box where you can talk to your friends.
+3) You can choose multiplayer for rock, paper, or scissor or single player for blackjack. Also if you notice on the bottom you have a chat box where you can talk to your friends.
 
 <img src="client/public/images/startgame.png">
 
