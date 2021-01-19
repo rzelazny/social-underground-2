@@ -74,13 +74,7 @@ function RPSTable() {
         <div id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
-            {camState ? (
-                <Webcam  />
-            ) : (
-                    <button type="button" onClick={enableWebcam}>
-                        Enable webcam
-                    </button>
-                )}
+            {camState && <Webcam  />}
             <Row>
                 <Col lg="4">
                     <Row>
