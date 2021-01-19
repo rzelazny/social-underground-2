@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Container, Row } from 'reactstrap';
+import Webcam from "webcam-easy";
 import $ from 'jquery';
 import "./style.css"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function RPSTable() {
+function RPSTable(curTable, myPhoto, theirPhoto, oppEmail) {
+
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState(false);
 
-   //webcam stuff, user is user facing camera mode, not userID
+    //webcam stuff, user is user facing camera mode, not userID
     const webcamElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('snapShot');
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
@@ -46,30 +48,30 @@ function RPSTable() {
     }
 
     //Play Rock Paper Scissors
-    $("#camBtnRPS").on("click", function(event) {
+    $("#camBtnRPS").on("click", function (event) {
         let timer = 4
         oppEmail = $("#select-RPS-opponent").val();
 
         //set the countdown
-        let rpsTimer = setInterval(function() {
+        let rpsTimer = setInterval(function () {
             timer--
-            switch(timer){
+            switch (timer) {
                 case 3:
                     $("#rpsCountdown").text("Rock");
-                break;
+                    break;
                 case 2:
                     $("#rpsCountdown").text("Paper");
-                break;
+                    break;
                 case 1:
                     $("#rpsCountdown").text("Scissors");
-                break;
+                    break;
                 case 0:
                     $("#rpsCountdown").text("Shoot!");
-                break;
+                    break;
             }
-            
+
             console.log(timer);
-            if(timer === 0){ //when the timer runs out...
+            if (timer === 0) { //when the timer runs out...
                 clearInterval(rpsTimer);
                 //take the picture
                 let sendPic = {
@@ -79,13 +81,13 @@ function RPSTable() {
                 //and post it to the db
                 console.log("Sending photo");
                 myPhoto.src = sendPic.photo;
-                myPhoto.style="display: block;";
+                myPhoto.style = "display: block;";
                 $.post("/api/photo/", sendPic);
 
                 //Then get the opponent's most most recent photo
-                $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
+                $.get("/api/photo/" + oppEmail + "/" + curTable).then(function (data) {
                     //unhide the photo element and set the source to the decoded image data
-                    theirPhoto.style="display: block;"
+                    theirPhoto.style = "display: block;"
                     theirPhoto.src = "data:image/png;base64," + atob(data[0].photo);
                 })
             }

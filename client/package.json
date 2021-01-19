@@ -11,7 +11,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.3",
     "reactstrap": "^8.8.1",
-    "socket.io-client": "^3.0.5"
+    "socket.io-client": "^3.0.5",
+    "webcam-easy": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
