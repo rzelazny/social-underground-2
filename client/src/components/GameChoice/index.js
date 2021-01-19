@@ -107,10 +107,10 @@ function GamingTable() {
 
                     {multi
                         &&
-                        <Button color="danger" onClick={blackjack}>Blackjack</Button>
+                        <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
                         }
                         {single
-                            && <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
+                            && <Button color="danger" onClick={blackjack}>Blackjack</Button>
                             }
                 </Form>
                 {/* options: hard coded blackjack for now */}
