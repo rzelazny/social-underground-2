@@ -4,6 +4,7 @@ import { Container, Card, CardTitle, Button, Form, FormGroup, Label, Input, Form
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
+import WerewolfGame from "../WerewolfGame";
 
 function GamingTable() {
     const [formDisplay, setFormDisplay] = useState(true);
@@ -154,7 +155,7 @@ function GamingTable() {
             {displayGame === "rps"
             && <RPSTable />}
             {displayGame === "werewolf"
-            && <p>werewolf game will go here</p>}
+            && <WerewolfGame />}
         </Container>
     );
 }
