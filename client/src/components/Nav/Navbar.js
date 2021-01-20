@@ -83,7 +83,7 @@ function Navbar({page, socket, email, room}) {
                             Home
                         </Link>
                     </div>
-                    <div
+                    {/* <div
                         className='nav-item'
                         // onMouseEnter={onMouseEnter}
                         // onMouseLeave={onMouseLeave}
@@ -95,9 +95,9 @@ function Navbar({page, socket, email, room}) {
                         >
                             Casino 
                             {/* <i className='fas fa-caret-down' /> */}
-                        </Link>
+                        {/* </Link> */}
                         {/* {dropdown && <Dropdown />} */}
-                    </div>
+                    {/* </div> */}
                     <div className='nav-item'>
                         <Link
                             to='/members'

@@ -10,6 +10,7 @@ var curTable = document.defaultView.location.pathname.split("casino/").pop();
 function Casino() {
     const [curEmail, setEmail] = useState("");
     const [chatRoom, setRoom] = useState("");
+    const [game, setGame] = useState("");
 
     useEffect(() => {
         init();
@@ -33,6 +34,7 @@ function Casino() {
                         console.log(data);
                         setRoom(data.roomNumber);
                         setEmail(userData.email);
+                        setGame(data.game);
                         console.log("emitting room:", data.roomNumber)
                         socket.emit("join-room", data.roomNumber);
                         //send welcome message
@@ -50,8 +52,9 @@ function Casino() {
 
     return (
         <div>
+
             <Nav page={curTable} socket={socket} email={curEmail} room={chatRoom}/>
-            <GamingTable room={chatRoom} curTable={curTable}/>
+            <GamingTable room={chatRoom} curTable={curTable} game={game}/>
             <br />
             <ChatWindow />
             <ChatContainer socket={socket} email={curEmail} room={chatRoom} />
