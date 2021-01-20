@@ -189,14 +189,11 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
-<<<<<<< HEAD
 // updating the table name to single player blackjack
-//Endpoint: api/table/blackjack
+//Endpoint: api/blackjack/:id
 router.post("/blackjack/:id", function (req, res) {
-	//accept game type
-	//then update game
 	db.Table.updateOne(
-		{_id: req.params.table}, {
+		{_id: req.params.id}, {
 			game: "Blackjack"
 		})
 	.then(function (results) {
@@ -208,16 +205,12 @@ router.post("/blackjack/:id", function (req, res) {
 	});
 })
 
-// updating the table name to single player blackjack
-//Endpoint: api/table/rps
-router.get("/table/rps", function (req, res) {
+// updating the table name to rps
+//Endpoint: api/rps/:id
+router.post("/blackjack/:id", function (req, res) {
 	db.Table.updateOne(
-		{_id: req.params.table}, {
-			game: {
-				type: String,
-				allowNull: false,
-				default: "Rock Paper Scissors"
-			}
+		{_id: req.params.id}, {
+			game: "Rock Paper Scissors"
 		})
 	.then(function (results) {
 		console.log("Returning updated data for table ", results);
@@ -228,16 +221,12 @@ router.get("/table/rps", function (req, res) {
 	});
 })
 
-// updating the table name to single player blackjack
-//Endpoint: api/table/werewolf
-router.get("/table/werewolf", function (req, res) {
+// updating the table name to werewolf
+//Endpoint: api/werewolf/:id
+router.post("/blackjack/:id", function (req, res) {
 	db.Table.updateOne(
-		{_id: req.params.table}, {
-			game: {
-				type: String,
-				allowNull: false,
-				default: "Werewolf"
-			}
+		{_id: req.params.id}, {
+			game: "Werewolf"
 		})
 	.then(function (results) {
 		console.log("Returning updated data for table ", results);
@@ -249,7 +238,6 @@ router.get("/table/werewolf", function (req, res) {
 })
 
 
-=======
 // Route for finding a player's seat at the table
 // Endpoint: /api/myseat/
 router.get("/myseat/:table", function (req, res) {
@@ -273,7 +261,6 @@ router.get("/myseat/:table", function (req, res) {
 		return res.json(seat);
 	})
 });
->>>>>>> main
 
 // //get all running games for the setup page
 // // Endpoint: /allgames
