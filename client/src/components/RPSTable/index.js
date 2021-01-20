@@ -117,7 +117,7 @@ function RPSTable({ room }) {
                     <img id="their-photo" className="photo" src={theirPhoto} />
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col md="12">
                     <form>
                         <label htmlFor="form-group row">Who do you challenge?</label>
@@ -130,7 +130,8 @@ function RPSTable({ room }) {
                         </select>
                     </form>
                 </Col>
-            </Row>
+            </Row> */}
+            <br />
             <Row>
                 <Col lg="4"></Col>
                 <Col lg="4">
