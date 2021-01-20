@@ -5,13 +5,13 @@ import Webcam from "react-webcam";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css"
 
-function RPSTable() {
+function RPSTable({room}) {
 
     //set up a socket connection when the page is loaded for sending photos
     useEffect(() => {
         socket.on("send-photo", photo => {
             console.log("got opponent's photo");
-            setTheirPhoto(photo);
+            setTheirPhoto(photo.photo);
         });
 
         //disconnect when we leave to prevent memory leaks
@@ -33,7 +33,11 @@ function RPSTable() {
     const screenshot = React.useCallback(
         () => {
             setMyPhoto(webcamRef.current.getScreenshot());
-            socket.emit("send-photo", webcamRef.current.getScreenshot())
+            let sendPhoto = {
+                photo: webcamRef.current.getScreenshot(),
+                room: room
+            }
+            socket.emit("send-photo", sendPhoto);
         },
         [webcamRef]
     );
