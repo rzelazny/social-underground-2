@@ -197,7 +197,19 @@ router.get("/myseat/:table", function (req, res) {
 	.then(function (results) {
 		console.log("Returning seat for ", req.user.email);
 		console.log("results", results);
-		return res.send(results);
+		let seat = 0;
+		if(results.user1 === req.user.email){
+			seat = 1;
+		}else if(results.user2 === req.user.email){
+			seat = 2;
+		}else if(results.user3 === req.user.email){
+			seat = 3;
+		}else if(results.user4 === req.user.email){
+			seat = 4;
+		}else if(results.user5 === req.user.email){
+			seat = 5;
+		}
+		return res.json(seat);
 	})
 });
 

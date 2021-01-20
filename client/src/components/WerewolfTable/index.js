@@ -18,8 +18,17 @@ function WerewolfTable({ room, curTable }) {
 
     //set up a socket connection when the page is loaded for sending photos
     useEffect(() => {
-        socket.on("send-photo", stream => {
-            set2PCam(stream.photo);
+        socket.on("send-frame-1", frame => {
+            console.log("got opponent's photo");
+            setP1Cam(frame.frame);
+        });
+        socket.on("send-frame-2", frame => {
+            console.log("got opponent's photo");
+            setP2Cam(frame.frame);
+        });
+        socket.on("send-frame-3", frame => {
+            console.log("got opponent's photo");
+            setP3Cam(frame.frame);
         });
 
         $.get("/api/myseat/" + curTable)
@@ -45,7 +54,9 @@ function WerewolfTable({ room, curTable }) {
     }, 1000 / FPS);
 
     const webcamRef = React.useRef(null);
-    const [player2Cam, set2PCam] = useState();
+    const [player1Cam, setP1Cam] = useState();
+    const [player2Cam, setP2Cam] = useState();
+    const [player3Cam, setP3Cam] = useState();
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState();
 
@@ -92,7 +103,9 @@ function WerewolfTable({ room, curTable }) {
                 screenshotFormat="image/jpeg"
                 style={{ height: "360px", width: "360px", zIndex: "1000" }}
             />
+            <img id="player1Cam" className="photo" src={player1Cam} />
             <img id="player2Cam" className="photo" src={player2Cam} />
+            <img id="player3Cam" className="photo" src={player3Cam} />
             {displayDirections
                 &&
                 <div id="directions">
