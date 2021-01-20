@@ -189,6 +189,55 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
+// updating the table name to single player blackjack
+//Endpoint: api/blackjack/:id
+router.post("/blackjack/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Blackjack"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to rps
+//Endpoint: api/rps/:id
+router.post("/rps/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Rock Paper Scissors"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to werewolf
+//Endpoint: api/werewolf/:id
+router.post("/beast/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Beast"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+
 // Route for finding a player's seat at the table
 // Endpoint: /api/myseat/
 router.get("/myseat/:table", function (req, res) {
