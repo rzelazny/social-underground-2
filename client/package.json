@@ -13,7 +13,8 @@
     "react-scripts": "3.4.3",
     "react-webcam": "^5.2.2",
     "reactstrap": "^8.8.1",
-    "socket.io-client": "^3.0.5"
+    "socket.io-client": "^3.0.5",
+    "use-sound": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
