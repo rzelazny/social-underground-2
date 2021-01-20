@@ -209,7 +209,7 @@ router.get("/UserStats", function (req, res) {
 	}).populate("userstats")
 	.then(function (results) {
 		console.log("get tables returning data", results);
-		return res.send(results.email);
+		return res.send(results);
 	})
 });
 

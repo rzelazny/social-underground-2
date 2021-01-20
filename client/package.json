@@ -11,6 +11,7 @@
     "react-images-upload": "^1.2.8",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.3",
+    "react-webcam": "^5.2.2",
     "reactstrap": "^8.8.1",
     "socket.io-client": "^3.0.5"
   },

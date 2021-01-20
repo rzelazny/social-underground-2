@@ -1,5 +1,5 @@
 #RPSTable{
-    background-color: black;
+    background-color: green;
     margin: 10px;
     padding:10px;
     text-align: left;
@@ -8,4 +8,17 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
+}
+/* #my-photo{
+    visibility: hidden;
+    height: 240px;
+    width: 100%
+} */
+
+#their-photo{
+    display: none;
+}
+#webcam{
+    width: 320; 
+    height: 240;
 }
