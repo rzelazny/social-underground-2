@@ -62,7 +62,7 @@ function GamingTable({room, curTable}) {
         setFormDisplay(false);
         setDisplayGame("werewolf");
         // change table name to werewolf
-        $.post("/api/werewolf/" + curTable)
+        $.post("/api/beast/" + curTable)
         .then((results) => {
         console.log(results)
         })

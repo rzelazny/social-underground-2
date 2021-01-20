@@ -223,10 +223,10 @@ router.post("/rps/:id", function (req, res) {
 
 // updating the table name to werewolf
 //Endpoint: api/werewolf/:id
-router.post("/werewolf/:id", function (req, res) {
+router.post("/beast/:id", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.id}, {
-			game: "Werewolf"
+			game: "Beast"
 		})
 	.then(function (results) {
 		console.log("Returning updated data for table ", results);
