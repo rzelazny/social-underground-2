@@ -191,7 +191,7 @@ router.post("/newtable", function (req, res) {
 
 // updating the table name to single player blackjack
 //Endpoint: api/table/blackjack
-router.get("/table/blackjack", function (re, res) {
+router.get("/table/blackjack", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.table}, {
 			game: {
@@ -211,7 +211,7 @@ router.get("/table/blackjack", function (re, res) {
 
 // updating the table name to single player blackjack
 //Endpoint: api/table/rps
-router.get("/table/rps", function (re, res) {
+router.get("/table/rps", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.table}, {
 			game: {
@@ -231,7 +231,7 @@ router.get("/table/rps", function (re, res) {
 
 // updating the table name to single player blackjack
 //Endpoint: api/table/werewolf
-router.get("/table/rps", function (re, res) {
+router.get("/table/rps", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.table}, {
 			game: {
