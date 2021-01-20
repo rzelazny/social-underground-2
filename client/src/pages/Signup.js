@@ -41,6 +41,7 @@ function Signup() {
         };
         if (password !== reenterPw) {
             console.log("Passwords don't match");
+            handlePasswordErr();
             return;
         }
         // If we have an email and password, run the signUpUser function
@@ -71,6 +72,12 @@ function Signup() {
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);
     }
+
+    function handlePasswordErr(err) {
+        $("#alert .msg").text("Passwords don't match!");
+        $("#alert").fadeIn(500);
+    }
+
 
     return (
         <Container id="signinbody">
