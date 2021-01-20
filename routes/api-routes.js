@@ -209,12 +209,12 @@ router.get("/UserStats", function (req, res) {
 	}).populate("userstats")
 	.then(function (results) {
 		console.log("get tables returning data", results);
-		return res.send(results.email);
+		return res.send(results);
 	})
 });
 
 router.post("UserStats/:id", (req, res) => {
-	db.userstats.updateOne(
+	db.UserStats.updateOne(
 		{ _id: req.params.id }, req.body)
 		.then(statsData => {
 			console.log("Stats Data: ", statsData);
