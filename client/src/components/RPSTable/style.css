@@ -10,10 +10,6 @@
     border-radius: 20px 20px 0px 0px;
 }
 
-#their-photo{
-    display: none;
-}
-
 #webcam{
     position: relative;
     padding: 5px;

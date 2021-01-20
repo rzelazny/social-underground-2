@@ -5,14 +5,6 @@ import "./style.css";
 export function Webcam() {
     const webcamRef = React.useRef(null);
 
-    //Take a photo snapshot
-    const screenshot = React.useCallback(
-        () => {
-            const imageSrc = webcamRef.current.getScreenshot();
-        },
-        [webcamRef]
-    );
-
     return (<div>
         <Camera
             id="webcam"

@@ -141,7 +141,7 @@ function GamingTable({room}) {
             {displayGame === "rps"
                 && <RPSTable room={room}/>}
             {displayGame === "werewolf"
-                && <WerewolfTable />}
+                && <WerewolfTable room={room}/>}
         </Container>
     );
 }
