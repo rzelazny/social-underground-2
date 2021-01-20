@@ -1,4 +1,4 @@
-#gameChoice{
+.gameChoice{
     background-image: url(../../images/felt.png);
     margin: 10px;
     padding:10px;
@@ -10,7 +10,7 @@
     border-width: 2px;
     border-radius: 20px;
 }
-#gameChoice h2{
+.gameChoice h2{
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }

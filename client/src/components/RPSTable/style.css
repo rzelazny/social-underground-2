@@ -1,5 +1,5 @@
 #RPSTable{
-    background-color: black;
+    background-color: green;
     margin: 10px;
     padding:10px;
     text-align: left;
@@ -8,4 +8,26 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
+}
+
+#webcam{
+    position: relative;
+    padding: 5px;
+    height: 0;
+    overflow: hidden;
+    display: block;
+}
+.photo{
+    height: 360px;
+    width: 360px;
+    object-fit: cover;
+}
+
+#rpsCountdown{
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }

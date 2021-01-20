@@ -3,13 +3,14 @@ import $ from 'jquery';
 import { Container } from "reactstrap";
 
 function Signup() {
-    var script = document.createElement('script');
-    script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-    script.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(script);
+    // var script = document.createElement('script');
+    // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+    // script.type = 'text/javascript';
+    // document.getElementsByTagName('head')[0].appendChild(script);
 
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
+    const [reenterPw, setReenterPw] = useState([]);
 
     const handleEmailChange = event => {
         console.log("form changed");
@@ -20,6 +21,11 @@ function Signup() {
     const handlePassChange = event => {
         const { value } = event.target;
         setPassword(value);
+    };
+
+    const handleReenterPw = event => {
+        const { value } = event.target;
+        setReenterPw(value);
     }
 
     // When the signup button is clicked, we validate the email and password are not blank
@@ -31,6 +37,10 @@ function Signup() {
             password: password.trim()
         };
         if (!userData.email || !userData.password) {
+            return;
+        };
+        if (password !== reenterPw) {
+            handlePasswordErr();
             return;
         }
         // If we have an email and password, run the signUpUser function
@@ -51,7 +61,7 @@ function Signup() {
         })
             .then(function (data) {
                 console.log(data);
-                //window.location.replace("/home");
+                window.location.replace("/home");
                 // If there's an error, handle it by throwing up a bootstrap alert
             })
             .catch(handleLoginErr);
@@ -61,6 +71,12 @@ function Signup() {
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);
     }
+
+    function handlePasswordErr(err) {
+        $("#alert .msg").text("Passwords don't match!");
+        $("#alert").fadeIn(500);
+    }
+
 
     return (
         <Container id="signinbody">
@@ -78,6 +94,11 @@ function Signup() {
                                 <label htmlFor="exampleInputPassword1">Password</label>
                                 <input type="password" className="form-control" id="password-input" placeholder="Password"
                                     onChange={handlePassChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Re-Enter Password</label>
+                                <input type="password" className="form-control" id="password-input" placeholder="Password"
+                                    onChange={handleReenterPw} />
                             </div>
                             <div style={{ display: "none" }} id="alert" className="alert alert-danger" role="alert">
                                 <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
