@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 
 const UserStats = new Schema({
     // email: {
@@ -18,4 +18,4 @@ const UserStats = new Schema({
     // }
     });
 
-    module.exports = mongoose.model('UserStats', UserStats);
+//     module.exports = mongoose.model('UserStats', UserStats);

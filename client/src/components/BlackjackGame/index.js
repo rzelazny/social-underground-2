@@ -5,12 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
+import $ from "jquery";
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // to do :
     //connect the score with the users membership page
     //currently hard coded... change the players name from player 1 to the players username
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,6 +22,15 @@ var player1Name = "Player 1";
 // to be saved in the players db //
 var houseScore = 0; // set equal to db (saved as players losses)
 var player1Score = 0; // set equal to db (saved as players wins)
+
+function stats() {
+    $.get("/api/UserStats").then((results) => {
+        console.log(results)
+        player1Score = (results.blackjack_win)
+        houseScore = (results.blackjack_lose)
+    })
+}
+stats();
 
 // to keep track of the winner for the scorecard //
 var winner = "";
@@ -382,6 +393,7 @@ function BlackjackGame() {
             console.log("player1 bust, house wins");
             winner = "House";
             houseScore++
+            $.post("/api/UserLose", {houseScore: houseScore}) 
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
             // return (
@@ -394,6 +406,7 @@ function BlackjackGame() {
             console.log("house bust, player1 wins");
             winner = player1Name;
             player1Score++
+            $.post("/api/UserStats", {player1Score: player1Score})
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
             // return (
@@ -417,6 +430,7 @@ function BlackjackGame() {
                 console.log("player1points ", p1HandVal);
                 winner = "House";
                 houseScore++
+                $.post("/api/UserLose", {houseScore: houseScore}) 
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
             }
@@ -427,6 +441,7 @@ function BlackjackGame() {
                 console.log("player1points ", p1HandVal);
                 winner = player1Name;
                 player1Score++
+                $.post("/api/UserStats", {player1Score: player1Score}) 
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
             }

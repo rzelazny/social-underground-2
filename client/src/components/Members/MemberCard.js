@@ -5,11 +5,15 @@ import $ from "jquery";
 
 function MemberCard() {
     const [email, setEmail] = useState(null);
+    const [win, setWin] = useState();
+    const [lose, setLose] = useState(); 
 
     function stats() {
         $.get("/api/UserStats").then((results) => {
             console.log(results)
             setEmail(results.email)
+            setWin(results.blackjack_win)
+            setLose(results.blackjack_lose)
         })
     }
     stats();
@@ -66,7 +70,8 @@ function MemberCard() {
                     <div className="cards__items">
                         <MemberItem
                             text= {email}
-                            label="Stats"
+                            text2= {win}
+                            text3= {lose}
                             // path="/member"
                         />
                     </div>

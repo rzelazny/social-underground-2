@@ -6,6 +6,7 @@ function GamingTable({room, curTable, game}) {
     return (
         // Game choice component will be here and the blackjack table will be an option in the game choice component //
         <GameChoice room={room} curTable={curTable} game={game} />
+
     );
 }
 

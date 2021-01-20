@@ -94,12 +94,14 @@ function WerewolfTable({ room, curTable }) {
             <br />
             <Webcam
                 id="webcam"
+
                 audio={true}
                 mirrored={true}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 style={{ height: "360px", width: "360px", zIndex: "1000" }}
             />
+
             {mySeat != 1 && <img id="player1Cam" className="photo" src={player1Cam} />}
             {mySeat != 2 && <img id="player2Cam" className="photo" src={player2Cam} />}
             {mySeat != 3 && <img id="player3Cam" className="photo" src={player3Cam} />}

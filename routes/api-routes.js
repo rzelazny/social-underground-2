@@ -12,12 +12,12 @@ router.post("/signup", ({ body }, res) => {
 		.then(dbUser => {
 			console.log(dbUser);
 			res.json(dbUser);
-			db.UserStats.create(dbUser._id)
-			.then(stats => {
-				console.log(stats);
-				console.log(dbUser._id);
-				db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
-			})
+			// db.UserStats.create(dbUser._id)
+			// .then(stats => {
+			// 	console.log(stats);
+			// 	console.log(dbUser._id);
+			// 	db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
+			// })
 		})
 		.catch(err => {
 			console.log(err);
@@ -277,24 +277,52 @@ router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
 		email: req.user.email
-	}).populate("userstats")
+	})
 	.then(function (results) {
 		console.log("get tables returning data", results);
 		return res.send(results);
 	})
 });
 
-router.post("UserStats/:id", (req, res) => {
-	db.UserStats.updateOne(
-		{ _id: req.params.id }, req.body)
-		.then(statsData => {
-			console.log("Stats Data: ", statsData);
-			res.json(statsData);
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).json(err);
-		});
+router.post("/UserStats", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["blackjack_win"] = req.body.player1Score;
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{email: req.user.email}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
 });
+
+router.post("/UserLose", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["blackjack_lose"] = req.body.houseScore;
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{email: req.user.email}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+});
+
+// router.post("UserStats/:id", (req, res) => {
+// 	db.UserStats.updateOne(
+// 		{ _id: req.params.id }, req.body)
+// 		.then(statsData => {
+// 			console.log("Stats Data: ", statsData);
+// 			res.json(statsData);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.status(404).json(err);
+// 		});
+// });
 
 module.exports = router;

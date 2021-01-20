@@ -9,6 +9,7 @@ import $ from "jquery";
 
 
 function GamingTable({room, curTable, game}) {
+
     const [formDisplay, setFormDisplay] = useState(true);
     const [displayGame, setDisplayGame] = useState();
 
@@ -16,7 +17,6 @@ function GamingTable({room, curTable, game}) {
     const [single, setSingle] = useState(false);
 
     const [players, setPlayers] = useState();
-
 
     if (game === "Just Chatting") {
         function ifSingle() {
@@ -146,6 +146,7 @@ function GamingTable({room, curTable, game}) {
                                 <CardTitle tag="h4">Choose a game:</CardTitle>
                             }
 
+
                             {players === "two"
                                 &&
                                 <Button color="danger" onClick={rps}>Rock Paper Scissors</Button>
@@ -165,6 +166,7 @@ function GamingTable({room, curTable, game}) {
             </Container>
         );
     }
+
     else if (game === "Blackjack") {
         return (
             <Container>
@@ -192,6 +194,7 @@ function GamingTable({room, curTable, game}) {
             <p>check console</p>
         )
     }
+
 }
 
 export default GamingTable;
