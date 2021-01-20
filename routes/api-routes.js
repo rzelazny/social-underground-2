@@ -207,7 +207,7 @@ router.post("/blackjack/:id", function (req, res) {
 
 // updating the table name to rps
 //Endpoint: api/rps/:id
-router.post("/blackjack/:id", function (req, res) {
+router.post("/rps/:id", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.id}, {
 			game: "Rock Paper Scissors"
@@ -223,7 +223,7 @@ router.post("/blackjack/:id", function (req, res) {
 
 // updating the table name to werewolf
 //Endpoint: api/werewolf/:id
-router.post("/blackjack/:id", function (req, res) {
+router.post("/werewolf/:id", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.id}, {
 			game: "Werewolf"

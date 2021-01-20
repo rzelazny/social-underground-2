@@ -40,9 +40,6 @@ function GamingTable({room, curTable}) {
         setFormDisplay(false);
         setDisplayGame("blackjack");
         // change table name to blackjack
-
-        //.ajax // put requst to /api/Table/~tableid
-        // pass info on type of game (another param or req.body)
         $.post("/api/blackjack/" + curTable)
         .then((results) => {
             console.log(results)
@@ -53,12 +50,22 @@ function GamingTable({room, curTable}) {
         // change table name to rps
         setFormDisplay(false);
         setDisplayGame("rps");
+        // change table name to rps
+        $.post("/api/rps/" + curTable)
+        .then((results) => {
+        console.log(results)
+        })
     }
 
     function werewolf() {
         // change table name to werewolf
         setFormDisplay(false);
         setDisplayGame("werewolf");
+        // change table name to werewolf
+        $.post("/api/werewolf/" + curTable)
+        .then((results) => {
+        console.log(results)
+        })
     }
 
     return (
