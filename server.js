@@ -56,6 +56,12 @@ io.on("connection", (socket) => {
     socket.to(chatMessage.room).emit("update-chat", chatMessage);
   });
 
+  //User has sent a photo to the server
+  socket.on("send-photo", (photo) => {
+    console.log("Server got photo");
+    socket.to(chatMessage.room).emit("update-chat", photo);
+  });
+
 });
 
 // Start the API server
