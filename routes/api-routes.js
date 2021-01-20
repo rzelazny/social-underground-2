@@ -231,7 +231,7 @@ router.get("/table/rps", function (req, res) {
 
 // updating the table name to single player blackjack
 //Endpoint: api/table/werewolf
-router.get("/table/rps", function (req, res) {
+router.get("/table/werewolf", function (req, res) {
 	db.Table.updateOne(
 		{_id: req.params.table}, {
 			game: {

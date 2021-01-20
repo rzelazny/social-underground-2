@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
 import WerewolfTable from "../WerewolfTable";
+import $ from "jquery";
+
 
 function GamingTable() {
 
@@ -37,14 +39,20 @@ function GamingTable() {
     function blackjack() {
         setFormDisplay(false);
         setDisplayGame("blackjack");
+        // change table name to blackjack
+        $.get("/api/Table/blackjack").then((results) => {
+            console.log(results)
+        })
     }
 
     function rps() {
+        // change table name to rps
         setFormDisplay(false);
         setDisplayGame("rps");
     }
 
     function werewolf() {
+        // change table name to werewolf
         setFormDisplay(false);
         setDisplayGame("werewolf");
     }
