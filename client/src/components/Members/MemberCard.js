@@ -65,10 +65,9 @@ function MemberCard() {
                 <div className="cards__wrapper">
                     <div className="cards__items">
                         <MemberItem
-                            text={email}
-                            
+                            text= {email}
                             label="Stats"
-                            path="/member"
+                            // path="/member"
                         />
                     </div>
                 </div>
