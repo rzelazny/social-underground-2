@@ -8,7 +8,7 @@ function Members() {
 
   return (
     <>
-      {/* <Nav />, */}
+      <Nav />,
       <MemberSection />
       <MemberCard />
     </>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import {socket} from "../components/Socket/Socket";
 import GamingTable from "../components/GamingTable";
+import Nav from "../components/Nav/Navbar";
 import { ChatContainer, ChatWindow, displayChat } from "../components/ChatLog/ChatLog";
 
 var curTable = document.defaultView.location.pathname.split("casino/").pop();
@@ -9,6 +10,7 @@ var curTable = document.defaultView.location.pathname.split("casino/").pop();
 function Casino() {
     const [curEmail, setEmail] = useState("");
     const [chatRoom, setRoom] = useState("");
+    const [game, setGame] = useState("");
 
     useEffect(() => {
         init();
@@ -32,6 +34,7 @@ function Casino() {
                         console.log(data);
                         setRoom(data.roomNumber);
                         setEmail(userData.email);
+                        setGame(data.game);
                         console.log("emitting room:", data.roomNumber)
                         socket.emit("join-room", data.roomNumber);
                         //send welcome message
@@ -49,7 +52,9 @@ function Casino() {
 
     return (
         <div>
-            <GamingTable room={chatRoom}/>
+
+            <Nav page={curTable} socket={socket} email={curEmail} room={chatRoom}/>
+            <GamingTable room={chatRoom} curTable={curTable} game={game}/>
             <br />
             <ChatWindow />
             <ChatContainer socket={socket} email={curEmail} room={chatRoom} />

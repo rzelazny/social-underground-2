@@ -153,14 +153,14 @@ router.post("/cleanup", function (req, res) {
 		}
 	})
 		.then(function (results) {
+			console.log("cleanup results:", results);
 			if (results != null) {
-				for (i = 0; i < results.length; i++) {
-					db.gaming_table.deleteOne({
-						id: {
-							$eq: results[i].id //might need to be _id
-						}
-					})
-					console.log("deleting empty table", results[i].id)
+				for (let i = 0; i < results.length; i++) {
+					db.Table.deleteOne({
+						_id : results[i]._id   
+					}) //"ObjectId(\"" + + "\")"
+					.catch((err) => console.log(err))
+					console.log("deleting empty table", results[i]._id)
 				}
 				res.send(results);
 			}
@@ -189,7 +189,78 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
+// updating the table name to single player blackjack
+//Endpoint: api/blackjack/:id
+router.post("/blackjack/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Blackjack"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
 
+// updating the table name to rps
+//Endpoint: api/rps/:id
+router.post("/rps/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Rock Paper Scissors"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to werewolf
+//Endpoint: api/werewolf/:id
+router.post("/beast/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Beast"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+
+// Route for finding a player's seat at the table
+// Endpoint: /api/myseat/
+router.get("/myseat/:table", function (req, res) {
+	console.log("Getting the seat for ", req.user.email);
+	db.Table.findById(req.params.table)
+	.then(function (results) {
+		console.log("Returning seat for ", req.user.email);
+		console.log("results", results);
+		let seat = 0;
+		if(results.user1 === req.user.email){
+			seat = 1;
+		}else if(results.user2 === req.user.email){
+			seat = 2;
+		}else if(results.user3 === req.user.email){
+			seat = 3;
+		}else if(results.user4 === req.user.email){
+			seat = 4;
+		}else if(results.user5 === req.user.email){
+			seat = 5;
+		}
+		return res.json(seat);
+	})
+});
 
 // //get all running games for the setup page
 // // Endpoint: /allgames

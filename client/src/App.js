@@ -7,18 +7,15 @@ import Casino from "./pages/Casino";
 import NoMatch from "./pages/NoMatch";
 import Members from "./pages/Members";
 import "./App.css";
-import Nav from "./components/Nav/Navbar";
 
 
 function App() {
 
-  const [authenticated, setAuth] = useState([false]);
+  //const [authenticated, setAuth] = useState([false]);
 
   return (
     <Router>
       <div>
-        <Nav />
-
         <Switch>
           <Route exact path={["/", "/login"]}>
             <Login />
