@@ -5,25 +5,38 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";
 import API from "../../utils/API";
+import $ from "jquery";
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // to do :
     //connect the score with the users membership page
     //currently hard coded... change the players name from player 1 to the players username
-    //fix play again btn
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// temporarily hard coded -- pull from db //
+var player1Name = "Player 1";
+
 // to be saved in the players db //
-var houseScore = 0;
-var player1Score = 0;
+var houseScore = 0; // set equal to db (saved as players losses)
+var player1Score = 0; // set equal to db (saved as players wins)
+
+function stats() {
+    $.get("/api/UserStats").then((results) => {
+        console.log(results)
+        player1Score = (results.blackjack_win)
+        houseScore = (results.blackjack_lose)
+    })
+}
+stats();
 
 // to keep track of the winner for the scorecard //
 var winner = "";
 
-// temporarily hard coded -- pull from db //
-var player1Name = "Player 1";
+var houseHandVal = 0;
+var p1HandVal = 0;
 
 function BlackjackGame() {
     // set states //
@@ -76,7 +89,7 @@ function BlackjackGame() {
                 // console.log(data);
                 let card1Val;
                 let card2Val;
-                let handVal;
+                // let houseHandVal;
                 // sets value of face card //
                 if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
                     card1Val = 10;
@@ -104,7 +117,7 @@ function BlackjackGame() {
                     card2Val = parseInt(data.data.cards[1].value);
                 }
 
-                handVal = card1Val + card2Val;
+                houseHandVal = card1Val + card2Val;
 
                 setHouseHand(
                     [
@@ -123,7 +136,7 @@ function BlackjackGame() {
                     ]
                 )
                 setHousePoints(
-                    handVal
+                    houseHandVal
                 )
             })
     }
@@ -140,7 +153,7 @@ function BlackjackGame() {
                 // console.log(data)
                 let card1Val;
                 let card2Val;
-                let handVal;
+                // let p1HandVal;
                 // sets value of face card //
                 if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
                     card1Val = 10;
@@ -166,7 +179,7 @@ function BlackjackGame() {
                 else {
                     card2Val = parseInt(data.data.cards[1].value);
                 }
-                handVal = card1Val + card2Val;
+                p1HandVal = card1Val + card2Val;
                 setPlayer1Hand(
                     [
                         {
@@ -184,7 +197,7 @@ function BlackjackGame() {
                     ]
                 )
                 setPlayer1Points(
-                    handVal
+                    p1HandVal
                 )
             })
     }
@@ -236,7 +249,7 @@ function BlackjackGame() {
         API.drawHitPlayer1(player1Hand)
             .then(data => {
                 let hitCardVal;
-                let handVal;
+                // let p1HandVal;
 
                 // sets value of face card //
                 if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
@@ -251,7 +264,7 @@ function BlackjackGame() {
                 }
 
                 // add current hand value and new card value //
-                handVal = hitCardVal + player1Points;
+                p1HandVal = hitCardVal + player1Points;
 
                 // add the card to the hand array //
                 setPlayer1Hand(
@@ -268,11 +281,11 @@ function BlackjackGame() {
 
                 // recalculate players points and update the point state //
                 setPlayer1Points(
-                    handVal
+                    p1HandVal
                 )
 
                 // check to see if player busts with new card //
-                if (handVal > 21) {
+                if (p1HandVal > 21) {
                     console.log("busted, will end round");
                     setPlayer1Bust(true);
                     endRound("player1 busted");
@@ -295,7 +308,7 @@ function BlackjackGame() {
             API.drawHitHouse(houseHand)
                 .then(data => {
                     let hitCardVal;
-                    let handVal;
+                    // let houseHandVal;
 
                     // sets value of face card //
                     if (data.data.cards[0].value === "JACK" || data.data.cards[0].value === "QUEEN" || data.data.cards[0].value === "KING") {
@@ -310,7 +323,7 @@ function BlackjackGame() {
                     }
 
                     // add current hand value and new card value //
-                    handVal = hitCardVal + housePoints;
+                    houseHandVal = hitCardVal + housePoints;
 
                     // add the card to the hand array //
                     setHouseHand(
@@ -327,11 +340,11 @@ function BlackjackGame() {
 
                     // recalculate players points and update the point state //
                     setHousePoints(
-                        handVal
+                        houseHandVal
                     )
 
                     // check to see if player busts with new card //
-                    if (handVal > 21) {
+                    if (houseHandVal > 21) {
                         console.log("busted, will end round");
                         setHouseBust(true);
                         endRound("house busted");
@@ -340,7 +353,7 @@ function BlackjackGame() {
                         console.log("house did not bust on hit")
                         if (player1Stand === true || check === "is standing" ) {
                             console.log("house didnt bust and player one is standing")
-                            if (houseStand === true || handVal >= 17 || handVal > player1Points) {
+                            if (houseStand === true || houseHandVal >= 17 || houseHandVal > player1Points) {
                                 setHouseStand(true);
                                 console.log("both players stand, ending round triggered")
                                 endRound("both stand");
@@ -380,6 +393,7 @@ function BlackjackGame() {
             console.log("player1 bust, house wins");
             winner = "House";
             houseScore++
+            $.post("/api/UserLose", {houseScore: houseScore}) 
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
             // return (
@@ -392,6 +406,7 @@ function BlackjackGame() {
             console.log("house bust, player1 wins");
             winner = player1Name;
             player1Score++
+            $.post("/api/UserStats", {player1Score: player1Score})
             console.log("house score: ", houseScore)
             console.log("player1 score: ", player1Score)
             // return (
@@ -409,18 +424,24 @@ function BlackjackGame() {
                 console.log("player1 score: ", player1Score)
             }
             // if house wins //
-            else if (housePoints < 22 && housePoints > player1Points) {
+            else if (houseHandVal < 22 && houseHandVal > p1HandVal) {
                 console.log("house wins");
+                console.log("house points ", houseHandVal);
+                console.log("player1points ", p1HandVal);
                 winner = "House";
                 houseScore++
+                $.post("/api/UserLose", {houseScore: houseScore}) 
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
             }
             // if player1 wins //
-            else if (player1Points < 22 && housePoints < player1Points) {
+            else if (p1HandVal < 22 && houseHandVal < p1HandVal) {
                 console.log("player1 wins");
+                console.log("house points ", houseHandVal);
+                console.log("player1points ", p1HandVal);
                 winner = player1Name;
                 player1Score++
+                $.post("/api/UserStats", {player1Score: player1Score}) 
                 console.log("house score: ", houseScore)
                 console.log("player1 score: ", player1Score)
             }

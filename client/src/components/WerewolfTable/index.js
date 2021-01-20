@@ -18,15 +18,12 @@ function WerewolfTable({ room, curTable }) {
     //set up a socket connection when the page is loaded for sending photos
     useEffect(() => {
         socket.on("send-frame-1", frame => {
-            console.log("got opponent's photo");
             setP1Cam(frame.frame);
         });
         socket.on("send-frame-2", frame => {
-            console.log("got opponent's photo");
             setP2Cam(frame.frame);
         });
         socket.on("send-frame-3", frame => {
-            console.log("got opponent's photo");
             setP3Cam(frame.frame);
         });
 
@@ -41,7 +38,7 @@ function WerewolfTable({ room, curTable }) {
     }, []);
 
     //send a frame from the wecam to the server
-    const FPS = 10;
+    const FPS = 3;
     setInterval(() => {
         let sendFrame = {
             frame: webcamRef.current.getScreenshot(),
@@ -97,12 +94,14 @@ function WerewolfTable({ room, curTable }) {
             <br />
             <Webcam
                 id="webcam"
+
                 audio={true}
                 mirrored={true}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 style={{ height: "360px", width: "360px", zIndex: "1000" }}
             />
+
             {mySeat != 1 && <img id="player1Cam" className="photo" src={player1Cam} />}
             {mySeat != 2 && <img id="player2Cam" className="photo" src={player2Cam} />}
             {mySeat != 3 && <img id="player3Cam" className="photo" src={player3Cam} />}

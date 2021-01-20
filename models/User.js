@@ -14,10 +14,18 @@ const User = new Schema({
 		type: String,
 		allowNull: false
 	},
-	userstats: {
-        type: Schema.Types.ObjectId,
-        ref: "UserStats"
-    }
+	// userstats: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "UserStats"
+	// }
+	blackjack_win: {
+		type: Number,
+		default: 0
+	},
+	blackjack_lose: {
+		type: Number,
+		default: 0
+	}
 });
 
 //Validate hashed password

@@ -12,12 +12,12 @@ router.post("/signup", ({ body }, res) => {
 		.then(dbUser => {
 			console.log(dbUser);
 			res.json(dbUser);
-			db.UserStats.create(dbUser._id)
-			.then(stats => {
-				console.log(stats);
-				console.log(dbUser._id);
-				db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
-			})
+			// db.UserStats.create(dbUser._id)
+			// .then(stats => {
+			// 	console.log(stats);
+			// 	console.log(dbUser._id);
+			// 	db.User.updateOne({_id: dbUser._id}, {$set:{userstats: stats._id}});
+			// })
 		})
 		.catch(err => {
 			console.log(err);
@@ -153,14 +153,14 @@ router.post("/cleanup", function (req, res) {
 		}
 	})
 		.then(function (results) {
+			console.log("cleanup results:", results);
 			if (results != null) {
-				for (i = 0; i < results.length; i++) {
-					db.gaming_table.deleteOne({
-						id: {
-							$eq: results[i].id //might need to be _id
-						}
-					})
-					console.log("deleting empty table", results[i].id)
+				for (let i = 0; i < results.length; i++) {
+					db.Table.deleteOne({
+						_id : results[i]._id   
+					}) //"ObjectId(\"" + + "\")"
+					.catch((err) => console.log(err))
+					console.log("deleting empty table", results[i]._id)
 				}
 				res.send(results);
 			}
@@ -188,6 +188,55 @@ router.post("/newtable", function (req, res) {
 			return res.status(401).json(err);
 		});
 });
+
+// updating the table name to single player blackjack
+//Endpoint: api/blackjack/:id
+router.post("/blackjack/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Blackjack"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to rps
+//Endpoint: api/rps/:id
+router.post("/rps/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Rock Paper Scissors"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to werewolf
+//Endpoint: api/werewolf/:id
+router.post("/beast/:id", function (req, res) {
+	db.Table.updateOne(
+		{_id: req.params.id}, {
+			game: "Beast"
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
 
 // Route for finding a player's seat at the table
 // Endpoint: /api/myseat/
@@ -228,24 +277,52 @@ router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
 		email: req.user.email
-	}).populate("userstats")
+	})
 	.then(function (results) {
 		console.log("get tables returning data", results);
 		return res.send(results);
 	})
 });
 
-router.post("UserStats/:id", (req, res) => {
-	db.UserStats.updateOne(
-		{ _id: req.params.id }, req.body)
-		.then(statsData => {
-			console.log("Stats Data: ", statsData);
-			res.json(statsData);
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).json(err);
-		});
+router.post("/UserStats", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["blackjack_win"] = req.body.player1Score;
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{email: req.user.email}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
 });
+
+router.post("/UserLose", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["blackjack_lose"] = req.body.houseScore;
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{email: req.user.email}, tableUpdateData)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+});
+
+// router.post("UserStats/:id", (req, res) => {
+// 	db.UserStats.updateOne(
+// 		{ _id: req.params.id }, req.body)
+// 		.then(statsData => {
+// 			console.log("Stats Data: ", statsData);
+// 			res.json(statsData);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.status(404).json(err);
+// 		});
+// });
 
 module.exports = router;
