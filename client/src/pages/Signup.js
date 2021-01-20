@@ -58,6 +58,7 @@ function Signup() {
     }
 
     function handleLoginErr(err) {
+        console.log("error line 62", err)
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);
     }

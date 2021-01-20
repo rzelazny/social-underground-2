@@ -47,7 +47,7 @@ function Navbar() {
                             Home
                         </Link>
                     </div>
-                    <div
+                    {/* <div
                         className='nav-item'
                         // onMouseEnter={onMouseEnter}
                         // onMouseLeave={onMouseLeave}
@@ -59,9 +59,9 @@ function Navbar() {
                         >
                             Casino 
                             {/* <i className='fas fa-caret-down' /> */}
-                        </Link>
+                        {/* </Link> */}
                         {/* {dropdown && <Dropdown />} */}
-                    </div>
+                    {/* </div> */}
                     <div className='nav-item'>
                         <Link
                             to='/members'
