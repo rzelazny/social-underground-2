@@ -12,7 +12,6 @@ import WerewolfGame6 from "../WerewolfGame6";
 import WerewolfGame7 from "../WerewolfGame7";
 
 var players = 0;
-let mySeat = "";
 
 function WerewolfTable({ room, curTable }) {
 
@@ -34,7 +33,7 @@ function WerewolfTable({ room, curTable }) {
         $.get("/api/myseat/" + curTable)
             .then((seat) => {
                 console.log("got my seat:", seat);
-                mySeat = seat;
+                setMySeat(seat);
             })
 
         //disconnect when we leave to prevent memory leaks
@@ -57,6 +56,7 @@ function WerewolfTable({ room, curTable }) {
     const [player1Cam, setP1Cam] = useState();
     const [player2Cam, setP2Cam] = useState();
     const [player3Cam, setP3Cam] = useState();
+    const [mySeat, setMySeat] = useState();
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState();
 
@@ -103,9 +103,9 @@ function WerewolfTable({ room, curTable }) {
                 screenshotFormat="image/jpeg"
                 style={{ height: "360px", width: "360px", zIndex: "1000" }}
             />
-            <img id="player1Cam" className="photo" src={player1Cam} />
-            <img id="player2Cam" className="photo" src={player2Cam} />
-            <img id="player3Cam" className="photo" src={player3Cam} />
+            {mySeat != 1 && <img id="player1Cam" className="photo" src={player1Cam} />}
+            {mySeat != 2 && <img id="player2Cam" className="photo" src={player2Cam} />}
+            {mySeat != 3 && <img id="player3Cam" className="photo" src={player3Cam} />}
             {displayDirections
                 &&
                 <div id="directions">
