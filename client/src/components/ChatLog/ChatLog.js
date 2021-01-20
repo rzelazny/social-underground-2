@@ -20,14 +20,9 @@ export function ChatContainer({ socket, email, room }) {
         socket.emit("chat-message", chatMessage)
         console.log("chat message emitted", chatMessage);
         displayChat(chatMessage);
-        // $.post("/api/chat", chatMessage)
-        //     .then((results) => {
-        //         console.log("post chat", results)
 
-        //         //Send the message to the server
-        //         socket.emit("chat-message", chatMessage)
-        //         console.log("chat message emitted");
-        //     })
+        //after displaying, clear out the input form
+        document.getElementById("chat-entry").reset()
     }
 
     //function updates the chat state when the user types
@@ -55,6 +50,7 @@ export function ChatWindow({ children }) {
     );
 }
 
+//function displays chat messages in the chat log
 export function displayChat(message) {
     console.log("displaying message: ", message)
     let chatLine = $("<li>")
@@ -62,10 +58,9 @@ export function displayChat(message) {
 
     chatLine.text(message.email + ": " + message.message);
     $("#chat-log").append(chatLine);
+
     //scroll to the bottom
     chatScroll.scrollTop(1000);
 }
-// export function ChatItem({ children }) {
-//     return <li className="list-group-item">{children}</li>;
-// }
+
 
