@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from 'reactstrap';
+import {socket} from "../Socket/Socket";
 import Webcam from "react-webcam";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css"
 
 function RPSTable() {
 
+    //set up a socket connection when the page is loaded for sending photos
+    useEffect(() => {
+        socket.on("send-photo", photo => {
+            console.log("got opponent's photo");
+            setTheirPhoto(photo);
+        });
+
+        //disconnect when we leave to prevent memory leaks
+        return () => socket.disconnect();
+    }, []);
+
+
     const [camState, setCamState] = useState(false);
-    const [photo, setPhoto] = useState();
+    const [myPhoto, setMyPhoto] = useState();
+    const [theirPhoto, setTheirPhoto] = useState();
     const webcamRef = React.useRef(null);
 
     // Toggle the webcam
@@ -18,7 +32,8 @@ function RPSTable() {
     //Take a photo snapshot
     const screenshot = React.useCallback(
         () => {
-            setPhoto(webcamRef.current.getScreenshot());
+            setMyPhoto(webcamRef.current.getScreenshot());
+            socket.emit("send-photo", webcamRef.current.getScreenshot())
         },
         [webcamRef]
     );
@@ -73,7 +88,7 @@ function RPSTable() {
     }
 
     return (
-        <div id="RPSTable">
+        <Container id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
 
@@ -97,11 +112,11 @@ function RPSTable() {
                     </Row>
                 </Col>
                 <Col lg="4">
-                    <img id="my-photo" src={photo} />
+                    <img id="my-photo" src={myPhoto} />
                     <div id="rpsCountdown"></div>
                 </Col>
                 <Col lg="4">
-                    <img id="their-photo" src="" />
+                    <img id="their-photo" src={theirPhoto} />
                 </Col>
             </Row>
             <Row>
@@ -125,7 +140,7 @@ function RPSTable() {
                 </Col>
                 <Col lg="4"></Col>
             </Row>
-        </div>
+        </Container>
     );
 }
 
