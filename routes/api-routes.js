@@ -191,14 +191,12 @@ router.post("/newtable", function (req, res) {
 
 // updating the table name to single player blackjack
 //Endpoint: api/table/blackjack
-router.get("/table/blackjack", function (req, res) {
+router.post("/blackjack/:id", function (req, res) {
+	//accept game type
+	//then update game
 	db.Table.updateOne(
 		{_id: req.params.table}, {
-			game: {
-				type: String,
-				allowNull: false,
-				default: "Blackjack"
-			}
+			game: "Blackjack"
 		})
 	.then(function (results) {
 		console.log("Returning updated data for table ", results);

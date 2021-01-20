@@ -40,7 +40,11 @@ function GamingTable() {
         setFormDisplay(false);
         setDisplayGame("blackjack");
         // change table name to blackjack
-        $.get("/api/Table/blackjack").then((results) => {
+
+        //.ajax // put requst to /api/Table/~tableid
+        // pass info on type of game (another param or req.body)
+        $.post("/api/blackjack/" + curTable)
+        .then((results) => {
             console.log(results)
         })
     }
