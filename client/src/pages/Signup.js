@@ -51,7 +51,7 @@ function Signup() {
         })
             .then(function (data) {
                 console.log(data);
-                //window.location.replace("/home");
+                window.location.replace("/home");
                 // If there's an error, handle it by throwing up a bootstrap alert
             })
             .catch(handleLoginErr);
