@@ -74,9 +74,10 @@ function RPSTable() {
         <div id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
-            {camState && <Webcam  />}
+            
             <Row>
                 <Col lg="4">
+                {camState && <Webcam />}
                     <Row>
                         <Col lg="4">
                             <button id="camBtnOn" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam On</button>

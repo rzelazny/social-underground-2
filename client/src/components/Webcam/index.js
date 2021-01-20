@@ -12,7 +12,7 @@ export function Webcam() {
             mirrored={true}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            style={{ height: "360px", width: "360px", display: "block" }}
+            style={{ height: "360px", width: "360px", zIndex: "1000"}}
         />
     </div>)
 }

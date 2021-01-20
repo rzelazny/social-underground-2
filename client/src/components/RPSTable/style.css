@@ -18,7 +18,11 @@
 #their-photo{
     display: none;
 }
+
 #webcam{
-    width: 320; 
-    height: 240;
+    position: relative;
+    padding: 5px;
+    height: 0;
+    overflow: hidden;
+    display: block;
 }
