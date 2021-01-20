@@ -56,6 +56,27 @@ io.on("connection", (socket) => {
     socket.to(chatMessage.room).emit("update-chat", chatMessage);
   });
 
+  //User has sent a photo to the server
+  socket.on("send-photo", (photo) => {
+    console.log("server got photo");
+    socket.to(photo.room).emit("send-photo", photo);
+  });
+
+  //Player1 has sent a webcam frame to the server
+  socket.on("send-frame-1", (frame) => {
+    socket.to(frame.room).emit("send-frame-1", frame);
+  });
+
+  //Player2 has sent a webcam frame to the server
+  socket.on("send-frame-2", (frame) => {
+    socket.to(frame.room).emit("send-frame-2", frame);
+  });
+
+  //Player3 has sent a webcam frame to the server
+  socket.on("send-frame-3", (frame) => {
+    socket.to(frame.room).emit("send-frame-3", frame);
+  });
+
 });
 
 // Start the API server

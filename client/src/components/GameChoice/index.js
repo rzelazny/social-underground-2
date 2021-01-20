@@ -6,7 +6,7 @@ import BlackjackTable from "../BlackjackTable";
 import RPSTable from "../RPSTable";
 import WerewolfTable from "../WerewolfTable";
 
-function GamingTable() {
+function GamingTable({room, curTable}) {
 
     const [formDisplay, setFormDisplay] = useState(true);
     const [displayGame, setDisplayGame] = useState();
@@ -139,9 +139,9 @@ function GamingTable() {
             {displayGame === "blackjack"
                 && <BlackjackTable />}
             {displayGame === "rps"
-                && <RPSTable />}
+                && <RPSTable room={room}/>}
             {displayGame === "werewolf"
-                && <WerewolfTable />}
+                && <WerewolfTable room={room} curTable={curTable}/>}
         </Container>
     );
 }

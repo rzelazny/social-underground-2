@@ -9,3 +9,9 @@
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
 }
+
+.photo{
+    height: 360px;
+    width: 360px;
+    object-fit: cover;
+}

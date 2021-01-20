@@ -1,103 +1,123 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import { Webcam } from "../Webcam";
-
+import { socket } from "../Socket/Socket";
+import Webcam from "react-webcam";
+import useSound from 'use-sound';
+import beepSfx from "../sounds/beep.wav";
+import boopSfx from "../sounds/boop.wav";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+function RPSTable({ room }) {
 
-function RPSTable() {
+    //set up a socket connection when the page is loaded for sending photos
+    useEffect(() => {
+        socket.on("send-photo", photo => {
+            console.log("got opponent's photo");
+            setTheirPhoto(photo.photo);
+        });
+
+        //disconnect when we leave to prevent memory leaks
+        return () => socket.disconnect();
+    }, []);
+
 
     const [camState, setCamState] = useState(false);
+    const [myPhoto, setMyPhoto] = useState();
+    const [theirPhoto, setTheirPhoto] = useState();
+    const [countdown, setCountdown] = useState("");
+    const webcamRef = React.useRef(null);
 
-    // //Turn on the camera
+    // Toggle the webcam
     function enableWebcam(event) {
-        //prompt user to start their camera
         setCamState(!camState);
     }
 
-    // //Turn off the camera
-    // function webcamOff(event) {
-    //     webcam.stop();
-    // }
+    //Take a photo snapshot
+    const screenshot = React.useCallback(
+        () => {
+            setMyPhoto(webcamRef.current.getScreenshot());
+        },
+        [webcamRef]
+    );
 
-    var curTable = document.defaultView.location.pathname.split("casino/").pop();
+    //sound effects for the RPS countdown
+    const [playBoop] = useSound(boopSfx, { volume: 0.5 });
+    const [playBeep] = useSound(beepSfx, { volume: 0.5 });
 
     //Play Rock Paper Scissors
     function playRPS(event) {
-        //     let timer = 4
-        //     let oppEmail = $("#select-RPS-opponent").val();
+        let timer = 4
 
-        //     //set the countdown
-        //     let rpsTimer = setInterval(function () {
-        //         timer--
-        //         switch (timer) {
-        //             case 3:
-        //                 $("#rpsCountdown").text("Rock");
-        //                 break;
-        //             case 2:
-        //                 $("#rpsCountdown").text("Paper");
-        //                 break;
-        //             case 1:
-        //                 $("#rpsCountdown").text("Scissors");
-        //                 break;
-        //             case 0:
-        //                 $("#rpsCountdown").text("Shoot!");
-        //                 break;
-        //         }
+        //set the countdown
+        let rpsTimer = setInterval(function () {
+            timer--
+            switch (timer) {
+                case 3:
+                    setCountdown("Rock");
+                    playBeep();
+                    break;
+                case 2:
+                    setCountdown("Paper");
+                    playBeep();
+                    break;
+                case 1:
+                    setCountdown("Scissors");
+                    playBeep();
+                    break;
+                case 0:
+                    setCountdown("Shoot!");
+                    playBoop();
+                    break;
+            }
 
-        //         console.log(timer);
-        //         if (timer === 0) { //when the timer runs out...
-        //             clearInterval(rpsTimer);
-        //             //take the picture
-        //             let sendPic = {
-        //                 photo: webcam.snap(),
-        //                 table: curTable
-        //             }
-        //             //and post it to the db
-        //             console.log("Sending photo");
-        //             myPhoto.src = sendPic.photo;
-        //             myPhoto.style = "display: block;";
-        //             $.post("/api/photo/", sendPic);
-
-        //             //Then get the opponent's most most recent photo
-        //             $.get("/api/photo/" + oppEmail + "/" + curTable).then(function (data) {
-        //                 //unhide the photo element and set the source to the decoded image data
-        //                 theirPhoto.style = "display: block;"
-        //                 theirPhoto.src = "data:image/png;base64," + atob(data[0].photo);
-        //             })
-        //         }
-        //     }, 1000);
+            console.log(timer);
+            if (timer === 0) { //when the timer runs out...
+                clearInterval(rpsTimer);
+                //take the picture
+                setMyPhoto(webcamRef.current.getScreenshot());
+                let sendPhoto = {
+                    photo: webcamRef.current.getScreenshot(),
+                    room: room
+                }
+                //and send it to the server
+                socket.emit("send-photo", sendPhoto);
+            }
+        }, 1000);
     }
 
     return (
-        <div id="RPSTable">
+        <Container id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
-            {camState && <Webcam  />}
             <Row>
                 <Col lg="4">
+                    {camState && <Webcam
+                        id="webcam"
+                        audio={false}
+                        mirrored={true}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        style={{ height: "360px", width: "360px", zIndex: "1000" }}
+                    />}
                     <Row>
-                        <Col lg="4">
-                            <button id="camBtnOn" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam On</button>
+                        <Col lg="6">
+                            <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
                         </Col>
-                        <Col lg="4">
-                            <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam Off</button>
-                        </Col>
-                        <Col lg="4">
-                            <button id="camSnap" className="btn btn-dark mb-1">Snapshot</button>
+                        <Col lg="6">
+                            <button id="camSnap" className="btn btn-dark mb-1" onClick={screenshot}>Snapshot</button>
                         </Col>
                     </Row>
                 </Col>
                 <Col lg="4">
-                    <img id="my-photo" src="" />
-                    <div id="rpsCountdown"></div>
+                    <img id="my-photo" className="photo" src={myPhoto} />
+                    <div id="rpsCountdown">{countdown}</div>
                 </Col>
                 <Col lg="4">
-                    <img id="their-photo" src="" />
+                    <img id="their-photo" className="photo" src={theirPhoto} />
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col md="12">
                     <form>
                         <label htmlFor="form-group row">Who do you challenge?</label>
@@ -110,7 +130,8 @@ function RPSTable() {
                         </select>
                     </form>
                 </Col>
-            </Row>
+            </Row> */}
+            <br />
             <Row>
                 <Col lg="4"></Col>
                 <Col lg="4">
@@ -118,7 +139,7 @@ function RPSTable() {
                 </Col>
                 <Col lg="4"></Col>
             </Row>
-        </div>
+        </Container>
     );
 }
 
