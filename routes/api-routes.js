@@ -189,6 +189,7 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
+<<<<<<< HEAD
 // updating the table name to single player blackjack
 //Endpoint: api/table/blackjack
 router.post("/blackjack/:id", function (req, res) {
@@ -248,6 +249,31 @@ router.get("/table/werewolf", function (req, res) {
 })
 
 
+=======
+// Route for finding a player's seat at the table
+// Endpoint: /api/myseat/
+router.get("/myseat/:table", function (req, res) {
+	console.log("Getting the seat for ", req.user.email);
+	db.Table.findById(req.params.table)
+	.then(function (results) {
+		console.log("Returning seat for ", req.user.email);
+		console.log("results", results);
+		let seat = 0;
+		if(results.user1 === req.user.email){
+			seat = 1;
+		}else if(results.user2 === req.user.email){
+			seat = 2;
+		}else if(results.user3 === req.user.email){
+			seat = 3;
+		}else if(results.user4 === req.user.email){
+			seat = 4;
+		}else if(results.user5 === req.user.email){
+			seat = 5;
+		}
+		return res.json(seat);
+	})
+});
+>>>>>>> main
 
 // //get all running games for the setup page
 // // Endpoint: /allgames

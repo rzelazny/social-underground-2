@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import $ from "jquery";
 import "./style.css"
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Webcam from "react-webcam";
+import { socket } from "../Socket/Socket";
 import WerewolfGame3 from "../WerewolfGame3";
 import WerewolfGame4 from "../WerewolfGame4";
 import WerewolfGame5 from "../WerewolfGame5";
@@ -10,8 +13,50 @@ import WerewolfGame7 from "../WerewolfGame7";
 
 var players = 0;
 
-function WerewolfTable() {
+function WerewolfTable({ room, curTable }) {
 
+    //set up a socket connection when the page is loaded for sending photos
+    useEffect(() => {
+        socket.on("send-frame-1", frame => {
+            console.log("got opponent's photo");
+            setP1Cam(frame.frame);
+        });
+        socket.on("send-frame-2", frame => {
+            console.log("got opponent's photo");
+            setP2Cam(frame.frame);
+        });
+        socket.on("send-frame-3", frame => {
+            console.log("got opponent's photo");
+            setP3Cam(frame.frame);
+        });
+
+        $.get("/api/myseat/" + curTable)
+            .then((seat) => {
+                console.log("got my seat:", seat);
+                setMySeat(seat);
+            })
+
+        //disconnect when we leave to prevent memory leaks
+        return () => socket.disconnect();
+    }, []);
+
+    //send a frame from the wecam to the server
+    const FPS = 10;
+    setInterval(() => {
+        let sendFrame = {
+            frame: webcamRef.current.getScreenshot(),
+            room: room,
+            seat: mySeat
+        }
+        //and send it to the server
+        socket.emit("send-frame-" + mySeat, sendFrame);
+    }, 1000 / FPS);
+
+    const webcamRef = React.useRef(null);
+    const [player1Cam, setP1Cam] = useState();
+    const [player2Cam, setP2Cam] = useState();
+    const [player3Cam, setP3Cam] = useState();
+    const [mySeat, setMySeat] = useState();
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState();
 
@@ -50,6 +95,17 @@ function WerewolfTable() {
         <Container id="werewolfTable">
             <h2>Beast</h2>
             <br />
+            <Webcam
+                id="webcam"
+                audio={true}
+                mirrored={true}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                style={{ height: "360px", width: "360px", zIndex: "1000" }}
+            />
+            {mySeat != 1 && <img id="player1Cam" className="photo" src={player1Cam} />}
+            {mySeat != 2 && <img id="player2Cam" className="photo" src={player2Cam} />}
+            {mySeat != 3 && <img id="player3Cam" className="photo" src={player3Cam} />}
             {displayDirections
                 &&
                 <div id="directions">
