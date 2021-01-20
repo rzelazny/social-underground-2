@@ -214,7 +214,7 @@ router.get("/UserStats", function (req, res) {
 });
 
 router.post("UserStats/:id", (req, res) => {
-	db.userstats.updateOne(
+	db.UserStats.updateOne(
 		{ _id: req.params.id }, req.body)
 		.then(statsData => {
 			console.log("Stats Data: ", statsData);

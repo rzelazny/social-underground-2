@@ -11,21 +11,21 @@ import API from "../../utils/API";
 // to do :
     //connect the score with the users membership page
     //currently hard coded... change the players name from player 1 to the players username
-    //fix play again btn
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// temporarily hard coded -- pull from db //
+var player1Name = "Player 1";
+
 // to be saved in the players db //
-var houseScore = 0;
-var player1Score = 0;
+var houseScore = 0; // set equal to db (saved as players losses)
+var player1Score = 0; // set equal to db (saved as players wins)
 
 // to keep track of the winner for the scorecard //
 var winner = "";
+
 var houseHandVal = 0;
 var p1HandVal = 0;
-
-// temporarily hard coded -- pull from db //
-var player1Name = "Player 1";
 
 function BlackjackGame() {
     // set states //

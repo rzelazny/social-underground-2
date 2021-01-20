@@ -4,55 +4,59 @@ import "./MemberCard.css";
 import $ from "jquery";
 
 function MemberCard() {
+    const [email, setEmail] = useState(null);
 
     function stats() {
-        $.get("/api/UserStats").then((results) => console.log(results))
+        $.get("/api/UserStats").then((results) => {
+            console.log(results)
+            setEmail(results.email)
+        })
     }
     stats();
 
-    function MyComponent() {
-        const [error, setError] = useState(null);
-        const [isLoaded, setIsLoaded] = useState(false);
-        const [items, setItems] = useState([]);
+    // function MyComponent() {
+    //     const [error, setError] = useState(null);
+    //     const [isLoaded, setIsLoaded] = useState(false);
+    //     const [items, setItems] = useState([]);
 
-        // Note: the empty deps array [] means
-        // this useEffect will run once
-        // similar to componentDidMount()
-        useEffect(() => {
-            fetch("api/UserStats")
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        setIsLoaded(true);
-                        setItems(result);
-                    },
-                    // Note: it's important to handle errors here
-                    // instead of a catch() block so that we don't swallow
-                    // exceptions from actual bugs in components.
-                    (error) => {
-                        setIsLoaded(true);
-                        setError(error);
-                    }
-                )
-        }, [])
+    //     // Note: the empty deps array [] means
+    //     // this useEffect will run once
+    //     // similar to componentDidMount()
+    //     useEffect(() => {
+    //         fetch("api/UserStats")
+    //             .then(res => res.json())
+    //             .then(
+    //                 (res) => {
+    //                     setIsLoaded(true);
+    //                     setItems(result);
+    //                 },
+    //                 // Note: it's important to handle errors here
+    //                 // instead of a catch() block so that we don't swallow
+    //                 // exceptions from actual bugs in components.
+    //                 (error) => {
+    //                     setIsLoaded(true);
+    //                     setError(error);
+    //                 }
+    //             )
+    //     }, [])
 
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            return (
-                <ul>
-                    {items.map(item => (
-                        <li key={item.id}>
-                            {item.name} 
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
-    MyComponent();
+    //     if (error) {
+    //         return <div>Error: {error.message}</div>;
+    //     } else if (!isLoaded) {
+    //         return <div>Loading...</div>;
+    //     } else {
+    //         return (
+    //             <ul>
+    //                 {items.map(item => (
+    //                     <li key={item.id}>
+    //                         {item.name} 
+    //                     </li>
+    //                 ))}
+    //             </ul>
+    //         );
+    //     }
+    // }
+    // MyComponent();
 
     return (
         <div className="cards">
@@ -61,8 +65,7 @@ function MemberCard() {
                 <div className="cards__wrapper">
                     <div className="cards__items">
                         <MemberItem
-                            text=" 
-                            Name: {item.name}"
+                            text={email}
                             
                             label="Stats"
                             path="/member"
