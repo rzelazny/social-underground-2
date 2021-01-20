@@ -79,13 +79,10 @@ function RPSTable() {
                 <Col lg="4">
                 {camState && <Webcam />}
                     <Row>
-                        <Col lg="4">
-                            <button id="camBtnOn" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam On</button>
+                        <Col lg="6">
+                            <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
                         </Col>
-                        <Col lg="4">
-                            <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam Off</button>
-                        </Col>
-                        <Col lg="4">
+                        <Col lg="6">
                             <button id="camSnap" className="btn btn-dark mb-1">Snapshot</button>
                         </Col>
                     </Row>
