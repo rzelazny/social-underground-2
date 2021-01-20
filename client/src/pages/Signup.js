@@ -10,6 +10,7 @@ function Signup() {
 
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
+    const [reenterPw, setReenterPw] = useState([]);
 
     const handleEmailChange = event => {
         console.log("form changed");
@@ -20,6 +21,11 @@ function Signup() {
     const handlePassChange = event => {
         const { value } = event.target;
         setPassword(value);
+    };
+
+    const handleReenterPw = event => {
+        const { value } = event.target;
+        setReenterPw(value);
     }
 
     // When the signup button is clicked, we validate the email and password are not blank
@@ -78,6 +84,11 @@ function Signup() {
                                 <label htmlFor="exampleInputPassword1">Password</label>
                                 <input type="password" className="form-control" id="password-input" placeholder="Password"
                                     onChange={handlePassChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Re-Enter Password</label>
+                                <input type="password" className="form-control" id="password-input" placeholder="Password"
+                                    onChange={handleReenterPw} />
                             </div>
                             <div style={{ display: "none" }} id="alert" className="alert alert-danger" role="alert">
                                 <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
