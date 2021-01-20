@@ -3,7 +3,7 @@ import { Container } from "reactstrap";
 import $ from "jquery";
 import NewBtn from "../components/NewBtn/";
 import NeonSign from "../components/NeonSign/NeonSign";
-import Nav from "./components/Nav/Navbar";
+import Nav from "../components/Nav/Navbar";
 
 function Home() {
 

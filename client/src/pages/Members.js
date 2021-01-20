@@ -3,7 +3,6 @@ import Nav from "../components/Nav/Navbar"
 // import $ from "jquery";
 import MemberSection from "../components/Members/MemberSection"
 import MemberCard from "../components/Members/MemberCard"
-import Nav from "./components/Nav/Navbar";
 
 function Members() {
 

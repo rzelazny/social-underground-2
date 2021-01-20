@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import {socket} from "../components/Socket/Socket";
 import GamingTable from "../components/GamingTable";
-import Nav from "./components/Nav/Navbar";
+import Nav from "../components/Nav/Navbar";
 import { ChatContainer, ChatWindow, displayChat } from "../components/ChatLog/ChatLog";
 
 var curTable = document.defaultView.location.pathname.split("casino/").pop();
@@ -50,7 +50,7 @@ function Casino() {
 
     return (
         <div>
-            <Nav />
+            <Nav page={curTable} socket={socket} email={curEmail} room={chatRoom}/>
             <GamingTable room={chatRoom} curTable={curTable}/>
             <br />
             <ChatWindow />

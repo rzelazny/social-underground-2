@@ -4,7 +4,7 @@ import './Navbar.css';
 import $ from 'jquery';
 import Dropdown from '../Dropdown/Dropdown';
 
-function Navbar() {
+function Navbar({page, socket, email, room}) {
     const [click, setClick] = useState(false);
     // const [dropdown, setDropdown] = useState(false);
 
@@ -19,9 +19,43 @@ function Navbar() {
     //         setDropdown(false);     
     // };
 
+    //logout functionality
     function logout(){
         console.log(`logging out`)
-        $.get("/api/logout")
+        //If page isn't blank they're coming from the casino so there's extra work to do
+        if(page){
+            //post a leaving chat message
+            let chatMessage = {
+                email: email,
+                message: " has left the chat.",
+                room: room
+            };
+            socket.emit("chat-message", chatMessage)
+
+            //get the user's seat so it can be opened up in the db
+            $.get("/api/myseat/" + page)
+            .then((seat) => {
+                console.log("got my seat:", seat);
+                let tableUpdate = {
+                    column: "user" + seat,
+                    data: "Open Seat"
+                }
+                //open up the seat at the table
+                $.post("/api/table/" + page, tableUpdate)
+                .then(()=>{
+                    //now log out
+                    $.get("/api/logout")
+                    .then(function (user) {
+                        // If there's an error, log the error
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+                })
+            })         
+        }
+        else{
+            $.get("/api/logout")
             .then(function (user) {
                 // If there's an error, log the error
             })
@@ -29,6 +63,8 @@ function Navbar() {
                 console.log(err);
             });
     }
+        }
+        
 
     return (
 
