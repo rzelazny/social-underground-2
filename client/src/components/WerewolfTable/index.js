@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import $ from "jquery";
 import "./style.css"
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,32 +12,40 @@ import WerewolfGame6 from "../WerewolfGame6";
 import WerewolfGame7 from "../WerewolfGame7";
 
 var players = 0;
+let mySeat = "";
 
-function WerewolfTable({ room }) {
+function WerewolfTable({ room, curTable }) {
 
     //set up a socket connection when the page is loaded for sending photos
     useEffect(() => {
         socket.on("send-photo", stream => {
-            console.log("got a stream");
-            setTheirPhoto(stream.photo);
+            set2PCam(stream.photo);
         });
+
+        $.get("/api/myseat/" + curTable)
+            .then((seat) => {
+                console.log("got my seat:", seat);
+                mySeat = seat;
+            })
 
         //disconnect when we leave to prevent memory leaks
         return () => socket.disconnect();
     }, []);
 
-    const FPS = 3;
+    //send a frame from the wecam to the server
+    const FPS = 10;
     setInterval(() => {
-        let sendPhoto = {
-            photo: webcamRef.current.getScreenshot(),
-            room: room
+        let sendFrame = {
+            frame: webcamRef.current.getScreenshot(),
+            room: room,
+            seat: mySeat
         }
         //and send it to the server
-        socket.emit("send-photo", sendPhoto);
+        socket.emit("send-frame-" + mySeat, sendFrame);
     }, 1000 / FPS);
 
     const webcamRef = React.useRef(null);
-    const [theirPhoto, setTheirPhoto] = useState();
+    const [player2Cam, set2PCam] = useState();
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState();
 
@@ -77,13 +86,13 @@ function WerewolfTable({ room }) {
             <br />
             <Webcam
                 id="webcam"
-                audio={false}
+                audio={true}
                 mirrored={true}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 style={{ height: "360px", width: "360px", zIndex: "1000" }}
             />
-            <img id="their-photo" className="photo" src={theirPhoto} />
+            <img id="player2Cam" className="photo" src={player2Cam} />
             {displayDirections
                 &&
                 <div id="directions">

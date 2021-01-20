@@ -189,7 +189,17 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
-
+// Route for finding a player's seat at the table
+// Endpoint: /api/myseat/
+router.get("/myseat/:table", function (req, res) {
+	console.log("Getting the seat for ", req.user.email);
+	db.Table.findById(req.params.table)
+	.then(function (results) {
+		console.log("Returning seat for ", req.user.email);
+		console.log("results", results);
+		return res.send(results);
+	})
+});
 
 // //get all running games for the setup page
 // // Endpoint: /allgames

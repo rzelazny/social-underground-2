@@ -49,7 +49,7 @@ function Casino() {
 
     return (
         <div>
-            <GamingTable room={chatRoom}/>
+            <GamingTable room={chatRoom} table={curTable}/>
             <br />
             <ChatWindow />
             <ChatContainer socket={socket} email={curEmail} room={chatRoom} />
