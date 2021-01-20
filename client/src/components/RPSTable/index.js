@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import { Webcam } from "../Webcam";
-
-import "./style.css"
-
+import Webcam from "react-webcam";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./style.css"
 
 function RPSTable() {
 
     const [camState, setCamState] = useState(false);
+    const [photo, setPhoto] = useState();
+    const webcamRef = React.useRef(null);
 
-    // //Turn on the camera
+    // Toggle the webcam
     function enableWebcam(event) {
-        //prompt user to start their camera
         setCamState(!camState);
     }
 
-    // //Turn off the camera
-    // function webcamOff(event) {
-    //     webcam.stop();
-    // }
+    //Take a photo snapshot
+    const screenshot = React.useCallback(
+        () => {
+            setPhoto(webcamRef.current.getScreenshot());
+        },
+        [webcamRef]
+    );
 
     var curTable = document.defaultView.location.pathname.split("casino/").pop();
 
@@ -74,21 +76,28 @@ function RPSTable() {
         <div id="RPSTable">
             <h2>Rock Paper Scissors Competition</h2>
             <br />
-            
+
             <Row>
                 <Col lg="4">
-                {camState && <Webcam />}
+                    {camState && <Webcam
+                        id="webcam"
+                        audio={false}
+                        mirrored={true}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        style={{ height: "360px", width: "360px", zIndex: "1000" }}
+                    />}
                     <Row>
                         <Col lg="6">
                             <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
                         </Col>
                         <Col lg="6">
-                            <button id="camSnap" className="btn btn-dark mb-1">Snapshot</button>
+                            <button id="camSnap" className="btn btn-dark mb-1" onClick={screenshot}>Snapshot</button>
                         </Col>
                     </Row>
                 </Col>
                 <Col lg="4">
-                    <img id="my-photo" src="" />
+                    <img id="my-photo" src={photo} />
                     <div id="rpsCountdown"></div>
                 </Col>
                 <Col lg="4">
