@@ -189,6 +189,66 @@ router.post("/newtable", function (req, res) {
 		});
 });
 
+// updating the table name to single player blackjack
+//Endpoint: api/table/blackjack
+router.get("/table/blackjack", function (re, res) {
+	db.Table.updateOne(
+		{_id: req.params.table}, {
+			game: {
+				type: String,
+				allowNull: false,
+				default: "Blackjack"
+			}
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to single player blackjack
+//Endpoint: api/table/rps
+router.get("/table/rps", function (re, res) {
+	db.Table.updateOne(
+		{_id: req.params.table}, {
+			game: {
+				type: String,
+				allowNull: false,
+				default: "Rock Paper Scissors"
+			}
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
+// updating the table name to single player blackjack
+//Endpoint: api/table/werewolf
+router.get("/table/rps", function (re, res) {
+	db.Table.updateOne(
+		{_id: req.params.table}, {
+			game: {
+				type: String,
+				allowNull: false,
+				default: "Werewolf"
+			}
+		})
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+	.catch(function (err) {
+		return res.status(401).json(err);
+	});
+})
+
 
 
 // //get all running games for the setup page
