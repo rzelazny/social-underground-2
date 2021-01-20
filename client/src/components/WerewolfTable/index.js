@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css"
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Webcam from "react-webcam";
+import { socket } from "../Socket/Socket";
 import WerewolfGame3 from "../WerewolfGame3";
 import WerewolfGame4 from "../WerewolfGame4";
 import WerewolfGame5 from "../WerewolfGame5";
@@ -10,8 +12,31 @@ import WerewolfGame7 from "../WerewolfGame7";
 
 var players = 0;
 
-function WerewolfTable() {
+function WerewolfTable({ room }) {
 
+    //set up a socket connection when the page is loaded for sending photos
+    useEffect(() => {
+        socket.on("send-photo", stream => {
+            console.log("got a stream");
+            setTheirPhoto(stream.photo);
+        });
+
+        //disconnect when we leave to prevent memory leaks
+        return () => socket.disconnect();
+    }, []);
+
+    const FPS = 3;
+    setInterval(() => {
+        let sendPhoto = {
+            photo: webcamRef.current.getScreenshot(),
+            room: room
+        }
+        //and send it to the server
+        socket.emit("send-photo", sendPhoto);
+    }, 1000 / FPS);
+
+    const webcamRef = React.useRef(null);
+    const [theirPhoto, setTheirPhoto] = useState();
     const [displayDirections, setDisplayDirections] = useState(true);
     const [startGame, setStartGame] = useState();
 
@@ -50,6 +75,15 @@ function WerewolfTable() {
         <Container id="werewolfTable">
             <h2>Beast</h2>
             <br />
+            <Webcam
+                id="webcam"
+                audio={false}
+                mirrored={true}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                style={{ height: "360px", width: "360px", zIndex: "1000" }}
+            />
+            <img id="their-photo" className="photo" src={theirPhoto} />
             {displayDirections
                 &&
                 <div id="directions">

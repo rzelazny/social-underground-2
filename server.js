@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
 
   //User has sent a photo to the server
   socket.on("send-photo", (photo) => {
-    console.log("Server got photo");
+    //console.log("Server got photo");
     socket.to(photo.room).emit("send-photo", photo);
   });
 
