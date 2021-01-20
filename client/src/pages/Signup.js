@@ -40,7 +40,6 @@ function Signup() {
             return;
         };
         if (password !== reenterPw) {
-            console.log("Passwords don't match");
             handlePasswordErr();
             return;
         }
