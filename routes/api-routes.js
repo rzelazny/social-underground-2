@@ -153,11 +153,12 @@ router.post("/cleanup", function (req, res) {
 		}
 	})
 		.then(function (results) {
+			console.log("cleanup results:", results);
 			if (results != null) {
 				for (i = 0; i < results.length; i++) {
 					db.gaming_table.deleteOne({
-						id: {
-							$eq: results[i].id //might need to be _id
+						_id: {
+							$eq: results[i]._id //might need to be _id
 						}
 					})
 					console.log("deleting empty table", results[i].id)
