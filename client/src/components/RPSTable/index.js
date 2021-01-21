@@ -21,7 +21,7 @@ function RPSTable({ room }) {
 
         socket.on("start-rps", () => {
             console.log("starting rps");
-            playRPS();
+            playRPS("oppStarted"); //other player started so we won't emit a start-rps
         });
 
         //disconnect when we leave to prevent memory leaks
@@ -53,11 +53,13 @@ function RPSTable({ room }) {
     const [playBeep] = useSound(beepSfx, { volume: 0.5 });
 
     //Play Rock Paper Scissors
-    function playRPS(event) {
+    function playRPS(starter) {
+        console.log("rps starter: ", starter);
         let timer = 4
 
         //altering others the game has started
-        socket.emit("start-rps", room);
+        if(starter === "me"){
+        socket.emit("start-rps", room)};
 
         //set the countdown
         let rpsTimer = setInterval(function () {
@@ -145,7 +147,7 @@ function RPSTable({ room }) {
             <Row>
                 <Col lg="4"></Col>
                 <Col lg="4" className="play-rps-col">
-                    <button id="camBtnRPS" onClick={playRPS} className="btn btn-dark mb-2">Play Rock Paper Scissors</button>
+                    <button id="camBtnRPS" onClick={()=>playRPS("me")} className="btn btn-dark mb-2">Play Rock Paper Scissors</button>
                 </Col>
                 <Col lg="4"></Col>
             </Row>
