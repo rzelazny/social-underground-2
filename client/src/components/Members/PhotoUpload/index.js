@@ -1,5 +1,5 @@
 import React from "react";
-import "./PhotoUpload.css"
+import "./style.css"
 
 class PhotoUpload extends React.Component {
     constructor(props) {
