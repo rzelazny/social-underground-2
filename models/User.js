@@ -14,10 +14,10 @@ const User = new Schema({
 		type: String,
 		allowNull: false
 	},
-	// userstats: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "UserStats"
-	// }
+	username: {
+		type: String,
+		allowNull: false,
+	},
 	blackjack_win: {
 		type: Number,
 		default: 0
