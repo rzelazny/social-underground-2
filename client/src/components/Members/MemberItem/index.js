@@ -7,7 +7,7 @@ import "./style.css";
 function MemberItem(props) {
     return (
 
-        <li className="cards__item">
+        <div className="cards__item">
             <PhotoUpload />
             <Card className="cards__item__link">
                 <CardBody>
@@ -15,12 +15,12 @@ function MemberItem(props) {
                     <hr />
                     <CardSubtitle tag="h4">Blackjack Stats:</CardSubtitle>
                     <br />
-                        <p className="data" tag="h6">Lifetime Blackjack Winnings: {props.blackjackWin}</p>
-                        <p className="data" tag="h6">Lifetime Blackjack Losses: {props.blackjackLosses}</p>
-                        <p className="data" tag="h6">Blackjack Ratio: {props.blackjackRatio}</p>
+                        <p className="data" tag="h6">&bull; Lifetime Blackjack Winnings: {props.blackjackWin}</p>
+                        <p className="data" tag="h6">&bull; Lifetime Blackjack Losses: {props.blackjackLosses}</p>
+                        <p className="data" tag="h6">&bull; Blackjack Ratio: {props.blackjackRatio}</p>
                 </CardBody>
             </Card>
-        </li>
+        </div>
 
     )
 }
