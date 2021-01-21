@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import $ from "jquery";
 import "./chatlog.css"
 import { Container } from 'reactstrap';

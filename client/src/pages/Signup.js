@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import $ from 'jquery';
 import { Container } from "reactstrap";
 
 function Signup() {
-    // var script = document.createElement('script');
-    // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-    // script.type = 'text/javascript';
-    // document.getElementsByTagName('head')[0].appendChild(script);
 
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
     const [reenterPw, setReenterPw] = useState([]);
 
+    //set state when email is changed
     const handleEmailChange = event => {
         console.log("form changed");
         const { value } = event.target;
         setEmail(value);
     };
 
+    //set state when password is changed
     const handlePassChange = event => {
         const { value } = event.target;
         setPassword(value);
     };
 
+    //set state when password2 is changed
     const handleReenterPw = event => {
         const { value } = event.target;
         setReenterPw(value);
@@ -45,8 +44,6 @@ function Signup() {
         }
         // If we have an email and password, run the signUpUser function
         signUpUser(userData.email, userData.password);
-        //emailInput.val("");
-        //passwordInput.val("");
 
     };
 
@@ -67,12 +64,14 @@ function Signup() {
             .catch(handleLoginErr);
     }
 
+    //function handles login errors
     function handleLoginErr(err) {
-        console.log("error line 62", err)
+        console.log("error with login", err)
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);
     }
 
+    //function handles mismatched password errors
     function handlePasswordErr(err) {
         $("#alert .msg").text("Passwords don't match!");
         $("#alert").fadeIn(500);
