@@ -20,7 +20,7 @@ function MemberItem(props) {
     function updateUsername() {
         console.log("will update username");
         $.post("/api/update_username", {username: username});
-        window.location.reload(false);
+        //window.location.reload();
     }
 
     return (
