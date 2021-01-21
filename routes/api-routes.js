@@ -53,7 +53,8 @@ router.get("/user_data", function (req, res) {
 		// Sending back a password, even a hashed password, isn't a good idea
 		res.json({
 			email: req.user.email,
-			id: req.user.id
+			id: req.user.id,
+			username: req.user.username
 		});
 	}
 });
@@ -287,7 +288,7 @@ router.get("/UserPro", function (req, res) {
 router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
-		email: req.user.email
+		username: req.user.username
 	})
 	.then(function (results) {
 		console.log("get tables returning data", results);
@@ -335,5 +336,21 @@ router.post("/UserLose", function (req, res) {
 // 			res.status(404).json(err);
 // 		});
 // });
+
+router.post("/update_username", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["username"] = req.body.username
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{username: req.user.username}
+		, tableUpdateData
+		)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+});
 
 module.exports = router;

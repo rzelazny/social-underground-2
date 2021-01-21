@@ -14,6 +14,10 @@ const User = new Schema({
 		type: String,
 		allowNull: false
 	},
+	username: {
+		type: String,
+		allowNull: false,
+	},
 	blackjack_win: {
 		type: Number,
 		default: 0

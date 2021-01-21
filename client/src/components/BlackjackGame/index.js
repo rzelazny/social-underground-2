@@ -17,7 +17,7 @@ import $ from "jquery";
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // temporarily hard coded -- pull from db //
-var player1Name = "Player 1";
+var player1Name = "";
 
 // to be saved in the players db //
 var houseScore = 0; // set equal to db (saved as players losses)
@@ -28,6 +28,7 @@ function stats() {
         console.log(results)
         player1Score = (results.blackjack_win)
         houseScore = (results.blackjack_lose)
+        player1Name = (results.username)
     })
 }
 stats();

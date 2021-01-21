@@ -1,8 +1,12 @@
 .data {
     color: black;
-    margin-left: 10px;
+    /* margin-left: 15px; */
 }
 
-#card-title{
+/* #card-title{
     background-color:#aa75e8;
+} */
+
+.username {
+    margin: 5px;
 }
