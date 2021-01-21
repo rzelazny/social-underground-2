@@ -12,9 +12,16 @@ function RPSTable({ room }) {
 
     //set up a socket connection when the page is loaded for sending photos
     useEffect(() => {
+
+        //when the opponent sends their picture display it
         socket.on("send-photo", photo => {
             console.log("got opponent's photo");
             setTheirPhoto(photo.photo);
+        });
+
+        socket.on("start-rps", () => {
+            console.log("starting rps");
+            playRPS();
         });
 
         //disconnect when we leave to prevent memory leaks
@@ -48,6 +55,9 @@ function RPSTable({ room }) {
     //Play Rock Paper Scissors
     function playRPS(event) {
         let timer = 4
+
+        //altering others the game has started
+        socket.emit("start-rps", room);
 
         //set the countdown
         let rpsTimer = setInterval(function () {
@@ -98,7 +108,7 @@ function RPSTable({ room }) {
                         ref={webcamRef}
                         screenshotFormat="image/jpeg"
                         style={{ height: "360px", width: "360px", zIndex: "1000" }}
-                    />: <div style={{ height: "360px"}}></div>}
+                    /> : <div style={{ height: "360px" }}></div>}
                     <Row>
                         <Col lg={{ size: 4, offset: 2 }}>
                             <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
