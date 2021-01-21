@@ -14,10 +14,6 @@ const User = new Schema({
 		type: String,
 		allowNull: false
 	},
-	// userstats: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "UserStats"
-	// }
 	blackjack_win: {
 		type: Number,
 		default: 0
@@ -25,7 +21,10 @@ const User = new Schema({
 	blackjack_lose: {
 		type: Number,
 		default: 0
-	}
+	},
+	// profile: {
+	// 	img: {contextType: String}
+	// }
 });
 
 //Validate hashed password

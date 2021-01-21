@@ -273,6 +273,17 @@ router.get("/myseat/:table", function (req, res) {
 // 		})
 // });
 
+router.get("/UserPro", function (req, res) {
+	console.log(req.user);
+	db.User.findOne({
+		profile: req.user.profile
+	})
+	.then(function (results) {
+		console.log("get tables returning data", results);
+		return res.send(results);
+	})
+});
+
 router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
