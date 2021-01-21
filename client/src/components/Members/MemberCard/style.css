@@ -9,7 +9,8 @@
     text-align: center;
   }
 
-  .cards h2 {
+  .cards h2,
+  .cards h4 {
     color: black;
     text-align: center;
   }
