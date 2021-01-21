@@ -11,7 +11,7 @@ function MemberItem(props) {
             <PhotoUpload />
             <Card className="cards__item__link">
                 <CardBody>
-                    <CardTitle id="card-title" tag="h2">Welcome, {props.username}!</CardTitle>
+                    <CardTitle id="card-title" tag="h4">Display Name: {props.username}!</CardTitle>
                     <hr />
                     <CardSubtitle tag="h4">Blackjack Stats:</CardSubtitle>
                     <br />

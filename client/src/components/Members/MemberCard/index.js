@@ -5,14 +5,14 @@ import "./style.css";
 import $ from "jquery";
 
 function MemberCard() {
-    const [email, setEmail] = useState(null);
+    const [username, setUsername] = useState(null);
     const [win, setWin] = useState();
     const [lose, setLose] = useState(); 
 
     function stats() {
         $.get("/api/UserStats").then((results) => {
             console.log(results)
-            setEmail(results.email)
+            setUsername(results.username)
             setWin(results.blackjack_win)
             setLose(results.blackjack_lose)
         })
@@ -22,12 +22,12 @@ function MemberCard() {
     
     return (
         <div className="cards">
-            <h1>Your Stats</h1>
+            <h1>Welcome, {username}!</h1>
             <div className="cards__container">
                 <div className="cards__wrapper">
                     <div className="cards__items">
                         <MemberItem
-                            username={email}
+                            username={username}
                             blackjackWin={win}
                             blackjackLosses={lose}
                             blackjackRatio={win + ":" + lose}
