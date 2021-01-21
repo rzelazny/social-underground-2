@@ -325,4 +325,20 @@ router.post("/UserLose", function (req, res) {
 // 		});
 // });
 
+router.post("/update_username", function (req, res) {
+	console.log(req.user);
+	let tableUpdateData = { $set: {} };
+	console.log(req.body);
+	tableUpdateData.$set["username"] = req.body.username
+	console.log("update: ",tableUpdateData);
+	db.User.updateOne(
+		{username: req.user.username}
+		, tableUpdateData
+		)
+	.then(function (results) {
+		console.log("Returning updated data for table ", results);
+		return res.send(results);
+	})
+});
+
 module.exports = router;

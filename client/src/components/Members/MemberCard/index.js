@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import MemberItem from "../MemberItem/index";
 import "./style.css";
-
 import $ from "jquery";
 
 function MemberCard() {

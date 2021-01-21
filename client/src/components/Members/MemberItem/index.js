@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from 'react';
 import PhotoUpload from "../PhotoUpload/index"
 import { CardBody, Form, Card, CardTitle, CardSubtitle, FormGroup, Label, Input, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
+import $ from "jquery";
+
 
 function MemberItem(props) {
 
-    function updateUsername() {
-        console.log("will update username")
+    const [username, setUsername] = useState();
+
+    function handleUsernameChange(event) {
+        console.log("form changed");
+        const { value } = event.target;
+        setUsername(value);
     }
 
-
+    function updateUsername() {
+        console.log("will update username");
+        $.post("/api/update_username", {username: username})
+    }
 
     return (
         <div className="cards__item">
@@ -20,8 +29,8 @@ function MemberItem(props) {
                     <Form inline className="d-flex justify-content-center">
                         <FormGroup>
                             <Label className="data username" for="username">Display Name: </Label>
-                            <Input className="username"type="username" name="username" id="username" placeholder={props.username} />
-                            <Button className="username"for="username" onClick={updateUsername}>Save</Button>
+                            <Input onChange={handleUsernameChange} className="username"type="username" name="username" id="username" placeholder={props.username} />
+                            <Button className="username" htmlFor="username" onClick={updateUsername}>Save</Button>
                         </FormGroup>
                     </Form>
                     <hr />
