@@ -9,6 +9,11 @@
     text-align: center;
   }
 
+  .cards h2 {
+    color: black;
+    text-align: center;
+  }
+
   .cards div{
     color: white;
   }
