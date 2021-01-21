@@ -11,6 +11,7 @@ function MemberItem(props) {
     const [username, setUsername] = useState();
 
     function handleUsernameChange(event) {
+        console.log("prevstate ", username)
         console.log("form changed");
         const { value } = event.target;
         setUsername(value);
@@ -18,7 +19,8 @@ function MemberItem(props) {
 
     function updateUsername() {
         console.log("will update username");
-        $.post("/api/update_username", {username: username})
+        $.post("/api/update_username", {username: username});
+        window.location.reload(false);
     }
 
     return (
