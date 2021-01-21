@@ -6,11 +6,11 @@ import MemberCard from "../components/Members/MemberCard"
 function Members() {
 
   return (
-    <>
+    <div id="members-main">
       <Nav />,
       <MemberSection />
       <MemberCard />
-    </>
+    </div>
   )
 }
 export default Members

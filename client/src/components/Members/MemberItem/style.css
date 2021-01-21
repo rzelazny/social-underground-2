@@ -1,4 +1,12 @@
 .data {
     color: black;
+<<<<<<< HEAD
     margin-left: 15px;
+=======
+    margin-left: 10px;
+}
+
+#card-title{
+    background-color:#aa75e8;
+>>>>>>> 214e7901f3b940c3b69a7076e0dd82ca02765c78
 }
