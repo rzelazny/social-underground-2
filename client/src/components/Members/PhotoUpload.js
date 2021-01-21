@@ -1,5 +1,6 @@
 import React from "react";
 import "./PhotoUpload.css"
+// import $ from "jquery";
 
 class PhotoUpload extends React.Component {
     constructor(props) {
@@ -37,6 +38,14 @@ class PhotoUpload extends React.Component {
         } else {
             $imagePreview = (<div className="previewText">Please select an image as your profile</div>);
         }
+    
+        // function photo() {
+        //     $.get("/api/UserPro").then((results) => {
+        //         console.log(results)
+        //         $imagePreview = (results)
+        //     })
+        // }
+        // photo();
 
         return (
             <div className="previewComponent">
