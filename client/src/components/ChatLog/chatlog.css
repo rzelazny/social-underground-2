@@ -7,7 +7,7 @@
   padding: 10px;
   text-align: left;
   height: 200px;
-  width: 531px;
+  width: 831px;
   background-image: url(../../images/spacedice.jpg);
   background-size: cover;
   color: white;
@@ -25,7 +25,7 @@
 }
 
 #chat-input {
-  width: 485px;
+  width: 785px;
   background-color: rgb(109, 104, 104);
   color: white;
 }
