@@ -1,10 +1,16 @@
 .cards {
     padding: 4rem;
     background: #fff;
+    background-image: url("../../../images/felt.png");
   }
   
-  h1 {
+  .cards h1 {
+    color: white;
     text-align: center;
+  }
+
+  .cards div{
+    color: white;
   }
   
   .cards__container {
