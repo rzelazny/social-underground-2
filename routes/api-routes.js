@@ -277,7 +277,7 @@ router.get("/myseat/:table", function (req, res) {
 router.get("/UserPro", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
-		profile: req.user.profile
+		profile: req.user.email
 	})
 	.then(function (results) {
 		console.log("get tables returning data", results);
@@ -288,7 +288,7 @@ router.get("/UserPro", function (req, res) {
 router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
-		username: req.user.username
+		email: req.user.email
 	})
 	.then(function (results) {
 		console.log("get tables returning data", results);
@@ -344,9 +344,7 @@ router.post("/update_username", function (req, res) {
 	tableUpdateData.$set["username"] = req.body.username
 	console.log("update: ",tableUpdateData);
 	db.User.updateOne(
-		{username: req.user.username}
-		, tableUpdateData
-		)
+		{email: req.user.email}, tableUpdateData)
 	.then(function (results) {
 		console.log("Returning updated data for table ", results);
 		return res.send(results);
