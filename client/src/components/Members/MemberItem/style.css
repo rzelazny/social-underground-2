@@ -1,4 +1,8 @@
 .data {
     color: black;
-    margin-left: 15px;
+    margin-left: 10px;
+}
+
+#card-title{
+    background-color:#aa75e8;
 }
