@@ -58,8 +58,29 @@ io.on("connection", (socket) => {
 
   //User has sent a photo to the server
   socket.on("send-photo", (photo) => {
-    //console.log("Server got photo");
+    console.log("server got photo");
     socket.to(photo.room).emit("send-photo", photo);
+  });
+
+  //User has sent a photo to the server
+  socket.on("start-rps", (room) => {
+    console.log("starting game of rps");
+    socket.to(room).emit("start-rps");
+  });
+
+  //Player1 has sent a webcam frame to the server
+  socket.on("send-frame-1", (frame) => {
+    socket.to(frame.room).emit("send-frame-1", frame);
+  });
+
+  //Player2 has sent a webcam frame to the server
+  socket.on("send-frame-2", (frame) => {
+    socket.to(frame.room).emit("send-frame-2", frame);
+  });
+
+  //Player3 has sent a webcam frame to the server
+  socket.on("send-frame-3", (frame) => {
+    socket.to(frame.room).emit("send-frame-3", frame);
   });
 
 });

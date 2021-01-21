@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-//import {Row, Col} from "reactstrap";
+import React, { useState } from "react";
 import $ from 'jquery';
 import {Container} from "reactstrap";
 
 function Login() {
-    // var script = document.createElement('script');
-    // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-    // script.type = 'text/javascript';
-    // document.getElementsByTagName('head')[0].appendChild(script);
 
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
@@ -27,8 +22,6 @@ function Login() {
 
         // If we have an email and password we run the loginUser function and clear the form
         loginUser(userData.email, userData.password);
-        //email.val("");
-        //password.val("");
     };
 
     const handleEmailChange = event => {
@@ -50,16 +43,12 @@ function Login() {
             password: password
         })
             .then(function (user) {
-                //localStorage.setItem("user", JSON.stringify(user.id))
                 window.location.replace("/home");
-                // If there's an error, log the error
-            })
+            })// If there's an error, log the error
             .catch(function (err) {
                 console.log(err);
             });
     }
-
-    
 
     return (
         <Container id="loginbody">

@@ -3,6 +3,7 @@ import { Container } from "reactstrap";
 import $ from "jquery";
 import NewBtn from "../components/NewBtn/";
 import NeonSign from "../components/NeonSign/NeonSign";
+import Nav from "../components/Nav/Navbar";
 
 function Home() {
 
@@ -23,7 +24,7 @@ function Home() {
 
     init();
 
-    //function clears out any tables with no users or that haven't been updated recently
+    //function clears out any tables with no users or TODO: that haven't been updated recently
     function cleanupTables() {
         $.post("api/cleanup").then(function () {
             console.log("table cleanup complete");
@@ -114,6 +115,7 @@ function Home() {
 
     return (
         <div>
+            <Nav />
             <Container id="homebody">
                 <NeonSign />
                 <div className="contianer" id="enterance">
