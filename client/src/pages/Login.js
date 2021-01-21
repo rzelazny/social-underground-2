@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import {Row, Col} from "reactstrap";
 import $ from 'jquery';
 import {Container} from "reactstrap";
 
