@@ -91,14 +91,14 @@ function RPSTable({ room }) {
             <br />
             <Row>
                 <Col lg="4">
-                    {camState && <Webcam
+                    {camState ? <Webcam
                         id="webcam"
                         audio={false}
                         mirrored={true}
                         ref={webcamRef}
                         screenshotFormat="image/jpeg"
                         style={{ height: "360px", width: "360px", zIndex: "1000" }}
-                    />}
+                    />: <div style={{ height: "360px"}}></div>}
                     <Row>
                         <Col lg={{ size: 4, offset: 2 }}>
                             <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
@@ -113,7 +113,7 @@ function RPSTable({ room }) {
                     <div id="rpsCountdown">{countdown}</div>
                 </Col>
                 <Col lg="4">
-                    <img id="their-photo" className="photo" src={theirPhoto} />
+                    <img id="their-photo" className="photo their-photo" src={theirPhoto} />
                 </Col>
             </Row>
             {/* // User can select which opponent to play RPS against
@@ -134,7 +134,7 @@ function RPSTable({ room }) {
             <br />
             <Row>
                 <Col lg="4"></Col>
-                <Col lg="4">
+                <Col lg="4" className="play-rps-col">
                     <button id="camBtnRPS" onClick={playRPS} className="btn btn-dark mb-2">Play Rock Paper Scissors</button>
                 </Col>
                 <Col lg="4"></Col>

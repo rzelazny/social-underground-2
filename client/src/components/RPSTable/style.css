@@ -1,33 +1,58 @@
 #RPSTable{
-    background-color: green;
+    background-image: url("../../images/felt.png");
     margin: 10px;
     padding:10px;
-    text-align: left;
+    text-align: center;
     color: white;
     border-color: black;
     border-style: solid;
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
+    min-height: 500px;
 }
-
+#RPSTable h2{
+    color: white;
+    font-size: 40;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: purple;
+}
 #webcam{
     position: relative;
-    padding: 5px;
-    height: 0;
+    padding: 10px;
+    height: 360px;
+    min-height:  360px;
     overflow: hidden;
     display: block;
 }
 .photo{
+    position: absolute;
+    right: 8px;
     height: 360px;
     width: 360px;
     object-fit: cover;
+    padding: 10px;
+}
+
+.their-photo{
+    left: -12px;
 }
 
 #rpsCountdown{
+    position: relative;
+    top: 365px;
     color: red;
     font-weight: bold;
     font-size: 30px;
     text-align: center;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
+}
+
+#camBtnRPS{
+    position: relative;
+}
+
+.play-rps-col{
+    text-align: center;
+    align-content: center;
 }
