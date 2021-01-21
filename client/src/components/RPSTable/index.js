@@ -100,10 +100,10 @@ function RPSTable({ room }) {
                         style={{ height: "360px", width: "360px", zIndex: "1000" }}
                     />}
                     <Row>
-                        <Col lg="6">
+                        <Col lg={{ size: 4, offset: 2 }}>
                             <button id="camBtnOff" className="btn btn-dark mb-1" onClick={enableWebcam}>Cam {camState ? "Off" : "On"} </button>
                         </Col>
-                        <Col lg="6">
+                        <Col lg="4">
                             <button id="camSnap" className="btn btn-dark mb-1" onClick={screenshot}>Snapshot</button>
                         </Col>
                     </Row>
