@@ -9,9 +9,10 @@ import { ChatContainer, ChatWindow, displayChat } from "../components/ChatLog/Ch
 var curTable = document.defaultView.location.pathname.split("casino/").pop();
 
 function Casino() {
-    const [curEmail, setEmail] = useState("");
+    // const [curEmail, setEmail] = useState("");
     const [chatRoom, setRoom] = useState("");
     const [game, setGame] = useState("");
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
         init();
@@ -34,13 +35,13 @@ function Casino() {
                         .then((data) => {
                             console.log(data);
                             setRoom(data.roomNumber);
-                            setEmail(userData.email);
+                            setUsername(userData.username);
                             setGame(data.game);
                             console.log("emitting room:", data.roomNumber)
                             socket.emit("join-room", data.roomNumber);
                             //send welcome message
                             let message = {
-                                email: userData.email,
+                                email: userData.username,
                                 message: " has joined the chat.",
                                 room: data.roomNumber
                             }
@@ -54,13 +55,13 @@ function Casino() {
     return (
         <div>
 
-            <Nav page={curTable} socket={socket} email={curEmail} room={chatRoom} />
+            <Nav page={curTable} socket={socket} email={username} room={chatRoom} />
             <GamingTable room={chatRoom} curTable={curTable} game={game} />
             <br />
             <Row>
                 <Col lg={{ size: 6, offset: 3 }}>
                     <ChatWindow />
-                    <ChatContainer socket={socket} email={curEmail} room={chatRoom} />
+                    <ChatContainer socket={socket} email={username} room={chatRoom} />
                 </Col>
             </Row>
             {/* // Footer will go here */}

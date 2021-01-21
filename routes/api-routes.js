@@ -53,7 +53,8 @@ router.get("/user_data", function (req, res) {
 		// Sending back a password, even a hashed password, isn't a good idea
 		res.json({
 			email: req.user.email,
-			id: req.user.id
+			id: req.user.id,
+			username: req.user.username
 		});
 	}
 });
@@ -276,7 +277,7 @@ router.get("/myseat/:table", function (req, res) {
 router.get("/UserStats", function (req, res) {
 	console.log(req.user);
 	db.User.findOne({
-		email: req.user.email
+		username: req.user.username
 	})
 	.then(function (results) {
 		console.log("get tables returning data", results);

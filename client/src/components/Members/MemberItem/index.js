@@ -30,13 +30,13 @@ function MemberItem(props) {
                 <CardBody>
                     <Form inline className="d-flex justify-content-center">
                         <FormGroup>
-                            <Label className="data username" for="username">Display Name: </Label>
+                            <Label className="data username" tag="h6" for="username">Display Name: </Label>
                             <Input onChange={handleUsernameChange} className="username"type="username" name="username" id="username" placeholder={props.username} />
-                            <Button className="username" htmlFor="username" onClick={updateUsername}>Save</Button>
+                            <Button color="danger" className="username" htmlFor="username" onClick={updateUsername}>Save</Button>
                         </FormGroup>
                     </Form>
                     <hr />
-                    <CardSubtitle tag="h4">Blackjack Stats:</CardSubtitle>
+                    <CardSubtitle tag="h4">Blackjack Stats</CardSubtitle>
                     <br />
                         <p className="data" tag="h6">&bull; Lifetime Blackjack Winnings: {props.blackjackWin}</p>
                         <p className="data" tag="h6">&bull; Lifetime Blackjack Losses: {props.blackjackLosses}</p>
