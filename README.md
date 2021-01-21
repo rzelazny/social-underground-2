@@ -32,7 +32,9 @@ Welcome to the Social Underground, a place where you can meet with friends and p
 
 5) HAVE FUN!
 
+<img src="client/public/images/member.png">
 
+6) Once you're done playing you can head over to the member tab and view your stats. There you can see how many times you won against the house we well as how many time the house won against you. Also on this page you're able to upload an image of yourself as your profile. 
 
 
 ##  Link

@@ -25,7 +25,10 @@ const User = new Schema({
 	blackjack_lose: {
 		type: Number,
 		default: 0
-	}
+	},
+	// profile: {
+	// 	img: {contextType: String}
+	// }
 });
 
 //Validate hashed password
