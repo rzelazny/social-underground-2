@@ -1,5 +1,5 @@
 import Camera from "react-webcam";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./style.css";
 
 export function Webcam() {
