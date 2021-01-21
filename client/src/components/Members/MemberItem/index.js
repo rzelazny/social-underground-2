@@ -1,17 +1,29 @@
 import React from "react";
 import PhotoUpload from "../PhotoUpload/index"
-import { CardBody, Card, CardTitle, CardSubtitle } from 'reactstrap';
+import { CardBody, Form, Card, CardTitle, CardSubtitle, FormGroup, Label, Input, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 
 function MemberItem(props) {
-    return (
 
+    function updateUsername() {
+        console.log("will update username")
+    }
+
+
+
+    return (
         <div className="cards__item">
             <PhotoUpload />
             <Card className="cards__item__link">
                 <CardBody>
-                    <CardTitle id="card-title" tag="h4">Display Name: {props.username}!</CardTitle>
+                    <Form inline className="d-flex justify-content-center">
+                        <FormGroup>
+                            <Label className="data username" for="username">Display Name: </Label>
+                            <Input className="username"type="username" name="username" id="username" placeholder={props.username} />
+                            <Button className="username"for="username" onClick={updateUsername}>Save</Button>
+                        </FormGroup>
+                    </Form>
                     <hr />
                     <CardSubtitle tag="h4">Blackjack Stats:</CardSubtitle>
                     <br />
