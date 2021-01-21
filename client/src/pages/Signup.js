@@ -54,7 +54,8 @@ function Signup() {
 
         $.post("/api/signup", {
             email: email,
-            password: password
+            password: password,
+            username: email
         })
             .then(function (data) {
                 console.log(data);
