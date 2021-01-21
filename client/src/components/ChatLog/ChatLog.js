@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import $ from "jquery";
 import "./chatlog.css"
 import { Container } from 'reactstrap';
@@ -21,8 +21,9 @@ export function ChatContainer({ socket, email, room }) {
         console.log("chat message emitted", chatMessage);
         displayChat(chatMessage);
 
-        //after displaying, clear out the input form
+        //after displaying, clear out the input form and chat
         document.getElementById("chat-entry").reset()
+        setChangeText("");
     }
 
     //function updates the chat state when the user types

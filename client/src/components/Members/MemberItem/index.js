@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom"
 import PhotoUpload from "../PhotoUpload/index"
-import { Button, CardBody, Container, Card, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { CardBody, Card, CardTitle, CardSubtitle } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 

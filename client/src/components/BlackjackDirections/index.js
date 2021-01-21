@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css"
-// import $ from 'jquery';
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
