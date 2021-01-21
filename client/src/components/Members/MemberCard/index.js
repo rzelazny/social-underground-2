@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import MemberItem from "./MemberItem";
-import "./MemberCard.css";
+import MemberItem from "../MemberItem/index";
+import "./style.css";
 import $ from "jquery";
 
 function MemberCard() {
@@ -69,10 +69,10 @@ function MemberCard() {
                 <div className="cards__wrapper">
                     <div className="cards__items">
                         <MemberItem
-                            text= {email}
-                            text2= {win}
-                            text3= {lose}
-                            // path="/member"
+                            username={email}
+                            blackjackWin={win}
+                            blackjackLosses={lose}
+                            blackjackRatio={win + ":" + lose}
                         />
                     </div>
                 </div>

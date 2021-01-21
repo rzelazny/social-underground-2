@@ -1,5 +1,5 @@
 import React from "react";
-import "./MemberSection.css";
+import "./style.css";
 
 
 function MemberSection(){
