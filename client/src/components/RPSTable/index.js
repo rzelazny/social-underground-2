@@ -71,7 +71,6 @@ function RPSTable({ room }) {
                     break;
             }
 
-            console.log(timer);
             if (timer === 0) { //when the timer runs out...
                 clearInterval(rpsTimer);
                 //take the picture
@@ -117,7 +116,8 @@ function RPSTable({ room }) {
                     <img id="their-photo" className="photo" src={theirPhoto} />
                 </Col>
             </Row>
-            {/* <Row>
+            {/* // User can select which opponent to play RPS against
+            <Row> 
                 <Col md="12">
                     <form>
                         <label htmlFor="form-group row">Who do you challenge?</label>
