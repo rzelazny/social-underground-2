@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import $ from 'jquery';
-import Dropdown from '../Dropdown/Dropdown';
 
 function Navbar({ page, socket, email, room }) {
     const [click, setClick] = useState(false);
-    // const [dropdown, setDropdown] = useState(false);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => {
@@ -15,14 +13,6 @@ function Navbar({ page, socket, email, room }) {
         //If page isn't blank they're coming from the casino so there's extra work to do
         if(page) exitingCasino();
     }
-    
-    // const onMouseEnter = () => {
-    //         setDropdown(true);
-    // };
-
-    // const onMouseLeave = () => {
-    //         setDropdown(false);     
-    // };
 
     function exitingCasino() {
         //post a leaving chat message
@@ -45,7 +35,6 @@ function Navbar({ page, socket, email, room }) {
                 $.post("/api/table/" + page, tableUpdate)
             })
     }
-
 
     //logout functionality
     function logout() {
@@ -81,21 +70,6 @@ return (
                         Home
                         </Link>
                 </div>
-                {/* <div
-                        className='nav-item'
-                        // onMouseEnter={onMouseEnter}
-                        // onMouseLeave={onMouseLeave}
-                    >
-                        <Link
-                            to='/Casino'
-                            className='nav-links'
-                            onClick={closeMobileMenu}
-                        >
-                            Casino 
-                            {/* <i className='fas fa-caret-down' /> */}
-                {/* </Link> */}
-                {/* {dropdown && <Dropdown />} */}
-                {/* </div> */}
                 <div className='nav-item'>
                     <Link
                         to='/members'

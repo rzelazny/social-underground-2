@@ -62,6 +62,12 @@ io.on("connection", (socket) => {
     socket.to(photo.room).emit("send-photo", photo);
   });
 
+  //User has sent a photo to the server
+  socket.on("start-rps", (room) => {
+    console.log("starting game of rps");
+    socket.to(room).emit("start-rps");
+  });
+
   //Player1 has sent a webcam frame to the server
   socket.on("send-frame-1", (frame) => {
     socket.to(frame.room).emit("send-frame-1", frame);

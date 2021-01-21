@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css"
-import { Alert, Container, Card, CardTitle, CardImg, CardText } from 'reactstrap';
+import { Container, Card, CardTitle, CardImg, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlackjackButtons from "../BlackjackButtons";
 import BlackjackScoreCard from "../BlackjackScoreCard";

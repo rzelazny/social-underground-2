@@ -24,7 +24,7 @@ function Home() {
 
     init();
 
-    //function clears out any tables with no users or that haven't been updated recently
+    //function clears out any tables with no users or TODO: that haven't been updated recently
     function cleanupTables() {
         $.post("api/cleanup").then(function () {
             console.log("table cleanup complete");
